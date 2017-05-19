@@ -1,24 +1,12 @@
-# README
+# GNOMAD
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Currently in development, this mobile-first single-page web app will allow travellers to connect to city residents in order to have an authentic local experience of their travel destination. Using a Ruby on Rails backend, react front-end with a foundation framework. 
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## TEAM
+* Stacy Curry (@stacurry)
+* Joe LeBeau (@joelebeau1)
+* Tové Mercer (@tovemercer)
+* K. Sabbak (@ksabbak)
+* Simon Swartzman (@rtzm)
