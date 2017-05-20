@@ -756,3 +756,266 @@ puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
 puma (3.8.2) lib/puma/server.rb:435:in `process_client'
 puma (3.8.2) lib/puma/server.rb:299:in `block in run'
 puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started POST "/users/create" for 127.0.0.1 at 2017-05-20 17:18:50 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/create"):
+  
+actionpack (5.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.1) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:22:09 -0500
+Processing by UsersController#create as */*
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 74ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:24:35 -0500
+Processing by UsersController#create as */*
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 76ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:25:22 -0500
+Processing by UsersController#create as */*
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 86ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:27:24 -0500
+Processing by UsersController#create as */*
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 79ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:28:57 -0500
+Processing by UsersController#create as */*
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 76ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:31:15 -0500
+Processing by UsersController#create as */*
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 76ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:31:56 -0500
+Processing by UsersController#create as */*
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 79ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:33:02 -0500
+Processing by UsersController#create as */*
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 74ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:34:40 -0500
+Processing by UsersController#create as */*
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 83ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:35:25 -0500
+Processing by UsersController#create as */*
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 83ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:35:46 -0500
+Processing by UsersController#create as */*
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 82ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:39:07 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"bob"}
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 74ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:39:59 -0500
+Processing by UsersController#create as */*
+  Parameters: {"undefined"=>"undefined"}
+Unpermitted parameter: :undefined
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 81ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:41:33 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry"}
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 78ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:43:34 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "id"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"undefined"}
+Unpermitted parameter: :image_url
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 74ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:43:47 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "id"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"undefined"}
+Unpermitted parameter: :image_url
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 76ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:44:10 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "id"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/12347926_2937009621499_4786466230803682099_n.jpg?oh=ff980a869d2e35ab63e687d0e662c7a1&oe=59AE9A1E"}
+Unpermitted parameter: :image_url
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 73ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:44:48 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "id"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/12347926_2937009621499_4786466230803682099_n.jpg?oh=ff980a869d2e35ab63e687d0e662c7a1&oe=59AE9A1E"}
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 83ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:46:00 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "uid"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/12347926_2937009621499_4786466230803682099_n.jpg?oh=ff980a869d2e35ab63e687d0e662c7a1&oe=59AE9A1E"}
+  [1m[36mUser Load (64.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE (3441749199673) LIMIT $1[0m  [["LIMIT", 1]]
+Completed 500 Internal Server Error in 101ms (ActiveRecord: 64.2ms)
+
+
+  
+ActiveRecord::StatementInvalid (PG::DatatypeMismatch: ERROR:  argument of WHERE must be type boolean, not type bigint
+LINE 1: SELECT  "users".* FROM "users" WHERE (3441749199673) LIMIT $...
+                                              ^
+: SELECT  "users".* FROM "users" WHERE (3441749199673) LIMIT $1):
+  
+app/models/user.rb:4:in `from_oauth'
+app/controllers/users_controller.rb:3:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:46:42 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "uid"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/12347926_2937009621499_4786466230803682099_n.jpg?oh=ff980a869d2e35ab63e687d0e662c7a1&oe=59AE9A1E"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."uid" = $1 LIMIT $2[0m  [["uid", "3441749199673"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "users" ("uid", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["uid", "3441749199673"], ["created_at", "2017-05-20 22:46:42.597611"], ["updated_at", "2017-05-20 22:46:42.597611"]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 84ms (ActiveRecord: 54.8ms)
+
+
+  
+ActiveRecord::NotNullViolation (PG::NotNullViolation: ERROR:  null value in column "provider" violates not-null constraint
+DETAIL:  Failing row contains (21, null, 3441749199673, null, null, null, null, null, 2017-05-20 22:46:42.597611, 2017-05-20 22:46:42.597611, null, null).
+: INSERT INTO "users" ("uid", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"):
+  
+app/models/user.rb:4:in `from_oauth'
+app/controllers/users_controller.rb:3:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:47:56 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "uid"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/12347926_2937009621499_4786466230803682099_n.jpg?oh=ff980a869d2e35ab63e687d0e662c7a1&oe=59AE9A1E"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."uid" = $1 LIMIT $2[0m  [["uid", "3441749199673"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("uid", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["uid", "3441749199673"], ["created_at", "2017-05-20 22:47:56.830409"], ["updated_at", "2017-05-20 22:47:56.830409"]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 1.7ms)
+
+
+  
+ActiveRecord::NotNullViolation (PG::NotNullViolation: ERROR:  null value in column "provider" violates not-null constraint
+DETAIL:  Failing row contains (22, null, 3441749199673, null, null, null, null, null, 2017-05-20 22:47:56.830409, 2017-05-20 22:47:56.830409, null, null).
+: INSERT INTO "users" ("uid", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"):
+  
+app/models/user.rb:4:in `from_oauth'
+app/controllers/users_controller.rb:3:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:48:45 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "uid"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/12347926_2937009621499_4786466230803682099_n.jpg?oh=ff980a869d2e35ab63e687d0e662c7a1&oe=59AE9A1E"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."uid" = $1 AND "users"."provider" = $2 LIMIT $3[0m  [["uid", "3441749199673"], ["provider", "facebook"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (40.9ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "3441749199673"], ["created_at", "2017-05-20 22:48:45.575460"], ["updated_at", "2017-05-20 22:48:45.575460"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 85ms (ActiveRecord: 42.4ms)
+
+
+  
+NoMethodError (undefined method `userjson' for #<Class:0x007faba2e58738>):
+  
+app/models/user.rb:5:in `from_oauth'
+app/controllers/users_controller.rb:3:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:50:33 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "uid"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/12347926_2937009621499_4786466230803682099_n.jpg?oh=ff980a869d2e35ab63e687d0e662c7a1&oe=59AE9A1E"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."uid" = $1 AND "users"."provider" = $2 LIMIT $3[0m  [["uid", "3441749199673"], ["provider", "facebook"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 428ms (ActiveRecord: 0.9ms)
+
+
+  
+NoMethodError (undefined method `userjson' for #<Class:0x007faba6a23a88>):
+  
+app/models/user.rb:5:in `from_oauth'
+app/controllers/users_controller.rb:3:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:52:22 -0500
+  [1m[35m (14.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "uid"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/12347926_2937009621499_4786466230803682099_n.jpg?oh=ff980a869d2e35ab63e687d0e662c7a1&oe=59AE9A1E"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."uid" = $1 AND "users"."provider" = $2 LIMIT $3[0m  [["uid", "3441749199673"], ["provider", "facebook"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 102ms (ActiveRecord: 6.5ms)
+
+
+  
+NoMethodError (undefined method `userjson' for #<Class:0x007f8eaa404c88>):
+  
+app/models/user.rb:5:in `from_oauth'
+app/controllers/users_controller.rb:3:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:53:23 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "uid"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/12347926_2937009621499_4786466230803682099_n.jpg?oh=ff980a869d2e35ab63e687d0e662c7a1&oe=59AE9A1E"}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."uid" = $1 AND "users"."provider" = $2 LIMIT $3[0m  [["uid", "3441749199673"], ["provider", "facebook"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 56ms (ActiveRecord: 1.3ms)
+
+
+  
+NoMethodError (undefined method `userjson' for #<Class:0x007f8eab2dcaf8>):
+  
+app/models/user.rb:5:in `from_oauth'
+app/controllers/users_controller.rb:3:in `create'
+Started POST "/users" for 127.0.0.1 at 2017-05-20 17:54:59 -0500
+Processing by UsersController#create as */*
+  Parameters: {"first_name"=>"Stacy", "last_name"=>"Curry", "uid"=>"3441749199673", "email"=>"curry.stacy@gmail.com", "image_url"=>"https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/12347926_2937009621499_4786466230803682099_n.jpg?oh=ff980a869d2e35ab63e687d0e662c7a1&oe=59AE9A1E"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."uid" = $1 AND "users"."provider" = $2 LIMIT $3[0m  [["uid", "3441749199673"], ["provider", "facebook"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (4.7ms)[0m  [1m[33mUPDATE "users" SET "first_name" = $1, "last_name" = $2, "email" = $3, "image_url" = $4, "updated_at" = $5 WHERE "users"."id" = $6[0m  [["first_name", "Stacy"], ["last_name", "Curry"], ["email", "curry.stacy@gmail.com"], ["image_url", "https://scontent.xx.fbcdn.net/v/t1.0-1/p160x160/12347926_2937009621499_4786466230803682099_n.jpg?oh=ff980a869d2e35ab63e687d0e662c7a1&oe=59AE9A1E"], ["updated_at", "2017-05-20 22:54:59.359231"], ["id", 23]]
+  [1m[35m (49.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 106ms (Views: 21.7ms | ActiveRecord: 54.4ms)
+
+
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]

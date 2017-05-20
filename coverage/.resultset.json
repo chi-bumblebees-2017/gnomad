@@ -1,0 +1,104 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/apprentice/Desktop/stacy/gnomad/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/apprentice/Desktop/stacy/gnomad/app/controllers/users_controller.rb": [
+        1,
+        1,
+        2,
+        2,
+        2,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        2,
+        null,
+        null
+      ],
+      "/Users/apprentice/Desktop/stacy/gnomad/app/controllers/application_controller.rb": [
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/apprentice/Desktop/stacy/gnomad/app/models/user.rb": [
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        null,
+        null
+      ],
+      "/Users/apprentice/Desktop/stacy/gnomad/app/models/application_record.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/apprentice/Desktop/stacy/gnomad/app/channels/application_cable/channel.rb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "/Users/apprentice/Desktop/stacy/gnomad/app/channels/application_cable/connection.rb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "/Users/apprentice/Desktop/stacy/gnomad/app/controllers/home_controller.rb": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/Users/apprentice/Desktop/stacy/gnomad/app/controllers/sessions_controller.rb": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/Users/apprentice/Desktop/stacy/gnomad/app/jobs/application_job.rb": [
+        0,
+        0
+      ],
+      "/Users/apprentice/Desktop/stacy/gnomad/app/mailers/application_mailer.rb": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "timestamp": 1495321859
+  }
+}
