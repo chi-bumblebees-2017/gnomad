@@ -9,9 +9,9 @@ class Conversation < ApplicationRecord
     where("(conversations.initiator_id = ? OR conversations.receiver_id = ?)", user.id, user.id)
   end
 
-#   scope :between, -> (sender_id, receiver_id) do
-#     where(initiator_id: sender_id, receiver_id: receiver_id).or(where(initiator_id: receiver_id, receiver_id: sender_id)).limit(1)
-# end
+  scope :between, -> (sender_id, receiver_id) do
+    where(initiator_id: sender_id, receiver_id: receiver_id).or(where(initiator_id: receiver_id, receiver_id: sender_id)).limit(1)
+end
 
   def with(current_user)
     initiator == current_user ? receiver : initiator
