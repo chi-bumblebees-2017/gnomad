@@ -3,6 +3,22 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      users: [],
+    }
+  }
+  // TODO: remove this method and the app-intro dummy text below. just added here by Simon to test server connections.
+  componentDidMount() {
+    fetch('/users', {
+      accept: 'application/json',
+    }).then(data => data.json())
+      .then(dataJson => { this.setState({
+        users: dataJson,
+    })});
+  }
+
   render() {
     return (
       <div className="App">
@@ -10,9 +26,12 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="App-intro">
+          Here is a json of user information:
+          {this.state.users.map((user) =>
+            <p key={user.id}>{user.name}</p>
+          )}
+        </div>
       </div>
     );
   }
