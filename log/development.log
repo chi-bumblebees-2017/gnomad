@@ -36,3 +36,226 @@ Migrating to CreatePersonalMessages (20170520020204)
   [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(3324956851394825955)[0m
   [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35mSQL (13.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "conversations" CASCADE[0m
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE TABLE "conversations" ("id" bigserial primary key, "initiator_id" integer, "receiver_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "gnomad_profiles" CASCADE[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "gnomad_profiles" ("id" bigserial primary key, "user_id" bigint, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_gnomad_profiles_on_user_id" ON "gnomad_profiles"  ("user_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "localhost_profiles" CASCADE[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "localhost_profiles" ("id" bigserial primary key, "user_id" bigint, "available" boolean, "suggestions" text, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_localhost_profiles_on_user_id" ON "localhost_profiles"  ("user_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "personal_messages" CASCADE[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "personal_messages" ("id" bigserial primary key, "body" text, "author_id" integer, "conversation_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_personal_messages_on_conversation_id" ON "personal_messages"  ("conversation_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "provider" character varying NOT NULL, "uid" character varying NOT NULL, "name" character varying, "image_url" character varying, "email" character varying, "home_city" character varying, "home_state" character varying, "bio" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170520020204)[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170520020055),
+(20170520020139),
+(20170520020148),
+(20170520020156);
+
+[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-05-20 16:01:43.131508"], ["updated_at", "2017-05-20 16:01:43.131508"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "conversations" CASCADE[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "conversations" ("id" bigserial primary key, "initiator_id" integer, "receiver_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "gnomad_profiles" CASCADE[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "gnomad_profiles" ("id" bigserial primary key, "user_id" bigint, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_gnomad_profiles_on_user_id" ON "gnomad_profiles"  ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "localhost_profiles" CASCADE[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "localhost_profiles" ("id" bigserial primary key, "user_id" bigint, "available" boolean, "suggestions" text, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_localhost_profiles_on_user_id" ON "localhost_profiles"  ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "personal_messages" CASCADE[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "personal_messages" ("id" bigserial primary key, "body" text, "author_id" integer, "conversation_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE  INDEX  "index_personal_messages_on_conversation_id" ON "personal_messages"  ("conversation_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "provider" character varying NOT NULL, "uid" character varying NOT NULL, "name" character varying, "image_url" character varying, "email" character varying, "home_city" character varying, "home_state" character varying, "bio" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170520020204)[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170520020055),
+(20170520020139),
+(20170520020148),
+(20170520020156);
+
+[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-05-20 16:01:43.259973"], ["updated_at", "2017-05-20 16:01:43.259973"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (75.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "conversations" CASCADE[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "conversations" ("id" bigserial primary key, "initiator_id" integer, "receiver_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "gnomad_profiles" CASCADE[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "gnomad_profiles" ("id" bigserial primary key, "user_id" bigint, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_gnomad_profiles_on_user_id" ON "gnomad_profiles"  ("user_id")[0m
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "localhost_profiles" CASCADE[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "localhost_profiles" ("id" bigserial primary key, "user_id" bigint, "available" boolean, "suggestions" text, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_localhost_profiles_on_user_id" ON "localhost_profiles"  ("user_id")[0m
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "personal_messages" CASCADE[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "personal_messages" ("id" bigserial primary key, "body" text, "author_id" integer, "conversation_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_personal_messages_on_conversation_id" ON "personal_messages"  ("conversation_id")[0m
+  [1m[35m (4.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "provider" character varying NOT NULL, "uid" character varying NOT NULL, "name" character varying, "image_url" character varying, "email" character varying, "home_city" character varying, "home_state" character varying, "bio" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (18.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "conversations" CASCADE[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "conversations" ("id" bigserial primary key, "initiator_id" integer, "receiver_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "gnomad_profiles" CASCADE[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "gnomad_profiles" ("id" bigserial primary key, "user_id" bigint, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_gnomad_profiles_on_user_id" ON "gnomad_profiles"  ("user_id")[0m
+  [1m[35m (3.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "localhost_profiles" CASCADE[0m
+  [1m[35m (8.3ms)[0m  [1m[35mCREATE TABLE "localhost_profiles" ("id" bigserial primary key, "user_id" bigint, "available" boolean, "suggestions" text, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_localhost_profiles_on_user_id" ON "localhost_profiles"  ("user_id")[0m
+  [1m[35m (1.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "personal_messages" CASCADE[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "personal_messages" ("id" bigserial primary key, "body" text, "author_id" integer, "conversation_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_personal_messages_on_conversation_id" ON "personal_messages"  ("conversation_id")[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "provider" character varying NOT NULL, "uid" character varying NOT NULL, "name" character varying, "image_url" character varying, "email" character varying, "home_city" character varying, "home_state" character varying, "bio" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "conversations" CASCADE[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "conversations" ("id" bigserial primary key, "initiator_id" integer, "receiver_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "gnomad_profiles" CASCADE[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "gnomad_profiles" ("id" bigserial primary key, "user_id" bigint, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_gnomad_profiles_on_user_id" ON "gnomad_profiles"  ("user_id")[0m
+  [1m[35m (4.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "localhost_profiles" CASCADE[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "localhost_profiles" ("id" bigserial primary key, "user_id" bigint, "available" boolean, "suggestions" text, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_localhost_profiles_on_user_id" ON "localhost_profiles"  ("user_id")[0m
+  [1m[35m (2.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "personal_messages" CASCADE[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "personal_messages" ("id" bigserial primary key, "body" text, "author_id" integer, "conversation_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX  "index_personal_messages_on_conversation_id" ON "personal_messages"  ("conversation_id")[0m
+  [1m[35m (2.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "provider" character varying NOT NULL, "uid" character varying NOT NULL, "name" character varying, "image_url" character varying, "email" character varying, "home_city" character varying, "home_state" character varying, "bio" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (19.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "conversations" CASCADE[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "conversations" ("id" bigserial primary key, "initiator_id" integer, "receiver_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "gnomad_profiles" CASCADE[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "gnomad_profiles" ("id" bigserial primary key, "user_id" bigint, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE  INDEX  "index_gnomad_profiles_on_user_id" ON "gnomad_profiles"  ("user_id")[0m
+  [1m[35m (2.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "localhost_profiles" CASCADE[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "localhost_profiles" ("id" bigserial primary key, "user_id" bigint, "available" boolean, "suggestions" text, "restaurants" boolean, "sports" boolean, "museums" boolean, "bars" boolean, "music" boolean, "outdoors" boolean, "art" boolean, "fitness" boolean, "history" boolean, "architecture" boolean, "family_fun" boolean, "zoo" boolean, "culture" boolean, "volunteer" boolean, "shopping" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_localhost_profiles_on_user_id" ON "localhost_profiles"  ("user_id")[0m
+  [1m[35m (2.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "personal_messages" CASCADE[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "personal_messages" ("id" bigserial primary key, "body" text, "author_id" integer, "conversation_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_personal_messages_on_conversation_id" ON "personal_messages"  ("conversation_id")[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "provider" character varying NOT NULL, "uid" character varying NOT NULL, "name" character varying, "image_url" character varying, "email" character varying, "home_city" character varying, "home_state" character varying, "bio" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "2ad3e"], ["name", "Fleta Dach V"], ["image_url", "http://raynor.biz/buford"], ["email", "bridgette.cartwright@schmittdamore.biz"], ["home_city", "Clayhaven"], ["home_state", "TX"], ["bio", "Vinegar green juice pbr&b five dollar toast single-origin coffee marfa tacos. Williamsburg mumblecore skateboard shabby chic. Cliche lo-fi messenger bag cold-pressed listicle normcore. Kogi plaid ethical diy. Stumptown intelligentsia pour-over narwhal williamsburg salvia locavore."], ["created_at", "2017-05-20 16:02:15.286533"], ["updated_at", "2017-05-20 16:02:15.286533"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "70229"], ["name", "Regan Ernser V"], ["image_url", "http://wolf.info/rodger_fisher"], ["email", "evelyn.altenwerth@faygerlach.name"], ["home_city", "Laverneville"], ["home_state", "WY"], ["bio", "Tofu kale chips artisan paleo quinoa kickstarter yr readymade. Chambray cred selfies cold-pressed jean shorts poutine kitsch +1. Synth lo-fi pug chicharrones. Actually tilde pbr&b. Schlitz crucifix post-ironic drinking taxidermy forage."], ["created_at", "2017-05-20 16:02:15.290498"], ["updated_at", "2017-05-20 16:02:15.290498"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "26624"], ["name", "Oren Jacobson I"], ["image_url", "http://lueilwitz.io/omer_heller"], ["email", "darius.watsica@prosacco.biz"], ["home_city", "Keyshawnburgh"], ["home_state", "PA"], ["bio", "Forage art party raw denim wolf. Lo-fi ethical godard truffaut viral. Blue bottle plaid fanny pack lumbersexual pinterest. Seitan cray offal. Fingerstache green juice diy yuccie."], ["created_at", "2017-05-20 16:02:15.293532"], ["updated_at", "2017-05-20 16:02:15.293532"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "0a46d"], ["name", "Merritt Rogahn"], ["image_url", "http://ko.co/loyal"], ["email", "nasir.hilpert@koch.info"], ["home_city", "Jazlynfurt"], ["home_state", "RI"], ["bio", "Distillery meditation kogi pork belly food truck echo put a bird on it. Quinoa semiotics park carry. Banh mi cornhole try-hard."], ["created_at", "2017-05-20 16:02:15.296464"], ["updated_at", "2017-05-20 16:02:15.296464"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "46900"], ["name", "Gaston Roberts"], ["image_url", "http://abbottjohnson.biz/aryanna"], ["email", "werner.conn@rempel.biz"], ["home_city", "Schultzhaven"], ["home_state", "IN"], ["bio", "Try-hard kogi chambray. Irony pitchfork meditation aesthetic. Austin squid single-origin coffee williamsburg pbr&b. Sriracha irony thundercats kitsch whatever. Williamsburg wayfarers loko vinegar flexitarian."], ["created_at", "2017-05-20 16:02:15.299480"], ["updated_at", "2017-05-20 16:02:15.299480"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "a83b1"], ["name", "Colby MacGyver"], ["image_url", "http://raynor.com/bradford"], ["email", "mertie.hand@parker.com"], ["home_city", "Port Cheyennestad"], ["home_state", "MT"], ["bio", "Drinking gastropub pour-over occupy meh xoxo deep v. Occupy pitchfork selfies pug health yr meditation kickstarter. Pitchfork etsy single-origin coffee. Sartorial skateboard fashion axe cronut."], ["created_at", "2017-05-20 16:02:15.303390"], ["updated_at", "2017-05-20 16:02:15.303390"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "c2be4"], ["name", "Abbigail Bahringer"], ["image_url", "http://cristbuckridge.info/jordon.kihn"], ["email", "hilton@waters.co"], ["home_city", "Whiteside"], ["home_state", "CT"], ["bio", "Xoxo small batch franzen vinegar. Green juice austin shabby chic. Tilde selfies sustainable. Authentic austin sriracha post-ironic. Fixie selfies banh mi ennui."], ["created_at", "2017-05-20 16:02:15.306460"], ["updated_at", "2017-05-20 16:02:15.306460"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "96aa5"], ["name", "Ms. Malvina Cruickshank"], ["image_url", "http://zulauf.net/maxime"], ["email", "gwen_nitzsche@roobabbott.org"], ["home_city", "Abernathyton"], ["home_state", "ID"], ["bio", "Sustainable cold-pressed fixie thundercats microdosing mustache farm-to-table. Literally paleo sriracha mixtape polaroid venmo normcore cronut. Typewriter fixie bespoke. Tumblr 3 wolf moon food truck."], ["created_at", "2017-05-20 16:02:15.309539"], ["updated_at", "2017-05-20 16:02:15.309539"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "660ba"], ["name", "Annabelle Maggio"], ["image_url", "http://labadieharvey.name/kyla"], ["email", "domingo@gutmannbins.name"], ["home_city", "North Lizabury"], ["home_state", "VA"], ["bio", "Austin thundercats wes anderson literally. Chia thundercats chartreuse organic 3 wolf moon tilde xoxo. Bushwick pug trust fund farm-to-table authentic flannel fixie."], ["created_at", "2017-05-20 16:02:15.312486"], ["updated_at", "2017-05-20 16:02:15.312486"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "47913"], ["name", "Eladio Becker"], ["image_url", "http://raynor.co/kelsi.wolf"], ["email", "pinkie@powlowski.co"], ["home_city", "North Sylvestermouth"], ["home_state", "MO"], ["bio", "Mumblecore whatever cleanse jean shorts crucifix kickstarter food truck. Pork belly diy venmo pour-over. Mumblecore farm-to-table venmo loko pour-over kickstarter locavore freegan. Plaid blog irony wolf. Food truck bushwick tumblr pinterest quinoa slow-carb."], ["created_at", "2017-05-20 16:02:15.315473"], ["updated_at", "2017-05-20 16:02:15.315473"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "27c44"], ["name", "Dr. Jeffry Schaden"], ["image_url", "http://klein.net/jaron_mayert"], ["email", "moises@gutkowski.org"], ["home_city", "Dovietown"], ["home_state", "MS"], ["bio", "Readymade organic migas pop-up cred gluten-free locavore. Pickled occupy etsy. Truffaut meditation seitan deep v hammock umami."], ["created_at", "2017-05-20 16:02:15.318373"], ["updated_at", "2017-05-20 16:02:15.318373"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "d1ba0"], ["name", "Axel Doyle"], ["image_url", "http://effertz.io/melya"], ["email", "jeromy_sporer@okeefeadams.info"], ["home_city", "South Wade"], ["home_state", "NJ"], ["bio", "Organic carry cornhole loko asymmetrical freegan street. Hoodie viral yr hella. Post-ironic single-origin coffee chia small batch 90's. Yr vinegar direct trade chambray hammock diy."], ["created_at", "2017-05-20 16:02:15.321509"], ["updated_at", "2017-05-20 16:02:15.321509"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "41327"], ["name", "Jayson Bradtke DVM"], ["image_url", "http://ryan.name/adalberto"], ["email", "jordane.mcclure@daugherty.biz"], ["home_city", "South Hopemouth"], ["home_state", "IL"], ["bio", "Direct trade readymade +1 knausgaard pinterest meh. Freegan waistcoat tumblr mixtape small batch. Craft beer tumblr schlitz small batch. Heirloom selfies poutine kitsch cleanse typewriter shoreditch roof. Lumbersexual hammock lomo pug ennui."], ["created_at", "2017-05-20 16:02:15.324519"], ["updated_at", "2017-05-20 16:02:15.324519"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "5eea7"], ["name", "Bethany Ritchie Sr."], ["image_url", "http://cain.io/karina"], ["email", "nicolette.schinner@mitchell.co"], ["home_city", "Brionnafort"], ["home_state", "KS"], ["bio", "Lomo 3 wolf moon farm-to-table marfa ethical. Vice messenger bag carry taxidermy kitsch occupy selvage. Kinfolk ugh humblebrag cardigan goth five dollar toast deep v hashtag. Ennui kitsch meditation bespoke biodiesel pickled diy."], ["created_at", "2017-05-20 16:02:15.328193"], ["updated_at", "2017-05-20 16:02:15.328193"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "bc223"], ["name", "Vicente Tremblay"], ["image_url", "http://marks.io/ibrahim.schamberger"], ["email", "valerie.boehm@pollichcruickshank.co"], ["home_city", "Port Porterton"], ["home_state", "SD"], ["bio", "Aesthetic chartreuse 8-bit authentic vice knausgaard lumbersexual tacos. Tote bag mlkshk echo hashtag neutra poutine. Typewriter farm-to-table jean shorts etsy pour-over. Quinoa pbr&b raw denim wayfarers farm-to-table drinking post-ironic."], ["created_at", "2017-05-20 16:02:15.331195"], ["updated_at", "2017-05-20 16:02:15.331195"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "92102"], ["name", "Miss Santiago Padberg"], ["image_url", "http://mrazullrich.org/holly_zemlak"], ["email", "trystan.graham@stanton.org"], ["home_city", "North Reece"], ["home_state", "NC"], ["bio", "Butcher thundercats ugh waistcoat gastropub microdosing pickled. Fixie actually iphone normcore. Roof hella flannel wes anderson skateboard chia typewriter."], ["created_at", "2017-05-20 16:02:15.334060"], ["updated_at", "2017-05-20 16:02:15.334060"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "19074"], ["name", "Clemmie Fadel"], ["image_url", "http://bailey.org/alphonso"], ["email", "andreanne_osinski@baumbach.org"], ["home_city", "Lake Romaburgh"], ["home_state", "NY"], ["bio", "Viral cred readymade lumbersexual vegan paleo bespoke. Meh humblebrag asymmetrical. 3 wolf moon ennui synth. Hashtag meh green juice. Skateboard lo-fi schlitz listicle thundercats master."], ["created_at", "2017-05-20 16:02:15.337049"], ["updated_at", "2017-05-20 16:02:15.337049"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "3c6c1"], ["name", "Deangelo Rice"], ["image_url", "http://windlerfay.net/israel"], ["email", "jasmin@mccullough.co"], ["home_city", "Koeppmouth"], ["home_state", "AZ"], ["bio", "Dreamcatcher small batch disrupt master. Biodiesel cornhole raw denim 8-bit diy hella retro fashion axe. Cold-pressed typewriter narwhal photo booth vegan pinterest listicle. Celiac viral chicharrones quinoa park distillery selvage chia."], ["created_at", "2017-05-20 16:02:15.340132"], ["updated_at", "2017-05-20 16:02:15.340132"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "02110"], ["name", "Larue Murray"], ["image_url", "http://west.org/marlene"], ["email", "demetrius_ferry@reynolds.name"], ["home_city", "East Guymouth"], ["home_state", "IA"], ["bio", "Tofu trust fund hammock. Schlitz messenger bag literally yr ramps kinfolk beard banh mi. Meggings polaroid typewriter microdosing austin etsy. Mustache gluten-free ugh. Hammock mlkshk lo-fi microdosing."], ["created_at", "2017-05-20 16:02:15.343081"], ["updated_at", "2017-05-20 16:02:15.343081"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "name", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "6a572"], ["name", "Oma Blanda"], ["image_url", "http://walter.name/emmanuel.hermiston"], ["email", "rashad@bashirianturcotte.net"], ["home_city", "East Jayson"], ["home_state", "WI"], ["bio", "Ethical meditation synth actually. Ugh typewriter small batch pug tumblr pitchfork bitters tousled. Trust fund sartorial whatever pop-up. Artisan carry everyday polaroid fixie blue bottle dreamcatcher skateboard."], ["created_at", "2017-05-20 16:02:15.346067"], ["updated_at", "2017-05-20 16:02:15.346067"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m

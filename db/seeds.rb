@@ -8,5 +8,5 @@
 require 'faker'
 
  20.times do
-  User.create(provider: 'facebook', uid: Faker::Numer.hexadecimal(5), name: Faker::Name.name, image_url: Faker::Internet.url, email: Faker::Internet.email, home_city: Faker::Address.city, home_state: Faker::Address.state_abbr, bio: Faker::Hipster.paragraph)
+  User.create(provider: 'facebook', uid: Faker::Number.hexadecimal(5), name: Faker::Name.name, image_url: Faker::Internet.url, email: Faker::Internet.email, home_city: Faker::Address.city, home_state: Faker::Address.state_abbr, bio: Faker::Hipster.paragraph)
  end
