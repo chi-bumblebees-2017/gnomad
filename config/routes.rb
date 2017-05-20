@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  resources :users, only: [:create, :new]
-  resources :sessions, only: [:create, :new, :destroy]
+  resources :users, only: [:create, :update, :show]
+  resources :sessions, only: [:destroy]
 
   get '/auth/:provider/callback', to: 'sessions#create'
 end

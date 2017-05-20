@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
-  def new
+  def create
+    user = User.from_oauth(userjson)
+    session[:user_id] = user.id
+    render json: user
   end
 
-  def create
+  def update
+  end
+
+  def show
   end
 end
