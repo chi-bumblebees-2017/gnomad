@@ -6,4 +6,8 @@ Rails.application.routes.draw do
   # root 'conversations#index'
   # resources :personal_messages, only: [:create]
   # resources :conversations, only: [:index, :show]
+  get "/users/:id/conversations" => "conversations#index"
+  get "/conversations/:id" => "conversations#show"
+  post "/conversations/:id/personal_messages" => "personal_messages#create"
+
 end
