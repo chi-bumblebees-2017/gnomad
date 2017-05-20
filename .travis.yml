@@ -11,5 +11,4 @@ deploy:
   app: gnomad
   on:
     repo: chi-bumblebees-2017/gnomad
-  # REMINDER: ADD 'run: rake db:' commands after database is setup
-
+  before_script: bundle exec rails db:setup
