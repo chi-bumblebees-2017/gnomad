@@ -11,13 +11,13 @@ class Conversation < ApplicationRecord
 
   scope :between, -> (sender_id, receiver_id) do
     where(initiator_id: sender_id, receiver_id: receiver_id).or(where(initiator_id: receiver_id, receiver_id: sender_id)).limit(1)
-end
-
-  def with(current_user)
-    initiator == current_user ? receiver : initiator
   end
 
-  def participates?(user)
-    initiator == user || receiver == user
-  end
+  # def with(current_user)
+  #   initiator == current_user ? receiver : initiator
+  # end
+
+  # def participates?(user)
+  #   initiator == user || receiver == user
+  # end
 end

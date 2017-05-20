@@ -6,10 +6,3 @@ end
 
 
 
-=begin
-
-switch to master branch
-mergre branch
-push to heroku
-
-=end
