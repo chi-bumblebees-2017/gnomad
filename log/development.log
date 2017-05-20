@@ -624,3 +624,135 @@ Migrating to RemoveNameAddFirstLastNameForUsers (20170520163007)
   [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3324956851394825955)[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3324956851394825955);[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3324956851394825955)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (13.1ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "7b974"], ["image_url", "http://larsonheaney.biz/geo"], ["email", "madge.braun@blick.net"], ["home_city", "Doylemouth"], ["home_state", "NE"], ["bio", "Church-key deep v yolo. Portland next level hoodie listicle kombucha green juice. Helvetica meditation literally butcher ramps tofu kinfolk."], ["created_at", "2017-05-20 18:43:17.299304"], ["updated_at", "2017-05-20 18:43:17.299304"], ["first_name", "Bennie"], ["last_name", "Brakus"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "525a8"], ["image_url", "http://ernser.name/danyka"], ["email", "torey_nicolas@block.net"], ["home_city", "South Lonnyfurt"], ["home_state", "GA"], ["bio", "Food truck ethical venmo. Poutine hashtag distillery gastropub direct trade. Mixtape fingerstache ramps plaid jean shorts helvetica. Flannel trust fund heirloom narwhal cronut meh."], ["created_at", "2017-05-20 18:43:17.316634"], ["updated_at", "2017-05-20 18:43:17.316634"], ["first_name", "Ariel"], ["last_name", "Breitenberg"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "94ce8"], ["image_url", "http://koelpinherman.biz/chase.marquardt"], ["email", "ethan.upton@zboncakmoen.com"], ["home_city", "East Pierceville"], ["home_state", "PA"], ["bio", "Marfa keffiyeh tattooed. Crucifix disrupt lumbersexual yolo. Blog migas ethical typewriter williamsburg."], ["created_at", "2017-05-20 18:43:17.319994"], ["updated_at", "2017-05-20 18:43:17.319994"], ["first_name", "Rickie"], ["last_name", "Bailey"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "34377"], ["image_url", "http://ratkesmith.net/darryl"], ["email", "merlin@bergstromhudson.io"], ["home_city", "North Shaunfort"], ["home_state", "AZ"], ["bio", "Fashion axe shabby chic marfa meggings helvetica kitsch. Neutra brooklyn butcher cred forage yr. Austin cred viral squid semiotics chartreuse fashion axe direct trade. Yuccie roof readymade tofu cronut swag. Offal cleanse next level pickled scenester banh mi bespoke."], ["created_at", "2017-05-20 18:43:17.324096"], ["updated_at", "2017-05-20 18:43:17.324096"], ["first_name", "Ayana"], ["last_name", "Purdy"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "536d6"], ["image_url", "http://pfannerstillkihn.name/edwin_kulas"], ["email", "salma_steuber@abshire.co"], ["home_city", "Bettyeburgh"], ["home_state", "MA"], ["bio", "Flexitarian cred banh mi skateboard keytar. Church-key messenger bag seitan cornhole. Art party fixie food truck. Messenger bag bushwick gastropub chartreuse retro migas pabst yuccie. Pickled plaid poutine franzen selvage selfies fanny pack."], ["created_at", "2017-05-20 18:43:17.327580"], ["updated_at", "2017-05-20 18:43:17.327580"], ["first_name", "Darius"], ["last_name", "Russel"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "123aa"], ["image_url", "http://durgan.co/liliana"], ["email", "stefan@hamillskiles.biz"], ["home_city", "East Breanneshire"], ["home_state", "VA"], ["bio", "Hella 3 wolf moon cray portland +1. You probably haven't heard of them iphone raw denim banjo pug deep v. Salvia bitters gentrify post-ironic. Cred seitan irony goth. Irony hammock 90's."], ["created_at", "2017-05-20 18:43:17.331001"], ["updated_at", "2017-05-20 18:43:17.331001"], ["first_name", "Bradford"], ["last_name", "Glover"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "2655d"], ["image_url", "http://barrows.name/adeline"], ["email", "shaun@mohr.net"], ["home_city", "South Alexandrineside"], ["home_state", "FL"], ["bio", "Freegan aesthetic sriracha small batch butcher mumblecore. Ennui letterpress offal paleo migas cray tilde poutine. Tumblr twee pop-up waistcoat tofu. Lumbersexual franzen asymmetrical shoreditch twee mixtape aesthetic. Hoodie church-key listicle kombucha cred semiotics put a bird on it neutra."], ["created_at", "2017-05-20 18:43:17.334301"], ["updated_at", "2017-05-20 18:43:17.334301"], ["first_name", "Precious"], ["last_name", "Terry"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "8eeae"], ["image_url", "http://wolff.biz/selena"], ["email", "abdullah.reynolds@parisian.co"], ["home_city", "West Lionel"], ["home_state", "IN"], ["bio", "Pop-up mustache 90's twee fingerstache literally art party hammock. Fanny pack leggings intelligentsia. Quinoa cliche paleo mlkshk williamsburg iphone mumblecore."], ["created_at", "2017-05-20 18:43:17.337432"], ["updated_at", "2017-05-20 18:43:17.337432"], ["first_name", "Rashad"], ["last_name", "Hessel"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "bea23"], ["image_url", "http://oconner.name/ricardo_glover"], ["email", "demetrius.vonrueden@torppadberg.biz"], ["home_city", "Erikaview"], ["home_state", "OR"], ["bio", "Truffaut meditation wayfarers. Fashion axe occupy williamsburg paleo truffaut. Slow-carb chambray craft beer hella austin literally authentic. Yuccie health fanny pack ramps mlkshk meggings goth. Selfies park bushwick tote bag next level celiac bespoke farm-to-table."], ["created_at", "2017-05-20 18:43:17.341599"], ["updated_at", "2017-05-20 18:43:17.341599"], ["first_name", "Jeanette"], ["last_name", "Gottlieb"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "674cc"], ["image_url", "http://zieme.net/gilberto.schiller"], ["email", "ernest_marquardt@mantefadel.com"], ["home_city", "Ebonyfurt"], ["home_state", "MD"], ["bio", "Fashion axe kombucha narwhal bespoke gluten-free. Organic echo meditation forage lumbersexual salvia humblebrag. Kickstarter plaid small batch. Godard selfies scenester."], ["created_at", "2017-05-20 18:43:17.344820"], ["updated_at", "2017-05-20 18:43:17.344820"], ["first_name", "Ibrahim"], ["last_name", "Schumm"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "19c95"], ["image_url", "http://huel.io/yazmin_flatley"], ["email", "crawford@crist.co"], ["home_city", "Bahringerhaven"], ["home_state", "NV"], ["bio", "Park cornhole cred asymmetrical shabby chic. Cliche hoodie slow-carb. Tofu small batch tattooed normcore wes anderson knausgaard. Messenger bag gentrify brunch actually quinoa microdosing neutra hammock."], ["created_at", "2017-05-20 18:43:17.348207"], ["updated_at", "2017-05-20 18:43:17.348207"], ["first_name", "Mable"], ["last_name", "Corkery"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "ec78b"], ["image_url", "http://kochturcotte.com/ola.weber"], ["email", "jamison_johnston@heathcote.name"], ["home_city", "Lake Dionberg"], ["home_state", "TN"], ["bio", "Dreamcatcher organic whatever. Forage freegan selvage everyday meditation gluten-free. Bespoke synth kale chips franzen park locavore. Bespoke stumptown bushwick."], ["created_at", "2017-05-20 18:43:17.351548"], ["updated_at", "2017-05-20 18:43:17.351548"], ["first_name", "Arielle"], ["last_name", "Sawayn"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "9abbc"], ["image_url", "http://riceboyle.name/linnea_nolan"], ["email", "sophie@lueilwitzlockman.info"], ["home_city", "Darbyberg"], ["home_state", "IN"], ["bio", "Hammock pickled letterpress raw denim everyday. +1 umami occupy ethical humblebrag ugh loko. Fashion axe yolo hashtag vinyl mustache diy biodiesel. Quinoa actually banh mi."], ["created_at", "2017-05-20 18:43:17.354689"], ["updated_at", "2017-05-20 18:43:17.354689"], ["first_name", "Florian"], ["last_name", "Parker"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "4b674"], ["image_url", "http://turcotteking.name/alia"], ["email", "garett@watsica.net"], ["home_city", "Halvorsonmouth"], ["home_state", "WY"], ["bio", "Letterpress quinoa knausgaard farm-to-table loko mixtape swag. Chambray try-hard meditation cold-pressed heirloom cardigan butcher. Photo booth blue bottle street bespoke mixtape vinegar yr selvage. Waistcoat bespoke readymade. Taxidermy fanny pack migas kickstarter."], ["created_at", "2017-05-20 18:43:17.358574"], ["updated_at", "2017-05-20 18:43:17.358574"], ["first_name", "Laurel"], ["last_name", "Greenholt"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "35e79"], ["image_url", "http://hoeger.com/savanah.adams"], ["email", "keith@schinner.name"], ["home_city", "Theresefurt"], ["home_state", "RI"], ["bio", "Meditation sustainable master. Chambray shabby chic dreamcatcher. Letterpress cray loko. Tilde sriracha franzen butcher bushwick. Tumblr biodiesel heirloom."], ["created_at", "2017-05-20 18:43:17.362257"], ["updated_at", "2017-05-20 18:43:17.362257"], ["first_name", "Vivien"], ["last_name", "Crona"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "dcc36"], ["image_url", "http://greenfelderosinski.biz/neva"], ["email", "tracy.pfeffer@ricecruickshank.io"], ["home_city", "South Keanu"], ["home_state", "KS"], ["bio", "Tote bag organic polaroid truffaut normcore 8-bit. Venmo chartreuse you probably haven't heard of them bitters vegan bushwick yr. Meh selvage biodiesel post-ironic hammock ramps art party listicle."], ["created_at", "2017-05-20 18:43:17.365768"], ["updated_at", "2017-05-20 18:43:17.365768"], ["first_name", "Joan"], ["last_name", "Mraz"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "3803d"], ["image_url", "http://leffler.co/lucio"], ["email", "gustave_zulauf@cormier.biz"], ["home_city", "Lake Felix"], ["home_state", "NC"], ["bio", "Hashtag diy keffiyeh leggings truffaut five dollar toast fixie. Hoodie viral literally salvia kombucha ethical. Retro deep v blue bottle."], ["created_at", "2017-05-20 18:43:17.370429"], ["updated_at", "2017-05-20 18:43:17.370429"], ["first_name", "Obie"], ["last_name", "Abernathy"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "81964"], ["image_url", "http://lubowitz.com/danny"], ["email", "kenneth.ruecker@lueilwitz.co"], ["home_city", "Laurineport"], ["home_state", "SC"], ["bio", "Whatever waistcoat lomo carry. Williamsburg cliche pbr&b yuccie keffiyeh street. Pbr&b cleanse bushwick photo booth meh goth 90's. Venmo echo 90's roof art party ugh lo-fi."], ["created_at", "2017-05-20 18:43:17.374333"], ["updated_at", "2017-05-20 18:43:17.374333"], ["first_name", "Santa"], ["last_name", "Wyman"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "d9295"], ["image_url", "http://boyle.biz/brayan_roberts"], ["email", "arjun@muller.co"], ["home_city", "Billieton"], ["home_state", "OR"], ["bio", "Hoodie cold-pressed pitchfork you probably haven't heard of them godard ugh. Pug tofu iphone wes anderson deep v. Occupy helvetica gentrify lomo etsy jean shorts. Selvage venmo authentic aesthetic wes anderson gastropub cred put a bird on it."], ["created_at", "2017-05-20 18:43:17.377526"], ["updated_at", "2017-05-20 18:43:17.377526"], ["first_name", "Natalie"], ["last_name", "Fay"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("provider", "uid", "image_url", "email", "home_city", "home_state", "bio", "created_at", "updated_at", "first_name", "last_name") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["provider", "facebook"], ["uid", "7a9d7"], ["image_url", "http://rogahncain.name/timmothy_hamill"], ["email", "jefferey_lindgren@grady.io"], ["home_city", "Morarberg"], ["home_state", "ME"], ["bio", "Roof pbr&b chartreuse. Chia hammock kogi heirloom. Loko asymmetrical lo-fi literally everyday organic hammock meditation."], ["created_at", "2017-05-20 18:43:17.380711"], ["updated_at", "2017-05-20 18:43:17.380711"], ["first_name", "Fabiola"], ["last_name", "Raynor"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/users" for 127.0.0.1 at 2017-05-20 13:44:05 -0500
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+actionpack (5.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.1) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/users" for 127.0.0.1 at 2017-05-20 13:45:33 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+actionpack (5.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.1) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'

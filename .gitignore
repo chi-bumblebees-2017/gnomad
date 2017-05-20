@@ -16,6 +16,8 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-coverage
+coveragegit
 
 .env
+
+/node_modules
