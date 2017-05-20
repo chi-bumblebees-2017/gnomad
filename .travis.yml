@@ -2,6 +2,14 @@ language: ruby
 rvm:
 - 2.3.1
 services:
-  - postgresql
-  
-# before_script: bundle exec rails db:setup
+- postgresql
+cache: bundler
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  api_key:
+    secure: FMEZLKQR/xEvLalsSFkVRLujw4R851WFMeBX7AloLOBV1EFxaKc16SU5xe9ucaxJOv35xja5oUqzUp6l3tERctxWRXxvpYbNuGJcyCOrBOb0h85s+fFxM0CIYK8FSiXuyfiVsAyJYK9lMyP2KaxH47JiEC2mvcBLyDwPwbyweDMGo6zwnLrHGzmeeDP52dryr24S8w93C16KD3Vu09V0xd78eK8OnEKab1P+g28ymGl0v+TyWYwg8QsRcSFigeCtMi8euk5OKX0616JXKO8nh+bFbLzeWN9xLR/cf91rmgWumcB3wUunM+7zHlvu0Lgd0Bke8qKrgUfvlI+VvjDLbN1tZBz2Oo4xHxzdlwI0vORHpYTqA/wbmFe5Miyrtq1qkpWFsGySXwYXgNN6SVZQkpNqUkV5KyiCEgRnMCG7SiiyFRTRO7GXxAXk55LMQ/LH3VE777W8VbmaFn6KWgKvhZI1whJ32i8xhVeDPS6GmmeQU5SboiYjfS8hfdUozC79vlNNqTCqT5uPJSGmrls0bcSp3aQ9Gmv5iap89PHQyymyvGOqN5umd7odzeElUjCO/kFIeJuRI5zN/P6iwzumuLSN5EHMuprFEovrDRgL3qDcZu+USQ2pX5CIJJ2PZvMluXXllTJ8y4wV7Voz3RwD4pO/s9HtlAr8VoR/efbLFEk=
+  app: gnomad
+  on:
+    repo: chi-bumblebees-2017/gnomad
+  before_script: bundle exec rails db:setup
