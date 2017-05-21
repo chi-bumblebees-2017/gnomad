@@ -5,13 +5,13 @@ class ConversationsController < ApplicationController
   def index
     # TODO: sub in current_user as argument to participating() later
     @conversations = Conversation.participating(User.find(1)).order('updated_at DESC')
-    render json: @conversations
+    render json: @conversations.as_json(include: [:initiator, :receiver, :last_message])
   end
 
   def show
     # @personal_message = PersonalMessage.new
     @conversation = Conversation.find_by(id: params[:id]) || Conversation.new
-    render json: @conversation.as_json(include: :personal_messages)
+    render json: @conversation.as_json(include: [:personal_messages, :receiver, :initiator])
   end
 
 
