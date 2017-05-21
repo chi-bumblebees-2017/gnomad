@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :authorize_request, only: [:create]
+
   def search
     location = params[:location].split(", ")
     city = location.first
@@ -12,7 +14,9 @@ class UsersController < ApplicationController
   def create
     user = User.from_oauth(user_params)
     session[:user_id] = user.id
-    render json: user
+    auth_token = JsonWebToken.encode(user_id: user.id)
+    p auth_token
+    json_response(auth_token: auth_token)
   end
 
   def update
