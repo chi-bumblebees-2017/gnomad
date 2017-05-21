@@ -3,7 +3,7 @@ rvm:
 - 2.3.1
 services:
 - postgresql
-cache: bundler
+# cache: bundler
 deploy:
   skip_cleanup: true
   provider: heroku
@@ -14,4 +14,3 @@ deploy:
     repo: chi-bumblebees-2017/gnomad
   before_script:
   - bundle exec rails db:setup
-  - bundle exec rake db:test:prepare
