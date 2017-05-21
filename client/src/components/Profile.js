@@ -50,6 +50,10 @@ class Profile extends Component {
           <h3>Localhost Interests</h3>
           <p>Placeholder: User Localhost Interests</p>
         </div>
+
+        <div className="chat-button">
+          <button>Start Chat</button>
+        </div>
       </div>
       );
     } else {
