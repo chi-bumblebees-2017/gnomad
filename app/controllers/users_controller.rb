@@ -5,9 +5,7 @@ class UsersController < ApplicationController
     location = params[:location].split(", ")
     city = location.first
     state = location.last
-    @matches = User.localhosts.from_location(city, state).likes_any(@current_user.interests_while_traveling)
-    p @current_user.interests_while_traveling
-    p @matches
+    @matches = User.localhosts.from_location(city, state).likes_any(current_user.interests_while_traveling)
     render json: @matches
   end
 
