@@ -25,10 +25,9 @@ class Profile extends Component {
           loaded: true,
     })});
   }
-
+  // TODO: update so that "start chat" button starts a chat with the user
   render() {
     if (this.state.loaded === true) {
-      // console.log(this.state)
       return (
       <div className="profile-container">
         <h1>{this.state.userData.user.first_name} </h1>
