@@ -30,7 +30,7 @@ class Conversation extends Component {
   }
 
 
-// user (4 times)**********
+// receiver user stub (4 times)**********
   render() {
     if (this.state.loaded === true) {
       return (
