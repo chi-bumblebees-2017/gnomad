@@ -22,6 +22,60 @@
     <title>React App</title>
   </head>
   <body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '1351086744971505',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v2.9'
+        });
+        FB.AppEvents.logPageView();
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1351086744971505";
+         fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+      function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+      }
+
+      function statusChangeCallback(response) {
+        if (response.status === 'connected') {
+          getFacebookInfo();
+        } else {
+          document.getElementById('status').innerHTML = 'Please log into this app.';
+        }
+      }
+
+      function getFacebookInfo() {
+        FB.api('/me', {fields: 'first_name, last_name, id, email'}, function(response) {
+          console.log(response)
+          var data = new FormData()
+          data.append("first_name", response.first_name)
+          data.append("last_name", response.last_name)
+          data.append("uid", response.id)
+          data.append("email", response.email)
+
+          FB.api('me/picture?width=150&height=150', function(response){
+            console.log(response)
+            data.append("image_url", response.data.url)
+            fetch("/users", {
+              method: "POST",
+              body: data,
+              mode: 'no-cors',
+            })
+          })
+        })
+      }
+    </script>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
