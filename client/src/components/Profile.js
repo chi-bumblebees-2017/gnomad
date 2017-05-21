@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Interests from './Interests';
 import {
   BrowserRouter as Router,
   Route,
@@ -30,30 +31,22 @@ class Profile extends Component {
       // console.log(this.state)
       return (
       <div className="profile-container">
-        <h1>{this.state.userData.first_name} </h1>
+        <h1>{this.state.userData.user.first_name} </h1>
 
         <div className="profile-picture-container">
-          <img src={this.state.userData.image_url} alt="profile-picture"/>
-        </div>
-
-        <div className="bio-container">
-          <h2>A Little Bit About Me...</h2>
-          <p>{this.state.userData.bio}</p>
-        </div>
-
-        <div className="gnomad-interests-container">
-          <h3>Gnomad Interests</h3>
-          <p>Placeholder: User Gnomad Interests</p>
-        </div>
-
-        <div className="localhost-interests-container">
-          <h3>Localhost Interests</h3>
-          <p>Placeholder: User Localhost Interests</p>
+          <img src={this.state.userData.user.image_url} alt="profile-picture"/>
         </div>
 
         <div className="chat-button">
           <button>Start Chat</button>
         </div>
+
+        <div className="bio-container">
+          <h2>A Little Bit About Me...</h2>
+          <p>{this.state.userData.user.bio}</p>
+        </div>
+
+        <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests}/>
       </div>
       );
     } else {
