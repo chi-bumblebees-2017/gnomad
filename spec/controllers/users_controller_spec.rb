@@ -11,6 +11,4 @@ RSpec.describe UsersController, type: :controller do
       expect{ post :create, params: {uid: 1} }.to change {User.count}.by 1
     end
   end
-
-
 end
