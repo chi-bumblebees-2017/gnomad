@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Conversation from './Conversation';
 import Conversations from './Conversations';
-import Dashboard from './Dashboard';
+import NewProfile from './NewProfile';
 import Login from './components/Login';
 import {
   BrowserRouter as Router,
@@ -32,8 +32,9 @@ class App extends Component {
           <Route exact path="/" component={Login} />
           <Route path="/chats" component={Conversations} />
           <Route path="/chats/:id" component={Conversation} />
-          <Route path="/account" component={Dashboard} />
-{/*       <Route path="/register" component={NewProfile} />     */}
+          <Route path="/register" component={NewProfile} />
+
+{/*        <Route path="/account" component={Dashboard} />     */}
 {/*       <Route path="/search" component={SearchContainer} />  */}
 {/*       <Route path="/logout" component={Logout} />           */}
 {/*       <Route path="/users/:name/:id" component={Profile} /> */}

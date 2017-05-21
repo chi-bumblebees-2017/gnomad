@@ -33,10 +33,56 @@ class Interests extends Component {
   //   })
   // }
 
+// ATTEMP TO CREAK CHECKBOXES***************************
+  // const interests = ['Restaurants','Sports'];
+  // componentWillMount = () => {
+  //   this.selectedCheckboxes = new Set();
+  // }
+
+  // toggleCheckbox = label => {
+  //   if (this.selectedCheckbox.has(label)) {
+  //     this.selectedCheckboxes.delete(label);
+  //   } else {
+  //     this/selectedCheckboxes.add(label);
+  //   }
+  // }
+
+  // handleFormSubmit = formSubmitEvent => {
+  //   formSubmitEvent.preventDefault();
+  // }
+
+  // createCheckbox = label => (
+  //     <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label} />
+  //   )
+
+  // createCheckboxes = () => (
+  //     interests.map(this.createCheckbox)
+  //   )
+
+//   render() {
+//     return (
+//       <div className="container">
+//         <div className="row">
+//           <div className="col-sm-12">
+
+//             <form onSubmit={this.handleFormSubmit}>
+//               {this.createCheckboxes()}
+//               <button className="btn btn-default" type="submit">Save</button>
+//             </form>
+
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+
+// ********************************************************
+
   render() {
     return (
       <div>
-        <p><label>Restaurants <input type="radio" name="restaurant" /></label></p>
+        <p><label>Restaurants <input type="radio" name="restaurants" /></label></p>
         <p><label>Sports <input type="radio" name="sports" /></label></p>
         <p><label>Museums <input type="radio" name="museums" /></label></p>
         <p><label>Bars <input type="radio" name="bars" /></label></p>
