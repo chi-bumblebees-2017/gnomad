@@ -12,4 +12,6 @@ deploy:
   app: gnomad
   on:
     repo: chi-bumblebees-2017/gnomad
-  before_script: bundle exec rails db:setup
+  before_script:
+  - bundle exec rails db:setup
+  - bundle exec rake db:test:prepare
