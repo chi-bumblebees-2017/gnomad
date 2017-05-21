@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class PersonalMessageContainer extends Component {
   render() {
     return (
-      <div>
-        <div>{this.props.messageId}</div>
+      <div className={this.props.className}>
+        <div>{this.props.author}</div>
         <div>{this.props.messageBody}</div>
       </div>
     );
