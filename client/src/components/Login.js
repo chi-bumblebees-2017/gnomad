@@ -5,7 +5,7 @@ import {
 
 class Login extends Component {
   loggedIn() {
-    return (localStorage.getItem('gnomad-auth-token').length >= 1)
+    return (localStorage.getItem('gnomad-auth-token') && localStorage.getItem('gnomad-auth-token').length >= 1)
   }
   render() {
     if (this.loggedIn()) {
