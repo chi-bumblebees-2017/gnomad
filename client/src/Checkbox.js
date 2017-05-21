@@ -3,18 +3,23 @@ import React, { Component } from 'react';
 class Checkbox extends Component {
   constructor(props) {
     super(props);
-    this.category = this.props.category
-    this.state = {
-      checkedValue: false,
-    };
     this.toggleCheckboxValue = this.toggleCheckboxValue.bind(this);
+    this.state = {
+      checkedValue: true,
+    };
+    this.category = this.props.category
+    this.profile = this.props.profileType
   };
 
   toggleCheckboxValue(event) {
+    console.log("1")
+    console.log(this.state)
     this.setState({
       checkedValue: !this.state.checkedValue
     });
-    this.props.handler(event.target.name, this.state.checkedValue);
+    console.log("2")
+    console.log(this.state)
+    this.props.handler(this.profile, event.target.name, this.state.checkedValue);
   };
 
   render() {
@@ -22,7 +27,7 @@ class Checkbox extends Component {
       <div>
       <p>
         <label>{this.props.category}</label>
-        <input onChange={this.toggleCheckboxValue} type="checkbox" value={this.state.checkedValue} name={this.props.category} />
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value={this.props.category} name={this.props.category} />
       </p>
       </div>
     )

@@ -4,7 +4,6 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-// import Interests from './Interests';
 import Checkbox from './Checkbox';
 import Dropdown from 'react-dropdown';
 import update from 'react-addons-update';
@@ -13,25 +12,44 @@ class NewProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      values: {city: "",
+      values: {
+        city: "",
         state: "",
         user_bio: "",
         gnomad_profile: "",
         localhost_profile: "",
-        restaurants: "",
-        sports: "",
-        museums: "",
-        bars: "",
-        music: "",
-        outdoors: "",
-        art: "",
-        fitness: "",
-        architecture: "",
-        family_fun: "",
-        zoo: "",
-        culture: "",
-        volunteer: "",
-        shopping: "",
+        gnomad_pref: {
+          restaurants: "",
+          sports: "",
+          museums: "",
+          bars: "",
+          music: "",
+          outdoors: "",
+          art: "",
+          fitness: "",
+          architecture: "",
+          family_fun: "",
+          zoo: "",
+          culture: "",
+          volunteer: "",
+          shopping: "",
+        },
+        local_pref: {
+          restaurants: "",
+          sports: "",
+          museums: "",
+          bars: "",
+          music: "",
+          outdoors: "",
+          art: "",
+          fitness: "",
+          architecture: "",
+          family_fun: "",
+          zoo: "",
+          culture: "",
+          volunteer: "",
+          shopping: "",
+        },
       }
     };
 
@@ -42,32 +60,31 @@ class NewProfile extends Component {
   }
 
 // sends the data to create a profile
-  updateInterest(category, value) {
+  updateInterest(profile, category, value) {
     const newValue = value;
+    const profileType = profile;
+    const interest = category;
     var newState = update(this.state, {
-      values: {[category]: {$set: newValue}}
-    })
+      values: {[profileType]: {[interest]: {$set: newValue}}
+    }});
     this.setState(newState);
-    console.log("NEW VALUE HERE");
-    console.log(newValue);
-    console.log("OTHER BIZ HERE");
     console.log(this.state.values);
   }
 // stores what is immedidatly typed
   handleChange(event) {
     const target = event.target;
     const name = target.name;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.value;
 
     var newState = update(this.state, {
       values: {[name]: {$set: value}}
     })
-    this.setState(newState)
-    console.log(this.state.values)
+    this.setState(newState);
   }
 
 // ajax, makes the request
   handleSubmit(event) {
+    console.log(this.state.values)
     event.preventDefault();
     fetch('/users/:id', {
       method: "PUT",
@@ -82,18 +99,15 @@ class NewProfile extends Component {
   }
 
   render() {
-    const ynOptions = ['Yes', 'No']
-    const ynDefaultOption = ynOptions['Select']
-
     return (<div>
       <p>Create Profile</p>
       <p>Facebook picture and name</p>
-      <form onSubmit={this.createProfile} className="create-profile-form">
+      <form onSubmit={this.handleSubmit} className="create-profile-form">
 
         <p><label>City: <input name="city" required type="text" onChange={this.handleChange} /></label></p>
 
         <label>State: </label>
-        <select name="state" onChange={this.handleChange} required value={this.state.values.state}>
+        <select type="select" name="state" onChange={this.handleChange} required value={this.state.values.state}>
           <option value="AK">AK</option>
           <option value="AL">AL</option>
           <option value="AR">AR</option>
@@ -149,51 +163,52 @@ class NewProfile extends Component {
         <p><label>Bio: <textarea name="user_bio" onChange={this.handleChange}/></label></p>
 
         <label>I want to register as a Gnomad: </label>
-        <select name="gnomad_profile" onChange={this.handleChange} required value={this.state.values.state}>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
+        <select type="select" name="gnomad_profile" onChange={this.handleChange} required value={this.state.values.gnomad_profile}>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
         </select>
 
-        // <div><label>I want to register as a Local Host:</label>
-        // <Dropdown options={ynOptions} onChange={this.handleChange} name="localhost_profile"value={ynDefaultOption} /></div>
-
         <p>As a Gnomad I like to :</p>
-        <Checkbox handler={this.updateInterest} category="restaurants"/>
-        <Checkbox handler={this.updateInterest} category="sports"/>
-        <Checkbox handler={this.updateInterest} category="museums"/>
-        <Checkbox handler={this.updateInterest} category="bars"/>
-        <Checkbox handler={this.updateInterest} category="music"/>
-        <Checkbox handler={this.updateInterest} category="outdoors"/>
-        <Checkbox handler={this.updateInterest} category="art"/>
-        <Checkbox handler={this.updateInterest} category="fitness"/>
-        <Checkbox handler={this.updateInterest} category="architecture"/>
-        <Checkbox handler={this.updateInterest} category="family_fun"/>
-        <Checkbox handler={this.updateInterest} category="zoo"/>
-        <Checkbox handler={this.updateInterest} category="culture"/>
-        <Checkbox handler={this.updateInterest} category="volunteer"/>
-        <Checkbox handler={this.updateInterest} category="shopping"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="restaurants"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="sports"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="museums"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="bars"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="music"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="outdoors"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="art"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="fitness"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="architecture"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="family_fun"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="zoo"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="culture"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="volunteer"/>
+        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="shopping"/>
+        <label>I want to register as a Gnomad: </label>
 
+         <label>I am availble to show people around as a Localhost: </label>
+        <select type="select" name="localhost_profile" onChange={this.handleChange} required value={this.state.values.localhost_profile}>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
         <p>As a Local Host:</p>
-        // <div><label>I am available to host gnomes: </label>
-        // <Dropdown options={ynOptions} onChange={this.updateInterest} name="available" value={ynDefaultOption} /></div>
 
         <p><label>Local Suggestions: <textarea name="suggestions" onChange={this.handleChange} /></label></p>
 
         <p>I like to show people:</p>
-        <Checkbox handler={this.updateInterest} category="restaurants"/>
-        <Checkbox handler={this.updateInterest} category="sports"/>
-        <Checkbox handler={this.updateInterest} category="museums"/>
-        <Checkbox handler={this.updateInterest} category="bars"/>
-        <Checkbox handler={this.updateInterest} category="music"/>
-        <Checkbox handler={this.updateInterest} category="outdoors"/>
-        <Checkbox handler={this.updateInterest} category="art"/>
-        <Checkbox handler={this.updateInterest} category="fitness"/>
-        <Checkbox handler={this.updateInterest} category="architecture"/>
-        <Checkbox handler={this.updateInterest} category="family_fun"/>
-        <Checkbox handler={this.updateInterest} category="zoo"/>
-        <Checkbox handler={this.updateInterest} category="culture"/>
-        <Checkbox handler={this.updateInterest} category="volunteer"/>
-        <Checkbox handler={this.updateInterest} category="shopping"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="restaurants"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="sports"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="museums"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="bars"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="music"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="outdoors"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="art"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="fitness"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="architecture"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="family_fun"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="zoo"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="culture"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="volunteer"/>
+        <Checkbox profileType="local_pref" handler={this.updateInterest} category="shopping"/>
 
         <input type="submit" value="Submit" />
       </form>
