@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   # root 'conversations#index'
-
+  get '/users' => "users#search"
   get "/users/:id/conversations" => "conversations#index"
   # get "/conversations/:id" => "conversations#show"
   # post "/conversations/:id/personal_messages" => "personal_messages#create"
