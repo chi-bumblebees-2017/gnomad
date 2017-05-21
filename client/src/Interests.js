@@ -1,16 +1,47 @@
 import React, { Component } from 'react';
 
 class Interests extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     value: "",
-  //   };
-  //   this.handleChange = this.handleChange.bind(this);
-  //   this.handleSubmit = this.handleSubmit.bind(this);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
-  // handleChange(event) {
+  render() {
+    return (
+      <div>
+        <p><label>Restaurants
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value={testValue} name="restaurants" /></label></p>
+        <p><label>Sports
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value={testValue} name="sports" /></label></p>
+        <p><label>Museums
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="museums" /></label></p>
+        <p><label>Bars
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="bars" /></label></p>
+        <p><label>Music
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="music" /></label></p>
+        <p><label>Outdoors
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="outdoors" /></label></p>
+        <p><label>Art
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="art" /></label></p>
+        <p><label>Fitness
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="fitness" /></label></p>
+        <p><label>Architecture
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="architecture" /></label></p>
+        <p><label>Family-Fun
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="family_fun" /></label></p>
+        <p><label>Zoo
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="zoo" /></label></p>
+        <p><label>Culture
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="culture" /></label></p>
+        <p><label>Volunteer
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="volunteer" /></label></p>
+        <p><label>Shopping
+        <input onClick={this.toggleCheckboxValue} type="checkbox" value="false" name="shopping" /></label></p>
+      </div>
+    );
+  }
+}
+
+export default Interests;
   //   this.setState({
   //     value: event.target.value,
   //   });
@@ -33,7 +64,7 @@ class Interests extends Component {
   //   })
   // }
 
-// ATTEMP TO CREAK CHECKBOXES***************************
+// ATTEMP TO CREAT CHECKBOXES***************************
   // const interests = ['Restaurants','Sports'];
   // componentWillMount = () => {
   //   this.selectedCheckboxes = new Set();
@@ -79,26 +110,3 @@ class Interests extends Component {
 
 // ********************************************************
 
-  render() {
-    return (
-      <div>
-        <p><label>Restaurants <input onChange={this.handleChange} type="radio" name="interests[restaurants]" /></label></p>
-        <p><label>Sports <input onChange={this.handleChange} type="radio" name="interests[sports]" /></label></p>
-        <p><label>Museums <input onChange={this.handleChange} type="radio" name="interests[museums]" /></label></p>
-        <p><label>Bars <input onChange={this.handleChange} type="radio" name="interests[bars]" /></label></p>
-        <p><label>Music <input onChange={this.handleChange} type="radio" name="interests[music]" /></label></p>
-        <p><label>Outdoors <input onChange={this.handleChange} type="radio" name="interests[outdoors]" /></label></p>
-        <p><label>Art <input onChange={this.handleChange} type="radio" name="interests[art]" /></label></p>
-        <p><label>Fitness <input onChange={this.handleChange} type="radio" name="interests[fitness]" /></label></p>
-        <p><label>Architecture <input onChange={this.handleChange} type="radio" name="interests[architecture]" /></label></p>
-        <p><label>Family-Fun <input onChange={this.handleChange} type="radio" name="interests[family_fun]" /></label></p>
-        <p><label>Zoo <input onChange={this.handleChange} type="radio" name="interests[zoo]" /></label></p>
-        <p><label>Culture <input onChange={this.handleChange} type="radio" name="interests[culture]" /></label></p>
-        <p><label>Volunteer <input onChange={this.handleChange} type="radio" name="interests[volunteer]" /></label></p>
-        <p><label>Shopping <input onChange={this.handleChange} type="radio" name="interests[shopping]" /></label></p>
-      </div>
-    );
-  }
-}
-
-export default Interests;
