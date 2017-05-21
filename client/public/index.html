@@ -69,6 +69,10 @@
               method: "POST",
               body: data,
               mode: 'no-cors',
+            }).then(function(data){
+              return data.json();
+            }).then(function(data){
+               localStorage.setItem('gnomad-auth-token', data.auth_token);
             })
           })
         })
