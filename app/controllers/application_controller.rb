@@ -5,8 +5,8 @@ class ApplicationController < ActionController::API
   # protect_from_forgery with: :exception
 
   # TODO: Stubbing current user for all controllers so that we don't need to handle API keys for now.
-  before_action :stub_current_user
 
+  # TODO: add the line below back in; not checking auth for all routes during development/testing
   before_action :authorize_request
   attr_reader :current_user
 
@@ -15,9 +15,5 @@ class ApplicationController < ActionController::API
   private
   def authorize_request
     @current_user = (AuthorizeApiRequest.new(request.headers).call)[:user]
-  end
-
-  def stub_current_user
-    @current_user = User.find(20)
   end
 end
