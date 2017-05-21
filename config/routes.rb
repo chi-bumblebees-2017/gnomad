@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  get '/users' => "users#search"
   resources :users, only: [:create, :update, :show]
   resources :sessions, only: [:destroy]
 
