@@ -7,8 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
+cities = ["Oklahoma City", "Tulsa", "Norman"]
+
 20.times do
-  user = User.create(provider: 'facebook', uid: Faker::Number.hexadecimal(5), first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, image_url: Faker::Internet.url, email: Faker::Internet.email, home_city: Faker::Address.city, home_state: Faker::Address.state_abbr, bio: Faker::Hipster.paragraph)
+  user = User.create(provider: 'facebook', uid: Faker::Number.hexadecimal(5), first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, image_url: Faker::Internet.url, email: Faker::Internet.email, home_city: cities.sample, home_state: "OK", bio: Faker::Hipster.paragraph)
   if rand(0..1) == 0
     lp = LocalhostProfile.create!(restaurants: rand(0..1) == 0 ? true : false,
                                  sports: rand(0..1) == 0 ? true : false,

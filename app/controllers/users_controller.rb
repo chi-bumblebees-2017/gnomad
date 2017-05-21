@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
   def search
-    @users = User.all
-    params[:location]
-    render json: @users
+    location = params[:location].split(", ")
+    city = location.first
+    state = location.last
+    @matches = User.localhosts.from_location(city, state).likes_any(@current_user.interests_while_traveling)
+    p @current_user.interests_while_traveling
+    p @matches
+    render json: @matches
   end
 
   def create

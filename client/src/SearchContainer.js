@@ -23,9 +23,11 @@ class SearchContainer extends Component {
     fetch(`/users?location=${this.state.location}`, {
       accept: 'application/json',
     }).then(data => data.json())
-      .then(dataJson => { this.setState({
-        localhosts: dataJson.localhosts,
-    })});
+      .then(dataJson => {
+        console.log(dataJson)
+        this.setState({
+          localhosts: dataJson,
+      })});
   }
 
 
