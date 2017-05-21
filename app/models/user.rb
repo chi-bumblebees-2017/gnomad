@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   POSSIBLE_INTERESTS = [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :history, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping]
+  has_many :initiated_conversations, class_name: 'Conversation', foreign_key: 'initiator_id'
+  has_many :received_conversations, class_name: 'Conversation', foreign_key: 'received_id'
+  has_many :personal_messages, dependent: :destroy
   # make models for and add associations to localhost or gnomad profiles
   has_one :gnomad_profile
   has_one :localhost_profile
