@@ -82,20 +82,20 @@ class Interests extends Component {
   render() {
     return (
       <div>
-        <p><label>Restaurants <input type="radio" name="restaurants" /></label></p>
-        <p><label>Sports <input type="radio" name="sports" /></label></p>
-        <p><label>Museums <input type="radio" name="museums" /></label></p>
-        <p><label>Bars <input type="radio" name="bars" /></label></p>
-        <p><label>Music <input type="radio" name="music" /></label></p>
-        <p><label>Outdoors <input type="radio" name="outdoors" /></label></p>
-        <p><label>Art <input type="radio" name="art" /></label></p>
-        <p><label>Fitness <input type="radio" name="fitness" /></label></p>
-        <p><label>Architecture <input type="radio" name="architecture" /></label></p>
-        <p><label>Family-Fun <input type="radio" name="family_fun" /></label></p>
-        <p><label>Zoo <input type="radio" name="zoo" /></label></p>
-        <p><label>Culture <input type="radio" name="culture" /></label></p>
-        <p><label>Volunteer <input type="radio" name="volunteer" /></label></p>
-        <p><label>Shopping <input type="radio" name="shopping" /></label></p>
+        <p><label>Restaurants <input onChange={this.handleChange} type="radio" name="interests[restaurants]" /></label></p>
+        <p><label>Sports <input onChange={this.handleChange} type="radio" name="interests[sports]" /></label></p>
+        <p><label>Museums <input onChange={this.handleChange} type="radio" name="interests[museums]" /></label></p>
+        <p><label>Bars <input onChange={this.handleChange} type="radio" name="interests[bars]" /></label></p>
+        <p><label>Music <input onChange={this.handleChange} type="radio" name="interests[music]" /></label></p>
+        <p><label>Outdoors <input onChange={this.handleChange} type="radio" name="interests[outdoors]" /></label></p>
+        <p><label>Art <input onChange={this.handleChange} type="radio" name="interests[art]" /></label></p>
+        <p><label>Fitness <input onChange={this.handleChange} type="radio" name="interests[fitness]" /></label></p>
+        <p><label>Architecture <input onChange={this.handleChange} type="radio" name="interests[architecture]" /></label></p>
+        <p><label>Family-Fun <input onChange={this.handleChange} type="radio" name="interests[family_fun]" /></label></p>
+        <p><label>Zoo <input onChange={this.handleChange} type="radio" name="interests[zoo]" /></label></p>
+        <p><label>Culture <input onChange={this.handleChange} type="radio" name="interests[culture]" /></label></p>
+        <p><label>Volunteer <input onChange={this.handleChange} type="radio" name="interests[volunteer]" /></label></p>
+        <p><label>Shopping <input onChange={this.handleChange} type="radio" name="interests[shopping]" /></label></p>
       </div>
     );
   }
