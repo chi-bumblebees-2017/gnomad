@@ -8,7 +8,7 @@ import UserListItemContainer from './UserListItemContainer'
 
 class SearchResults extends Component {
   render() {
-    if (this.props.results.length == 0) {
+    if (this.props.results.length === 0) {
       return (
         <div className="search-results">
           No localhosts found in that city that share your interests...

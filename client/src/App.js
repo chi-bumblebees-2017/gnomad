@@ -7,6 +7,7 @@ import {
   BrowserRouter as Router,
   Route,
   NavLink,
+  Redirect,
   Link
 } from 'react-router-dom';
 import NavBar from './NavBar';
@@ -18,21 +19,18 @@ class App extends Component {
     this.state = {
       auth_token: ""
     }
-    this.fetchStuff = this.fetchStuff.bind(this);
+    this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
   }
 
-  fetchStuff() {
-    fetch("/users/new", {
-              method: "GET",
-              headers: {
-                'Authorization': localStorage.getItem('gnomad-auth-token')
-              },
-            }).then(function(data){
-              return data.json()
-            }).then(function(data){
-              console.log(data)
-            });
+  checkIfLoggedIn() {
+    if (localStorage.getItem('gnomad-auth-token').length >= 1) {
+      this.setState({
+        auth_token: localStorage.getItem('gnomad-auth-token'),
+      })
+      this.props.history.push('/account');
+    }
   }
+
 
   render() {
     return (<div>
@@ -54,7 +52,6 @@ class App extends Component {
 {/*       <Route path="/users/:name/:id" component={Profile} /> */}
         </div>
       </Router>
-      <div onClick={this.fetchStuff}>Click me!</div>
       </div>
     );
   }
