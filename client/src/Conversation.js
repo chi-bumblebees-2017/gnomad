@@ -17,6 +17,21 @@ class Conversation extends Component {
     }
   }
 
+  onReceived(message) {
+    this.setState({
+      messages: [
+        ...this.state.messages,
+        message
+      ]
+    })
+  }
+
+  sendMessage = () => {
+    const message = this.refs.newMessage.value
+    // Call perform or send
+    this.refs.roomChannel.perform('sendMessage', {message})
+  }
+
   componentDidMount() {
     fetch(`/conversations/${this.props.match.params.id}`, {
       accept: 'application/json',
