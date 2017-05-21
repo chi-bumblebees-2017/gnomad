@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize_request, only: [:create]
+  # TODO: add line below back in once we add back this before action. commented out for now in development/test mode.
+  # skip_before_action :authorize_request, only: [:create]
 
   def search
     location = params[:location].split(", ")
@@ -21,6 +22,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    user = User.find(params[:id])
+
+    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting}
   end
 
   private
