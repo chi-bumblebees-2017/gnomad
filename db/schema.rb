@@ -20,6 +20,9 @@ ActiveRecord::Schema.define(version: 20170520163007) do
     t.integer "receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["initiator_id", "receiver_id"], name: "index_conversations_on_initiator_id_and_receiver_id", unique: true
+    t.index ["initiator_id"], name: "index_conversations_on_initiator_id"
+    t.index ["receiver_id"], name: "index_conversations_on_receiver_id"
   end
 
   create_table "gnomad_profiles", force: :cascade do |t|

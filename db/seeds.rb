@@ -50,3 +50,16 @@ cities = ["Oklahoma City", "Tulsa", "Norman"]
     user.gnomad_profile = gp
   end
 end
+
+initiator = User.first
+receiver = User.last
+convo = Conversation.create!(initiator: initiator, receiver: receiver)
+convo.personal_messages.create!(body: Faker::ChuckNorris.fact, author_id: initiator.id)
+19.times do
+  if rand(0..1) == 0
+    author_id = initiator.id
+  else
+    author_id = receiver.id
+  end
+  convo.personal_messages.create!(body: Faker::ChuckNorris.fact, author_id: author_id)
+end

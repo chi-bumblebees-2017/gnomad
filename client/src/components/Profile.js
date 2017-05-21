@@ -19,6 +19,9 @@ class Profile extends Component {
   componentDidMount() {
     fetch(`/users/${this.props.match.params.id}`, {
       accept: 'application/json',
+      headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token')
+      },
     }).then(data => data.json())
       .then(dataJson => {
         this.setState({
