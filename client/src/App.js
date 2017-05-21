@@ -16,11 +16,26 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      auth_token: ""
     }
+    this.fetchStuff = this.fetchStuff.bind(this);
+  }
+
+  fetchStuff() {
+    fetch("/users/new", {
+              method: "GET",
+              headers: {
+                'Authorization': localStorage.getItem('gnomad-auth-token')
+              },
+            }).then(function(data){
+              return data.json()
+            }).then(function(data){
+              console.log(data)
+            });
   }
 
   render() {
-    return (
+    return (<div>
       <Router>
         <div className="App">
           <NavBar>
@@ -39,6 +54,8 @@ class App extends Component {
 {/*       <Route path="/users/:name/:id" component={Profile} /> */}
         </div>
       </Router>
+      <div onClick={this.fetchStuff}>Click me!</div>
+      </div>
     );
   }
 }
