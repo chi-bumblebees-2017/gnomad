@@ -3,8 +3,10 @@ import {
   BrowserRouter as Router,
   Route,
   Link
-} from 'react-router-dom'
-import PersonalMessage from './PersonalMessage'
+} from 'react-router-dom';
+import PersonalMessageContainer from './PersonalMessageContainer';
+import NewMessage from './NewMessage';
+
 
 class Conversation extends Component {
   constructor(props) {
@@ -14,7 +16,7 @@ class Conversation extends Component {
       loaded: false,
     }
   }
-  // TODO: figure out fetch route
+
   componentDidMount() {
     fetch(`/conversations/${this.props.match.params.id}`, {
       accept: 'application/json',
@@ -27,19 +29,28 @@ class Conversation extends Component {
     })});
   }
 
+
   render() {
     if (this.state.loaded === true) {
       return (
-        <div className="conversation-container">
-          {this.state.messages.map((personalMessage) =>
-            <PersonalMessage key={personalMessage.id} messageId={personalMessage.id} body={personalMessage.body} />
-          )}
+        <div>
+          <div className="profile-link-banner"><Link to="/users/1">Visit user 1 profile</Link></div>
+          <div className="conversation-container">
+            {this.state.messages.map((personalMessage) =>
+              <PersonalMessageContainer key={personalMessage.id} messageBody={personalMessage.body} />
+            )}
+          </div>
+          <NewMessage conversationId={this.props.match.params.id} receiverId={1} />
         </div>
         );
     } else {
       return (
-        <div className="conversation-container">
-          loading...
+        <div>
+          <div className="profile-link-banner"><Link to="/users/1">Visit user 1 profile</Link></div>
+          <div className="conversation-container">
+            loading...
+          </div>
+          <NewMessage conversationId={this.props.match.params.id} receiverId={1} />
         </div>
       );
     }

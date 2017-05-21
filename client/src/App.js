@@ -7,6 +7,7 @@ import {
   Link
 } from 'react-router-dom'
 import Conversation from './Conversation';
+import Conversations from './Conversations';
 
 class App extends Component {
   constructor(props) {
@@ -33,13 +34,8 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <h2>Welcome to React</h2>
           </div>
-          <div className="App-intro">
-            Here is a json of user information:
-            {this.state.users.map((user) =>
-              <p key={user.id}>{user.name}</p>
-            )}
-          </div>
           <Route path="/chats/:id" component={Conversation} />
+          <Route path="/chats" component={Conversations} />
         </div>
       </Router>
     );
