@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+import NavBar from './NavBar';
 import Login from './components/Login';
+import Profile from './components/Profile';
+import SearchContainer from './SearchContainer'
 import {
   BrowserRouter as Router,
   Route,
   NavLink,
   Link
 } from 'react-router-dom';
-import NavBar from './NavBar';
-import SearchContainer from './SearchContainer'
 
 class App extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class App extends Component {
 {/*       <Route path="/chats/:id" component={Conversation} />  */}
           <Route path="/search" component={SearchContainer} />
 {/*       <Route path="/logout" component={Logout} />           */}
-{/*       <Route path="/users/:name/:id" component={Profile} /> */}
+          <Route path="/users/:name/:id" component={Profile} />
         </div>
       </Router>
       <div onClick={this.fetchStuff}>Click me!</div>
