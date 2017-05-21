@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize_request, only: [:create, :new]
+  skip_before_action :authorize_request, only: [:create]
 
   def create
     user = User.from_oauth(user_params)
@@ -13,9 +13,6 @@ class UsersController < ApplicationController
   end
 
   def show
-  end
-
-  def new
   end
 
   private

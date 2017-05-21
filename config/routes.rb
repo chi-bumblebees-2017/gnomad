@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  resources :users, only: [:create, :update, :show, :new]
+  resources :users, only: [:create, :update, :show]
   resources :sessions, only: [:destroy]
 
   get '/auth/:provider/callback', to: 'sessions#create'
