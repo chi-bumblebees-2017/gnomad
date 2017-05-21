@@ -13,26 +13,9 @@ import {
   Redirect,
   Link
 } from 'react-router-dom';
+import Logout from './components/Logout';
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      auth_token: ""
-    }
-    this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
-  }
-
-  checkIfLoggedIn() {
-    if (localStorage.getItem('gnomad-auth-token').length >= 1) {
-      this.setState({
-        auth_token: localStorage.getItem('gnomad-auth-token'),
-      })
-      this.props.history.push('/account');
-    }
-  }
-
-
   render() {
     return (<div>
       <Router>
@@ -49,7 +32,7 @@ class App extends Component {
 {/*       <Route path="/account" component={Dashboard} />       */}
 {/*       <Route path="/register" component={NewProfile} />     */}
           <Route path="/search" component={SearchContainer} />
-{/*       <Route path="/logout" component={Logout} />           */}
+          <Route path="/logout" component={Logout} />
           <Route path="/users/:name/:id" component={Profile} />
         </div>
       </Router>

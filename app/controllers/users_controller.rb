@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   # TODO: add line below back in once we add back this before action. commented out for now in development/test mode.
-  # skip_before_action :authorize_request, only: [:create]
+  skip_before_action :authorize_request, only: [:create]
 
   def search
     location = params[:location].split(", ")

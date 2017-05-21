@@ -29,6 +29,9 @@ class NewMessage extends Component {
     fetch(`/conversations/${this.props.conversationId}/personal_messages`, {
       method: "POST",
       body: this.makeMessageRequest(this.state.value),
+      headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token')
+      },
       // mode: 'no-cors',
     })
   }
