@@ -3,7 +3,6 @@ import './App.css';
 import NavBar from './NavBar';
 import Login from './components/Login';
 import Profile from './components/Profile';
-import NavBar from './NavBar';
 import SearchContainer from './SearchContainer'
 import {
   BrowserRouter as Router,
