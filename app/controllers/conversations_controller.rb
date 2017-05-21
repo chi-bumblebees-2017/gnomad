@@ -3,8 +3,7 @@ class ConversationsController < ApplicationController
   # before_action :check_participating!, except: [:index]
 
   def index
-    # TODO: sub in current_user as argument to participating() later
-    @conversations = Conversation.participating(User.find(1)).order('updated_at DESC')
+    @conversations = Conversation.participating(User.find(session[:user_id])).order('updated_at DESC')
     render json: @conversations.as_json(include: [:initiator, :receiver, :last_message])
   end
 

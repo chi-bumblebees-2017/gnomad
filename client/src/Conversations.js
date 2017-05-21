@@ -14,9 +14,9 @@ class Conversations extends Component {
       loaded: false,
     }
   }
-  // TODO: figure out putting in current user's id into fetch route
+
   componentDidMount() {
-    fetch('/users/20/conversations/', {
+    fetch('/conversations/', {
       accept: 'application/json',
     }).then(data => data.json())
       .then(dataJson => {
