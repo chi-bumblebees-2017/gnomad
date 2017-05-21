@@ -57,7 +57,6 @@
 
       function getFacebookInfo() {
         FB.api('/me', {fields: 'first_name, last_name, id, email'}, function(response) {
-          console.log(response)
           var data = new FormData()
           data.append("first_name", response.first_name)
           data.append("last_name", response.last_name)
@@ -65,7 +64,6 @@
           data.append("email", response.email)
 
           FB.api('me/picture?width=150&height=150', function(response){
-            console.log(response)
             data.append("image_url", response.data.url)
             fetch("/users", {
               method: "POST",

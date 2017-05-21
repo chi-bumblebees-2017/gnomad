@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
+import NavBar from './NavBar';
 import Login from './components/Login';
+import Profile from './components/Profile';
 import {
   BrowserRouter as Router,
   Route,
   NavLink,
   Link
 } from 'react-router-dom';
-import NavBar from './NavBar';
 
 
 class App extends Component {
@@ -34,7 +35,7 @@ class App extends Component {
 {/*       <Route path="/chats/:id" component={Conversation} />  */}
 {/*       <Route path="/search" component={SearchContainer} />  */}
 {/*       <Route path="/logout" component={Logout} />           */}
-{/*       <Route path="/users/:name/:id" component={Profile} /> */}
+          <Route path="/users/:name/:id" component={Profile} />
         </div>
       </Router>
     );
