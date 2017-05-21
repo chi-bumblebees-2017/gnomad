@@ -4,6 +4,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import UserListItemContainer from './UserListItemContainer'
 
 class SearchResults extends Component {
   render() {
@@ -15,11 +16,11 @@ class SearchResults extends Component {
       );
     } else {
       return (
-        <div className="search-results">
+        <ul className="search-results">
           {this.props.results.map((localhost) =>
-            <div>{localhost.first_name}</div>
+            <UserListItemContainer key={localhost.id} user={localhost} snippet={localhost.suggestions} linkto={`/users/${localhost.first_name}/${localhost.id}`} />
           )}
-        </div>
+        </ul>
       );
     }
   }

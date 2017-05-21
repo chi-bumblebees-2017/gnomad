@@ -49,6 +49,7 @@ cities = ["Oklahoma City", "Tulsa", "Norman"]
                                shopping: rand(0..1) == 0 ? true : false)
     user.gnomad_profile = gp
   end
+end
 
 initiator = User.first
 receiver = User.last
@@ -61,5 +62,4 @@ convo.personal_messages.create!(body: Faker::ChuckNorris.fact, author_id: initia
     author_id = receiver.id
   end
   convo.personal_messages.create!(body: Faker::ChuckNorris.fact, author_id: author_id)
-
 end

@@ -20,11 +20,12 @@ class SearchContainer extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    // TODO: Change history so that back button works. How do I persist the results from the last search too?
+    this.props.history.push(`/search/${this.state.location}`, this.state);
     fetch(`/users?location=${this.state.location}`, {
       accept: 'application/json',
     }).then(data => data.json())
       .then(dataJson => {
-        console.log(dataJson)
         this.setState({
           localhosts: dataJson,
       })});
