@@ -12,8 +12,7 @@ class NewProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      values: {
-        city: "",
+      values: {city: "",
         state: "",
         user_bio: "",
         gnome_profile: "",
@@ -36,7 +35,21 @@ class NewProfile extends Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.createProfile = this.createProfile.bind(this);
+  }
+
+// sends the data to create a profile
+
+// stores what is immedidatly typed
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    var newState = update(this.state, {
+      values: {[name]: {$set: value}}
+    })
+    this.setState(newState)
   }
 
 // ajax, makes the request
