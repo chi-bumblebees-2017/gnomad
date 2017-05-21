@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def search
+    params[:location]
+  end
+
   def create
     user = User.from_oauth(user_params)
     session[:user_id] = user.id
