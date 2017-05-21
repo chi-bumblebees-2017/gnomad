@@ -8,6 +8,7 @@ import {
   Link
 } from 'react-router-dom';
 import NavBar from './NavBar';
+import SearchContainer from './SearchContainer'
 
 
 class App extends Component {
@@ -32,7 +33,7 @@ class App extends Component {
 {/*       <Route path="/register" component={NewProfile} />     */}
 {/*       <Route path="/chats" component={Conversations} />     */}
 {/*       <Route path="/chats/:id" component={Conversation} />  */}
-{/*       <Route path="/search" component={SearchContainer} />  */}
+          <Route path="/search" component={SearchContainer} />
 {/*       <Route path="/logout" component={Logout} />           */}
 {/*       <Route path="/users/:name/:id" component={Profile} /> */}
         </div>
