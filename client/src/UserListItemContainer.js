@@ -8,7 +8,8 @@ import {
 class UserListItemContainer extends Component {
   render() {
     return (
-      <li><div><Link to={this.props.linkto}>{this.props.user.imageurl} - {this.props.user.name}</Link></div>
+      <li><div><Link to={this.props.linkto}>
+      <img src={this.props.user.imageurl} className="profile-list-item" /> - {this.props.user.name}</Link></div>
       <div>{this.props.snippet}</div></li>
     );
   }

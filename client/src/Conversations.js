@@ -34,9 +34,9 @@ class Conversations extends Component {
         <div>
           <div>Chat History</div>
           <ul>
-            {this.state.conversations.map((conversation) => {
-              <UserListItemContainer key={conversation.id} user={conversation.initiator} snippet={conversation.last_message} linkto={conversation} />
-            })}
+            {this.state.conversations.map((conversation) =>
+              <UserListItemContainer key={conversation.id} user={conversation.initiator} snippet={conversation.last_message.body} linkto={conversation} />
+            )}
           </ul>
         </div>
       );
