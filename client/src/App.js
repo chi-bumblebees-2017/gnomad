@@ -1,41 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Conversation from './Conversation';
+import Conversations from './Conversations';
+import Login from './components/Login';
 import {
   BrowserRouter as Router,
   Route,
+  NavLink,
   Link
-} from 'react-router-dom'
-import Conversation from './Conversation';
-import Conversations from './Conversations';
+} from 'react-router-dom';
+import NavBar from './NavBar';
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      users: [],
     }
   }
-  // TODO: remove this method and the app-intro dummy text below. just added here by Simon to test server connections.
-  // componentDidMount() {
-  //   fetch('/users', {
-  //     accept: 'application/json',
-  //   }).then(data => data.json())
-  //     .then(dataJson => { this.setState({
-  //       users: dataJson,
-  //   })});
-  // }
 
   render() {
     return (
       <Router>
         <div className="App">
-          <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Welcome to React</h2>
-          </div>
-          <Route path="/chats/:id" component={Conversation} />
+          <NavBar>
+            <NavLink to="/account">Dashboard</NavLink>
+            <NavLink to="/chats">Chats</NavLink>
+            <NavLink to="/search">Search</NavLink>
+            <NavLink to="/logout">Logout</NavLink>
+          </NavBar>
+          <Route exact path="/" component={Login} />
           <Route path="/chats" component={Conversations} />
+          <Route path="/chats/:id" component={Conversation} />
+{/*       <Route path="/account" component={Dashboard} />       */}
+{/*       <Route path="/register" component={NewProfile} />     */}
+{/*       <Route path="/search" component={SearchContainer} />  */}
+{/*       <Route path="/logout" component={Logout} />           */}
+{/*       <Route path="/users/:name/:id" component={Profile} /> */}
         </div>
       </Router>
     );
