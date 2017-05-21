@@ -27,5 +27,7 @@ module Gnomad
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    # running standalong cable server
+    config.action_cable.mount_path = "/cable"
   end
 end
