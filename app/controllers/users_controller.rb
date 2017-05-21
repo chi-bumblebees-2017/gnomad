@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def search
+    @users = User.all
     params[:location]
+    render json: @users
   end
 
   def create
