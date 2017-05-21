@@ -9,7 +9,7 @@ class SearchContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      users: [],
+      localhosts: [],
     }
   }
   // TODO: remove this method and the app-intro dummy text below. just added here by Simon to test server connections.
@@ -18,14 +18,14 @@ class SearchContainer extends Component {
       accept: 'application/json',
     }).then(data => data.json())
       .then(dataJson => { this.setState({
-        users: dataJson,
+        localhosts: dataJson.localhosts,
     })});
   }
 
   render() {
     return (
       <div className="search-container">
-
+        <SearchBar />
       </div>
     );
   }
