@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Login from './components/Login';
 import {
   BrowserRouter as Router,
   Route,
@@ -7,6 +8,7 @@ import {
   Link
 } from 'react-router-dom';
 import NavBar from './NavBar';
+
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +27,7 @@ class App extends Component {
             <NavLink to="/search">Search</NavLink>
             <NavLink to="/logout">Logout</NavLink>
           </NavBar>
-{/*       <Route exact path="/" component={Login} />            */}
+          <Route exact path="/" component={Login} />
 {/*       <Route path="/account" component={Dashboard} />       */}
 {/*       <Route path="/register" component={NewProfile} />     */}
 {/*       <Route path="/chats" component={Conversations} />     */}
