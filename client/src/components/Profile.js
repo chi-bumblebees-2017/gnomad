@@ -33,8 +33,8 @@ class Profile extends Component {
   render() {
     if (this.state.loaded === true) {
       return (
-      <div className="profile-container">
-        <h1>{this.state.userData.user.first_name} </h1>
+      <div className="profile-container ui centered container">
+        <h1>{this.state.userData.user.first_name}</h1>
 
         <div className="profile-picture-container">
           <img src={this.state.userData.user.image_url} alt="profile-picture"/>
@@ -44,8 +44,8 @@ class Profile extends Component {
           <ChatButton />
         </div>
 
-        <div className="bio-container">
-          <h2>A Little Bit About Me...</h2>
+        <h2>A Little Bit About Me...</h2>
+        <div className="bio-container ui justified container">
           <p>{this.state.userData.user.bio}</p>
         </div>
 

@@ -6,11 +6,11 @@ class LocalHostInterests extends Component {
     return (
       <div className="localhost-interests-container">
         <h3>as a Localhost, I am interested in...</h3>
-        <ul>
+        <div role="list" className="ui horizontal list">
           {this.props.host_interests.map((interest) =>
-            <li key={this.props.host_interests.indexOf(interest)}>{interest.replace(/_/g," ")}</li>
+            <div role="listitem" className="item" key={this.props.host_interests.indexOf(interest)}><i aria-hidden="true" className="tag icon"></i>{interest.replace(/_/g," ")}</div>
             )}
-        </ul>
+        </div>
       </div>
     );
   }
