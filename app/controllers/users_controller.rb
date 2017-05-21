@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize_request, only: [:create]
+  # TODO: use line 3 once authorization is sorted out; allowing users to view all routes w/o auth for testing
+  # skip_before_action :authorize_request, only: [:create]
+  skip_before_action :authorize_request
 
   def search
     location = params[:location].split(", ")
