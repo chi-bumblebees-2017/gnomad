@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # root 'conversations#index'
   get '/users' => "users#search"
   get "/conversations" => "conversations#index"
+  post "/conversations" => "conversations#create"
   get "/conversations/:id" => "conversations#show"
   post "/conversations/:id/personal_messages" => "personal_messages#create"
 

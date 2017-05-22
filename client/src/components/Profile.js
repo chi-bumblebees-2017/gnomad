@@ -6,14 +6,17 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import NewFirstMessage from './NewFirstMessage'
 
 class Profile extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       userData: [],
       loaded: false,
-    }
+      writeMessage: false,
+    };
+    this.displayMessageForm = this.displayMessageForm.bind(this);
   }
 
   componentDidMount() {
@@ -29,29 +32,54 @@ class Profile extends Component {
           loaded: true,
     })});
   }
-  // TODO: update so that "start chat" button starts a chat with the user
+
+  displayMessageForm() {
+    this.setState({
+      writeMessage: true,
+    })
+  }
+
   render() {
     if (this.state.loaded === true) {
-      return (
-      <div className="profile-container ui centered container">
-        <h1>{this.state.userData.user.first_name}</h1>
+      if (this.state.writeMessage) {
+        return (
+          <div className="profile-container ui centered container">
+          <h1>{this.state.userData.user.first_name}</h1>
 
-        <div className="profile-picture-container">
-          <img src={this.state.userData.user.image_url} alt="profile-picture"/>
-        </div>
+            <div className="profile-picture-container">
+              <img src={this.state.userData.user.image_url} alt="profile-picture"/>
+            </div>
 
-        <div className="chat-button">
-          <ChatButton />
-        </div>
+            <NewFirstMessage receiverId={this.state.userData.user.id} />
 
-        <h2>A Little Bit About Me...</h2>
-        <div className="bio-container ui justified container">
+            <h2>A Little Bit About Me...</h2>
+            <div className="bio-container ui justified container">
+              <p>{this.state.userData.user.bio}</p>
+            </div>
+            <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
+          </div>
+        );
+      } else {
+        return (
+          <div className="profile-container ui centered container">
+          <h1>{this.state.userData.user.first_name}</h1>
+
+            <div className="profile-picture-container">
+              <img src={this.state.userData.user.image_url} alt="profile-picture"/>
+            </div>
+
+          <div className="chat-button">
+            <button onClick={this.displayMessageForm}>Start Chat</button>
+          </div>
+
+          <h2>A Little Bit About Me...</h2>
+          <div className="bio-container ui justified container">
           <p>{this.state.userData.user.bio}</p>
+          </div>
+          <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
         </div>
-
-        <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
-      </div>
-      );
+        );
+      }
     } else {
       return (
         <div>Loading...</div>
