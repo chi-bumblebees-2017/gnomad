@@ -23,8 +23,12 @@ class UsersController < ApplicationController
 
   def show
     user = User.find(params[:id])
-
-    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: user.localhost_profile.suggestions}
+    if user.localhost_profile
+      suggestions = user.localhost_profile.suggestions
+    else
+      suggestions = nil
+    end
+    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions}
   end
 
   private
