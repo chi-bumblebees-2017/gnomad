@@ -17,9 +17,16 @@ import Logout from './components/Logout';
 import ActionCableProvider from 'react-actioncable-provider';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    };
+  }
+
   render() {
     return (
-      <ActionCableProvider url="ws://localhost:3001/cable">
+      <ActionCableProvider url="ws://localhost:28080/websocket">
         <Router>
           <div className="App">
             <NavBar>
