@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-
   describe "POST #create" do
     it "returns a 200 ok status" do
       post :create, params: {uid: 1}
@@ -13,9 +12,10 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "GET #show" do
-    xit "returns a 200 ok status" do
-      # stub authorized user somehow to get around auth token issue
+    it "returns a 200 ok status" do
       user = User.create!(provider: "facebook", uid: 12345)
+      header = {'Authorization' => JsonWebToken.encode(user_id: user.id)}
+      request.headers.merge! header
       get :show, params: {id: user.id}
       expect(response).to have_http_status :ok
     end

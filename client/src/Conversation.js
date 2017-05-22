@@ -44,32 +44,48 @@ class Conversation extends Component {
         this.setState({
           messages: dataJson.personal_messages,
           loaded: true,
+          me: dataJson.me,
+          other: dataJson.other,
     })});
   }
 
+  checkAuthorClass(message) {
+    // TODO: write this method
+    if (message.author_id === this.state.me.id) {
+      return "my-message"
+    } else {
+      return "their-message"
+    }
+  }
+  checkAuthorName(message) {
+    // TODO: write this method
+    if (message.author_id === this.state.me.id) {
+      return this.state.me.first_name
+    } else {
+      return this.state.other.first_name
+    }
+  }
 
 // receiver user stub (4 times)**********
   render() {
     if (this.state.loaded === true) {
       return (
         <div>
-          <div className="profile-link-banner"><Link to="/users/1">Visit user 1 profile</Link></div>
+          <div className="profile-link-banner"><Link to={`/users/${this.state.other.first_name}/${this.state.other.id}`}>Visit {this.state.other.first_name}'s profile</Link></div>
           <div className="conversation-container">
             {this.state.messages.map((personalMessage) =>
-              <PersonalMessageContainer key={personalMessage.id} messageBody={personalMessage.body} />
+              <PersonalMessageContainer className={this.checkAuthorClass(personalMessage)} key={personalMessage.id} author={this.checkAuthorName(personalMessage)} messageBody={personalMessage.body} />
             )}
           </div>
-          <NewMessage conversationId={this.props.match.params.id} receiverId={1} />
+          <NewMessage conversationId={this.props.match.params.id} receiverId={this.state.other.id} />
         </div>
         );
     } else {
       return (
         <div>
-          <div className="profile-link-banner"><Link to="/users/1">Visit user 1 profile</Link></div>
           <div className="conversation-container">
             loading...
           </div>
-          <NewMessage conversationId={this.props.match.params.id} receiverId={1} />
         </div>
       );
     }

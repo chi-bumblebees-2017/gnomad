@@ -21,27 +21,26 @@ const cable = ActionCable.createConsumer('/cable')
 
 class App extends Component {
   render() {
-    return (
-      <ActionCableProvider cable={cable}>
-        <Router>
-          <div className="App">
-            <NavBar>
-              <NavLink to="/account">Dashboard</NavLink>
-              <NavLink to="/chats">Chats</NavLink>
-              <NavLink to="/search">Search</NavLink>
-              <NavLink to="/logout">Logout</NavLink>
-            </NavBar>
-            <Route exact path="/" component={Login} />
-            <Route path="/chats" component={Conversations} />
-            <Route path="/chats/:id" component={Conversation} />
-  {/*       <Route path="/account" component={Dashboard} />       */}
-  {/*       <Route path="/register" component={NewProfile} />     */}
-            <Route path="/search" component={SearchContainer} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/users/:name/:id" component={Profile} />
-          </div>
-        </Router>
-      </ActionCableProvider>
+    return (<div>
+      <Router>
+        <div className="App">
+          <NavBar>
+            <NavLink to="/account">Dashboard</NavLink>
+            <NavLink to="/chats">Chats</NavLink>
+            <NavLink to="/search">Search</NavLink>
+            <NavLink to="/logout">Logout</NavLink>
+          </NavBar>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/chats" component={Conversations} />
+          <Route path="/chats/:id" component={Conversation} />
+{/*       <Route path="/account" component={Dashboard} />       */}
+{/*       <Route path="/register" component={NewProfile} />     */}
+          <Route path="/search" component={SearchContainer} />
+          <Route path="/logout" component={Logout} />
+          <Route path="/users/:name/:id" component={Profile} />
+        </div>
+      </Router>
+      </div>
     );
   }
 }
