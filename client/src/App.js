@@ -27,7 +27,7 @@ class App extends Component {
             <NavLink to="/logout">Logout</NavLink>
           </NavBar>
           <Route exact path="/" component={Login} />
-          <Route path="/chats" component={Conversations} />
+          <Route exact path="/chats" component={Conversations} />
           <Route path="/chats/:id" component={Conversation} />
 {/*       <Route path="/account" component={Dashboard} />       */}
 {/*       <Route path="/register" component={NewProfile} />     */}
