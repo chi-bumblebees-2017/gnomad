@@ -6,7 +6,8 @@ import NewProfile from './NewProfile';
 import NavBar from './NavBar';
 import Login from './components/Login';
 import Profile from './components/Profile';
-import SearchContainer from './SearchContainer'
+import SearchContainer from './SearchContainer';
+import Dashboard from './Dashboard';
 import {
   BrowserRouter as Router,
   Route,
@@ -34,6 +35,7 @@ class App extends Component {
           <Route path="/search" component={SearchContainer} />
           <Route path="/logout" component={Logout} />
           <Route path="/users/:name/:id" component={Profile} />
+          <Route path="/account" component={Dashboard} />
         </div>
       </Router>
       </div>
