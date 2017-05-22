@@ -22,8 +22,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find(params[:id])
-
+    if params[:id] == 0
+      user = current_user
+    else
+      user = User.find(params[:id])
+    end
+    p user.city
     render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting}
   end
 

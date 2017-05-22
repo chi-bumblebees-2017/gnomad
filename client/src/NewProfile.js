@@ -50,7 +50,9 @@ class NewProfile extends Component {
           volunteer: "",
           shopping: "",
         },
-      }
+      },
+      loaded: false,
+      userData: [],
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -96,6 +98,20 @@ class NewProfile extends Component {
     var data = new FormData();
     data.append("profileData", values)
     return data
+  }
+
+  componentDidMount() {
+    fetch(`/users/0`, {
+      accept: 'application/json',
+      headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token')
+      },
+    }).then(data => data.json())
+      .then(dataJson => {
+        this.setState({
+          userData: dataJson,
+          loaded: true,
+    })});
   }
 
   render() {
