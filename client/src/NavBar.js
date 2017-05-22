@@ -15,9 +15,9 @@ class NavBar extends Component {
 
   render() {
     return (
-      <nav className="navbar">
+      <div className="navbar ui pointing secondary compact menu">
         {this.props.children}
-      </nav>
+      </div>
     );
   }
 }
