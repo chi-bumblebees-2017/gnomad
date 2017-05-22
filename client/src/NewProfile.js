@@ -18,39 +18,40 @@ class NewProfile extends Component {
         city: "",
         state: "",
         user_bio: "",
-        gnomad_profile: "",
-        localhost_profile: "",
+        gnomad_profile: false,
+        localhost_profile: false,
         gnomad_pref: {
-          restaurants: "",
-          sports: "",
-          museums: "",
-          bars: "",
-          music: "",
-          outdoors: "",
-          art: "",
-          fitness: "",
-          architecture: "",
-          family_fun: "",
-          zoo: "",
-          culture: "",
-          volunteer: "",
-          shopping: "",
+          restaurants: false,
+          sports: false,
+          museums: false,
+          bars: false,
+          music: false,
+          outdoors: false,
+          art: false,
+          fitness: false,
+          architecture: false,
+          family_fun: false,
+          zoo: false,
+          culture: false,
+          volunteer: false,
+          shopping: false,
         },
+        suggestions: "",
         local_pref: {
-          restaurants: "",
-          sports: "",
-          museums: "",
-          bars: "",
-          music: "",
-          outdoors: "",
-          art: "",
-          fitness: "",
-          architecture: "",
-          family_fun: "",
-          zoo: "",
-          culture: "",
-          volunteer: "",
-          shopping: "",
+          restaurants: false,
+          sports: false,
+          museums: false,
+          bars: false,
+          music: false,
+          outdoors: false,
+          art: false,
+          fitness: false,
+          architecture: false,
+          family_fun: false,
+          zoo: false,
+          culture: false,
+          volunteer: false,
+          shopping: false,
         },
       },
     };
@@ -166,6 +167,7 @@ class NewProfile extends Component {
 
         <label>State: </label>
         <select type="select" name="state" onChange={this.handleChange} required value={this.state.values.state}>
+          <option>--</option>
           <option value="AK">AK</option>
           <option value="AL">AL</option>
           <option value="AR">AR</option>
@@ -242,7 +244,7 @@ class NewProfile extends Component {
         <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="culture"/>
         <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="volunteer"/>
         <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="shopping"/>
-        <label>I am availble to show people around as a Localhost: </label>
+        <label>I want to sign up as a local host:</label>
         <select type="select" name="localhost_profile" onChange={this.handleChange} required value={this.state.values.localhost_profile}>
           <option >--</option>
           <option value="true">Yes</option>
@@ -250,7 +252,7 @@ class NewProfile extends Component {
         </select>
         <p>As a Local Host:</p>
 
-        <p><label>Local Suggestions: <textarea name="suggestions" onChange={this.handleChange} /></label></p>
+        <p><label>Local Suggestions: <textarea value={this.state.suggestions} name="suggestions" onChange={this.handleChange} /></label></p>
 
         <p>I like to show people:</p>
         <Checkbox profileType="local_pref" handler={this.updateInterest} category="restaurants"/>
