@@ -38,3 +38,17 @@
 .margin-none {
   margin: 0;
 }
+
+.border-radius-10 {
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.max-width {
+  max-width: 600px;
+  margin: auto;
+}
+
+.left-pad-0 {
+  padding-left: 0;
+}

@@ -38,9 +38,9 @@ class NewFirstMessage extends Component {
 
   render() {
     return (
-      <form className="ui form" id="personal-message-form" onSubmit={this.handleSubmit}>
-        <TextArea autoHeight id="new-message" name="personal_message" value={this.state.value} onChange={this.handleChange} />
-        <input className="tiny ui blue button" type="submit" value="Send" />
+      <form className="ui form ui icon input" id="personal-message-form" onSubmit={this.handleSubmit}>
+        <input type="text" id="new-message" name="personal_message" placeholder="Start chatting" value={this.state.value} onChange={this.handleChange}></input>
+        <i aria-hidden="true" onClick={this.handleSubmit} className="talk outline link icon blue large"></i>
       </form>
     );
   }
