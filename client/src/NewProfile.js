@@ -169,13 +169,11 @@ class NewProfile extends Component {
     if (this.state.submitted) {
       return ( <Redirect to={{
         pathname: '/account',
-        state: {user_id: this.state.userData.user.id},
       }} /> );
     }
     // Renders main form content IF current user data has loaded
     else if (this.state.loaded) {
       return (<div>
-        <p></p>
         <p>Create Profile</p>
           <div className="profile-picture-container">
               <img src={this.state.userData.user.image_url} alt="profile-picture"/>
