@@ -16,9 +16,10 @@ class Conversation < ApplicationRecord
   def last_message
     personal_messages.last
   end
-  # def with(current_user)
-  #   initiator == current_user ? receiver : initiator
-  # end
+
+  def with(current_user)
+    initiator == current_user ? receiver : initiator
+  end
 
   # def participates?(user)
   #   initiator == user || receiver == user

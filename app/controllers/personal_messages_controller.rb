@@ -4,7 +4,7 @@ class PersonalMessagesController < ApplicationController
   def create
     @conversation ||= Conversation.create(conversation_id: personal_message_params[:conversation_id], author_id: current_user.id, receiver_id: @receiver.id)
 
-    @personal_message = PersonalMessage.create(body: personal_message_params[:body], author_id: session[:user_id], conversation_id: personal_message_params[:conversation_id])
+    @personal_message = PersonalMessage.create(body: personal_message_params[:body], author_id: current_user.id, conversation_id: personal_message_params[:conversation_id])
     @personal_message.save!
 
     render json: @personal_message
