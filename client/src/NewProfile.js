@@ -67,6 +67,7 @@ class NewProfile extends Component {
     data.append("profile_data[city]", values.city);
     data.append("profile_data[state]", values.state);
     data.append("profile_data[user_bio]", values.user_bio);
+    data.append("profile_data[suggestions]", values.suggestions);
     data.append("profile_data[gnomad_profile]", values.gnomad_profile);
     data.append("profile_data[localhost_profile]", values.localhost_profile);
     data.append("profile_data[gnomad_pref][restaurants]", values.gnomad_pref.restaurants);

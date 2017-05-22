@@ -28,6 +28,8 @@ class UsersController < ApplicationController
     if profile_params[:gnomad_profile]
       user.gnomad_profile = GnomadProfile.create(profile_params[:gnomad_pref])
     end
+    p user
+    p user.localhost_profile
 
   end
 
