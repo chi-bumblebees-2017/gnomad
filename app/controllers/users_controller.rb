@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     else
       suggestions = nil
     end
-    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions}
+    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions, bio: user.bio}
   end
 
   private
