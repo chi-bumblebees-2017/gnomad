@@ -18,7 +18,8 @@ class Login extends Component {
   }
 
   onceLoggedIn() {
-    fetch(`/users/0`, {
+    fetch('/users/a', {
+      method: "GET",
       accept: 'application/json',
       headers: {
         'Authorization': localStorage.getItem('gnomad-auth-token')
@@ -31,13 +32,21 @@ class Login extends Component {
     })});
   }
 
-  render() {
+  componentDidMount() {
     if (this.loggedIn()) {
       this.onceLoggedIn();
-      if (this.state.loaded === true && this.state.userData.user.city){
+    }
+  }
+
+  render() {
+    if (this.loggedIn()) {
+      if (this.state.loaded === true && this.state.userData.user.home_city){
         return (<Redirect push to={{ pathname: "/account" }} />)
-      } else if (this.state.loaded === true && !(this.state.userData.user.city) ) {
+      } else if (this.state.loaded === true && !(this.state.userData.user.home_city) ) {
         return (<Redirect push to={{ pathname: "/register" }} />)
+      } else {
+        console.log(this.state);
+        return (<div> :( </div>)
       }
     } else {
       return(

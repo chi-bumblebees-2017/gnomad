@@ -19,20 +19,25 @@ class UsersController < ApplicationController
   end
 
   def update
+    user = User.find(params[:id])
+    p profile_params
   end
 
   def show
-    if params[:id] == 0
+    if params[:id] == "a"
       user = current_user
     else
       user = User.find(params[:id])
     end
-    p user.city
     render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting}
   end
 
   private
   def user_params
     params.permit(:first_name, :last_name, :uid, :email, :image_url)
+  end
+
+  def profile_params
+    params.require(:profile_data).permit(:values, :city, :state, :user_bio, :gnomad_profile, :localhost_profile, gnomad_pref: [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping], localhost_pref: [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping])
   end
 end

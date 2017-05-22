@@ -12,6 +12,8 @@ class NewProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loaded: false,
+      userData: [],
       values: {
         city: "",
         state: "",
@@ -51,14 +53,63 @@ class NewProfile extends Component {
           shopping: "",
         },
       },
-      loaded: false,
-      userData: [],
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.createProfile = this.createProfile.bind(this);
     this.updateInterest = this.updateInterest.bind(this);
+  }
+
+  createProfile(values) {
+    var data = new FormData();
+    data.append("profile_data[city]", values.city);
+    data.append("profile_data[state]", values.state);
+    data.append("profile_data[user_bio]", values.user_bio);
+    data.append("profile_data[gnomad_profile]", values.gnomad_profile);
+    data.append("profile_data[localhost_profile]", values.localhost_profile);
+    data.append("profile_data[gnomad_pref][restaurants]", values.gnomad_pref.restaurants);
+    data.append("profile_data[gnomad_pref][sports]", values.gnomad_pref.sports);
+    data.append("profile_data[gnomad_pref][museums]", values.gnomad_pref.museums);
+    data.append("profile_data[gnomad_pref][bars]", values.gnomad_pref.bars);
+    data.append("profile_data[gnomad_pref][music]", values.gnomad_pref.music);
+    data.append("profile_data[gnomad_pref][outdoors]", values.gnomad_pref.outdoors);
+    data.append("profile_data[gnomad_pref][art]", values.gnomad_pref.art);
+    data.append("profile_data[gnomad_pref][fitness]", values.gnomad_pref.fitness);
+    data.append("profile_data[gnomad_pref][architecture]", values.gnomad_pref.architecture);
+    data.append("profile_data[gnomad_pref][family_fun]", values.gnomad_pref.family_fun);
+    data.append("profile_data[gnomad_pref][zoo]", values.gnomad_pref.zoo);
+    data.append("profile_data[gnomad_pref][culture]", values.gnomad_pref.culture);
+    data.append("profile_data[gnomad_pref][volunteer]", values.gnomad_pref.volunteer);
+    data.append("profile_data[gnomad_pref][shopping]", values.gnomad_pref.shopping);
+    data.append("profile_data[localhost_pref][restaurants]", values.local_pref.restaurants);
+    data.append("profile_data[localhost_pref][sports]", values.local_pref.sports);
+    data.append("profile_data[localhost_pref][museums]", values.local_pref.museums);
+    data.append("profile_data[localhost_pref][bars]", values.local_pref.bars);
+    data.append("profile_data[localhost_pref][music]", values.local_pref.music);
+    data.append("profile_data[localhost_pref][outdoors]", values.local_pref.outdoors);
+    data.append("profile_data[localhost_pref][art]", values.local_pref.art);
+    data.append("profile_data[localhost_pref][fitness]", values.local_pref.fitness);
+    data.append("profile_data[localhost_pref][architecture]", values.local_pref.architecture);
+    data.append("profile_data[localhost_pref][family_fun]", values.local_pref.family_fun);
+    data.append("profile_data[localhost_pref][zoo]", values.local_pref.zoo);
+    data.append("profile_data[localhost_pref][culture]", values.local_pref.culture);
+    data.append("profile_data[localhost_pref][volunteer]", values.local_pref.volunteer);
+    data.append("profile_data[localhost_pref][shopping]", values.local_pref.shopping);
+    return data
+  }
+
+// ajax, makes the request
+  handleSubmit(event) {
+    console.log(this.state)
+    event.preventDefault();
+    fetch(`/users/${this.state.userData.user.id}`, {
+      method: "PUT",
+      headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token')
+      },
+      body: this.createProfile(this.state.values)
+    })
   }
 
 // sends the data to create a profile
@@ -68,9 +119,12 @@ class NewProfile extends Component {
     const interest = category;
     var newState = update(this.state, {
       values: {[profileType]: {[interest]: {$set: newValue}}
-    }});
+    },
+    userData: {$set: this.state.userData},
+    loaded: {$set: this.state.loaded},
+  });
     this.setState(newState);
-    console.log(this.state.values);
+    console.log(this.state);
   }
 // stores what is immedidatly typed
   handleChange(event) {
@@ -79,29 +133,17 @@ class NewProfile extends Component {
     const value = target.value;
 
     var newState = update(this.state, {
-      values: {[name]: {$set: value}}
+      values: {[name]: {$set: value}},
+      userData: {$set: this.state.userData},
+      loaded: {$set: this.state.loaded},
     })
     this.setState(newState);
   }
 
-// ajax, makes the request
-  handleSubmit(event) {
-    console.log(this.state.values)
-    event.preventDefault();
-    fetch('/users/:id', {
-      method: "PUT",
-      body: this.createProfile(this.state.values)
-    })
-  }
 
-  createProfile(values) {
-    var data = new FormData();
-    data.append("profileData", values)
-    return data
-  }
 
   componentDidMount() {
-    fetch(`/users/0`, {
+    fetch('/users/a', {
       accept: 'application/json',
       headers: {
         'Authorization': localStorage.getItem('gnomad-auth-token')
@@ -180,6 +222,7 @@ class NewProfile extends Component {
 
         <label>I want to register as a Gnomad: </label>
         <select type="select" name="gnomad_profile" onChange={this.handleChange} required value={this.state.values.gnomad_profile}>
+          <option >--</option>
           <option value="true">Yes</option>
           <option value="false">No</option>
         </select>
@@ -199,10 +242,9 @@ class NewProfile extends Component {
         <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="culture"/>
         <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="volunteer"/>
         <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="shopping"/>
-        <label>I want to register as a Gnomad: </label>
-
-         <label>I am availble to show people around as a Localhost: </label>
+        <label>I am availble to show people around as a Localhost: </label>
         <select type="select" name="localhost_profile" onChange={this.handleChange} required value={this.state.values.localhost_profile}>
+          <option >--</option>
           <option value="true">Yes</option>
           <option value="false">No</option>
         </select>
