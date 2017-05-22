@@ -159,121 +159,131 @@ class NewProfile extends Component {
   }
 
   render() {
-    return (<div>
-      <p>Create Profile</p>
-      <p>Facebook picture and name</p>
-      <form onSubmit={this.handleSubmit} className="create-profile-form">
+    if (this.state.loaded) {
 
-        <p><label>City: <input name="city" required type="text" onChange={this.handleChange} /></label></p>
+      return (<div>
+        <p>Create Profile</p>
+          <div className="profile-picture-container">
+              <img src={this.state.userData.user.image_url} alt="profile-picture"/>
+          </div>
+          <div>{this.state.userData.user.first_name} {this.state.userData.user.last_name}</div>
+        <form onSubmit={this.handleSubmit} className="create-profile-form">
 
-        <label>State: </label>
-        <select type="select" name="state" onChange={this.handleChange} required value={this.state.values.state}>
-          <option>--</option>
-          <option value="AK">AK</option>
-          <option value="AL">AL</option>
-          <option value="AR">AR</option>
-          <option value="AZ">AZ</option>
-          <option value="CA">CA</option>
-          <option value="CO">CO</option>
-          <option value="CT">CT</option>
-          <option value="DE">DE</option>
-          <option value="FL">FL</option>
-          <option value="GA">GA</option>
-          <option value="HI">HI</option>
-          <option value="IA">IA</option>
-          <option value="ID">ID</option>
-          <option value="IL">IL</option>
-          <option value="IN">IN</option>
-          <option value="KS">KS</option>
-          <option value="KY">KY</option>
-          <option value="LA">LA</option>
-          <option value="MA">MA</option>
-          <option value="MD">MD</option>
-          <option value="ME">ME</option>
-          <option value="MI">MI</option>
-          <option value="MN">MN</option>
-          <option value="MO">MO</option>
-          <option value="MS">MS</option>
-          <option value="MT">MT</option>
-          <option value="NC">NC</option>
-          <option value="ND">ND</option>
-          <option value="NE">NE</option>
-          <option value="NH">NH</option>
-          <option value="NJ">NJ</option>
-          <option value="NM">NM</option>
-          <option value="NV">NV</option>
-          <option value="NY">NY</option>
-          <option value="OH">OH</option>
-          <option value="OK">OK</option>
-          <option value="OR">OR</option>
-          <option value="PA">PA</option>
-          <option value="RI">RI</option>
-          <option value="SC">SC</option>
-          <option value="SD">SD</option>
-          <option value="TN">TN</option>
-          <option value="TX">TX</option>
-          <option value="UT">UT</option>
-          <option value="VA">VA</option>
-          <option value="VT">VT</option>
-          <option value="WA">WA</option>
-          <option value="WI">WI</option>
-          <option value="WV">WV</option>
-          <option value="WY">WY</option>
-        </select>
+          <p><label>City: <input name="city" required type="text" onChange={this.handleChange} /></label></p>
 
-        <p><label>Bio: <textarea name="user_bio" onChange={this.handleChange}/></label></p>
+          <label>State: </label>
+          <select type="select" name="state" onChange={this.handleChange} required value={this.state.values.state}>
+            <option>--</option>
+            <option value="AK">AK</option>
+            <option value="AL">AL</option>
+            <option value="AR">AR</option>
+            <option value="AZ">AZ</option>
+            <option value="CA">CA</option>
+            <option value="CO">CO</option>
+            <option value="CT">CT</option>
+            <option value="DE">DE</option>
+            <option value="FL">FL</option>
+            <option value="GA">GA</option>
+            <option value="HI">HI</option>
+            <option value="IA">IA</option>
+            <option value="ID">ID</option>
+            <option value="IL">IL</option>
+            <option value="IN">IN</option>
+            <option value="KS">KS</option>
+            <option value="KY">KY</option>
+            <option value="LA">LA</option>
+            <option value="MA">MA</option>
+            <option value="MD">MD</option>
+            <option value="ME">ME</option>
+            <option value="MI">MI</option>
+            <option value="MN">MN</option>
+            <option value="MO">MO</option>
+            <option value="MS">MS</option>
+            <option value="MT">MT</option>
+            <option value="NC">NC</option>
+            <option value="ND">ND</option>
+            <option value="NE">NE</option>
+            <option value="NH">NH</option>
+            <option value="NJ">NJ</option>
+            <option value="NM">NM</option>
+            <option value="NV">NV</option>
+            <option value="NY">NY</option>
+            <option value="OH">OH</option>
+            <option value="OK">OK</option>
+            <option value="OR">OR</option>
+            <option value="PA">PA</option>
+            <option value="RI">RI</option>
+            <option value="SC">SC</option>
+            <option value="SD">SD</option>
+            <option value="TN">TN</option>
+            <option value="TX">TX</option>
+            <option value="UT">UT</option>
+            <option value="VA">VA</option>
+            <option value="VT">VT</option>
+            <option value="WA">WA</option>
+            <option value="WI">WI</option>
+            <option value="WV">WV</option>
+            <option value="WY">WY</option>
+          </select>
 
-        <label>I want to register as a Gnomad: </label>
-        <select type="select" name="gnomad_profile" onChange={this.handleChange} required value={this.state.values.gnomad_profile}>
-          <option >--</option>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
+          <p><label>Bio: <textarea name="user_bio" onChange={this.handleChange}/></label></p>
 
-        <p>As a Gnomad I like to :</p>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="restaurants"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="sports"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="museums"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="bars"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="music"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="outdoors"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="art"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="fitness"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="architecture"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="family_fun"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="zoo"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="culture"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="volunteer"/>
-        <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="shopping"/>
-        <label>I want to sign up as a local host:</label>
-        <select type="select" name="localhost_profile" onChange={this.handleChange} required value={this.state.values.localhost_profile}>
-          <option >--</option>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-        <p>As a Local Host:</p>
+          <label>I want to register as a Gnomad: </label>
+          <select type="select" name="gnomad_profile" onChange={this.handleChange} required value={this.state.values.gnomad_profile}>
+            <option >--</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
 
-        <p><label>Local Suggestions: <textarea value={this.state.suggestions} name="suggestions" onChange={this.handleChange} /></label></p>
+          <p>As a Gnomad I like to :</p>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="restaurants"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="sports"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="museums"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="bars"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="music"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="outdoors"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="art"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="fitness"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="architecture"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="family_fun"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="zoo"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="culture"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="volunteer"/>
+          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="shopping"/>
+          <label>I want to sign up as a local host:</label>
+          <select type="select" name="localhost_profile" onChange={this.handleChange} required value={this.state.values.localhost_profile}>
+            <option >--</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+          <p>As a Local Host:</p>
 
-        <p>I like to show people:</p>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="restaurants"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="sports"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="museums"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="bars"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="music"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="outdoors"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="art"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="fitness"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="architecture"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="family_fun"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="zoo"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="culture"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="volunteer"/>
-        <Checkbox profileType="local_pref" handler={this.updateInterest} category="shopping"/>
+          <p><label>Local Suggestions: <textarea value={this.state.suggestions} name="suggestions" onChange={this.handleChange} /></label></p>
 
-        <input type="submit" value="Submit" />
-      </form>
-      </div>)
+          <p>I like to show people:</p>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="restaurants"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="sports"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="museums"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="bars"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="music"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="outdoors"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="art"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="fitness"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="architecture"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="family_fun"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="zoo"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="culture"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="volunteer"/>
+          <Checkbox profileType="local_pref" handler={this.updateInterest} category="shopping"/>
+
+          <input type="submit" value="Submit" />
+        </form>
+        </div>)
+  } else {
+    return (
+      <div>loading...</div>
+    )
+  }
   };
 }
 
