@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form, TextArea } from 'semantic-ui-react';
 
 class NewFirstMessage extends Component {
   constructor(props) {
@@ -37,9 +38,9 @@ class NewFirstMessage extends Component {
 
   render() {
     return (
-      <form id="personal-message-form" onSubmit={this.handleSubmit}>
-        <textarea id="new-message" name="personal_message" value={this.state.value} onChange={this.handleChange} />
-        <input type="submit" value="Send" />
+      <form className="ui form" id="personal-message-form" onSubmit={this.handleSubmit}>
+        <TextArea autoHeight id="new-message" name="personal_message" value={this.state.value} onChange={this.handleChange} />
+        <input className="tiny ui blue button" type="submit" value="Send" />
       </form>
     );
   }
