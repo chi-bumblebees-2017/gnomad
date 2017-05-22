@@ -35,18 +35,8 @@ class Login extends Component {
           userData: dataJson,
           loaded: true,
           })
-        console.log("once logged in");
-        console.log(this.state);
       });
   }
-
-  // componentDidMount() {
-  //   console.log("order of op")
-  //   if (this.loggedIn()) {
-  //     this.onceLoggedIn();
-  //     console.log("Component did mount")
-  //   }
-  // }
 
   responseFacebook(response) {
     var data = new FormData()
@@ -74,7 +64,6 @@ class Login extends Component {
         });
   }
     responseFacebooks(response) {
-    console.log("Okay so this happened?ssssssss")
   }
 
   render() {
@@ -89,8 +78,6 @@ class Login extends Component {
           pathname: "/register",
         }} />)
       } else {
-        console.log("render else");
-        console.log(this.state);
         return (<div>Internet gnomes are fetching your info...</div>)
       }
     } else {
