@@ -62,6 +62,7 @@ class NewProfile extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.createProfile = this.createProfile.bind(this);
     this.updateInterest = this.updateInterest.bind(this);
+    this.isBeingEdited = this.isBeingEdited.bind(this);
   }
 
   createProfile(values) {
@@ -161,7 +162,14 @@ class NewProfile extends Component {
         this.setState({
           userData: dataJson,
           loaded: true,
-    })});
+        })
+    });
+  }
+
+  isBeingEdited(user) {
+    if (user.home_city) {
+      return true;
+    } else { return false; }
   }
 
   render() {

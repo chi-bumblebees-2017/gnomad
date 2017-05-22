@@ -31,6 +31,23 @@ class UsersController < ApplicationController
     render json: {first_name: user.first_name.downcase, id: user.id}
   end
 
+  def edit
+    user = User.find(params[:id])
+    if user.localhost_profile
+      localhost_profile = user.localhost_profile.suggestions
+    else
+      localhost_profile = false
+    end
+
+    if user.gnomad_profile
+      gnomad_profile = user.gnomad_profile.suggestions
+    else
+      gnomad_profile = false
+    end
+
+    render json: {user: user, localhost_profile: localhost_profile, gnomad_profile: gnomad_profile}
+  end
+
   def show
     if params[:id] == "a"
       user = current_user

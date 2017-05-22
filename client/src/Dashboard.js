@@ -26,7 +26,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    fetch('/users/a', {
+    fetch('/edit', {
       accept: 'application/json',
       headers: {
         'Authorization': localStorage.getItem('gnomad-auth-token')
@@ -79,7 +79,8 @@ class Dashboard extends Component {
     );
   }
   else if (this.state.loaded === true && this.state.editing === true) {
-    return ( <NewProfile /> );
+    console.log(this.state.userData.user)
+    return ( <NewProfile editingUser={this.state.userData.user}/> );
   }
   else {
     return ( <div>Internet gnomes are fetching your info...</div> );
