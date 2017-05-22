@@ -8,7 +8,7 @@ class Interests extends Component {
       return(
         <div className="interests-container ui center aligned container">
           <GnomadInterests travel_interests={this.props.travel_interests} />
-          <LocalHostInterests host_interests={this.props.host_interests} />
+          <LocalHostInterests host_interests={this.props.host_interests} suggestions={this.props.suggestions} />
         </div>
       );
     } else if (this.props.travel_interests.length>0){
@@ -20,7 +20,7 @@ class Interests extends Component {
     } else if (this.props.host_interests.length>0){
       return(
         <div className="interests-container">
-          <LocalHostInterests host_interests={this.props.host_interests} />
+          <LocalHostInterests host_interests={this.props.host_interests} suggestions={this.props.suggestions} />
         </div>
       );
     } else {

@@ -49,7 +49,7 @@ class Profile extends Component {
           <p>{this.state.userData.user.bio}</p>
         </div>
 
-        <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests}/>
+        <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
       </div>
       );
     } else {
