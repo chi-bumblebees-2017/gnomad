@@ -15,7 +15,6 @@ import {
 } from 'react-router-dom';
 import Logout from './components/Logout';
 import { ActionCableProvider } from 'react-actioncable-provider'
-
 const cable = ActionCable.createConsumer('/cable')
 
 
