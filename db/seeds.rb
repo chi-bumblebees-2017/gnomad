@@ -9,7 +9,7 @@ require 'faker'
 cities = ["Oklahoma City", "Tulsa", "Norman"]
 
 20.times do
-  user = User.create(provider: 'facebook', uid: Faker::Number.hexadecimal(5), first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, image_url: Faker::Internet.url, email: Faker::Internet.email, home_city: cities.sample, home_state: "OK", bio: Faker::Hipster.paragraph)
+  user = User.create(provider: 'facebook', uid: Faker::Number.hexadecimal(5), first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, image_url: "https://thumbs.dreamstime.com/x/garden-gnome-elf-22324178.jpg", email: Faker::Internet.email, home_city: cities.sample, home_state: "OK", bio: Faker::Hipster.paragraph)
   if rand(0..1) == 0
     lp = LocalhostProfile.create!(restaurants: rand(0..1) == 0 ? true : false,
                                  sports: rand(0..1) == 0 ? true : false,
@@ -61,4 +61,6 @@ convo.personal_messages.create!(body: Faker::ChuckNorris.fact, author_id: initia
     author_id = receiver.id
   end
   convo.personal_messages.create!(body: Faker::ChuckNorris.fact, author_id: author_id)
+end
+
 

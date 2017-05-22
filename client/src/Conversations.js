@@ -16,8 +16,11 @@ class Conversations extends Component {
   }
 
   componentDidMount() {
-    fetch('/conversations/', {
+    fetch('/conversations', {
       accept: 'application/json',
+      headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token')
+      },
     }).then(data => data.json())
       .then(dataJson => {
         console.log(dataJson);
@@ -35,7 +38,7 @@ class Conversations extends Component {
           <div>Chat History</div>
           <ul>
             {this.state.conversations.map((conversation) =>
-              <UserListItemContainer key={conversation.id} user={conversation.initiator} snippet={conversation.last_message.body} linkto={conversation} />
+              <UserListItemContainer key={conversation.id} user={conversation.initiator} snippet={conversation.last_message.body} linkto={`/chats/${conversation.id}`} />
             )}
           </ul>
         </div>

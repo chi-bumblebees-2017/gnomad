@@ -1,9 +1,8 @@
 class PersonalMessagesController < ApplicationController
   before_action :find_conversation!
-  # TODO: update current_user, remove before_action
 
   def create
-    @conversation ||= Conversation.create(conversation_id: personal_message_params[:conversation_id], author_id: session[:user_id], receiver_id: @receiver.id)
+    @conversation ||= Conversation.create(conversation_id: personal_message_params[:conversation_id], author_id: current_user.id, receiver_id: @receiver.id)
 
     @personal_message = PersonalMessage.create(body: personal_message_params[:body], author_id: session[:user_id], conversation_id: personal_message_params[:conversation_id])
     @personal_message.save!
@@ -26,7 +25,7 @@ class PersonalMessagesController < ApplicationController
     if personal_message_params[:receiver_id]
       @receiver = User.find_by(id: personal_message_params[:receiver_id])
       # redirect_to(root_path) and return unless @receiver
-      @conversation = Conversation.between(session[:user_id], @receiver.id)[0]
+      @conversation = Conversation.between(current_user, @receiver.id)[0]
     else
       @conversation = Conversation.find_by(id: personal_message_params[:conversation_id])
       # redirect_to(root_path) and return unless @conversation && @conversation.participates?(@current_user)

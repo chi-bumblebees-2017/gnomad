@@ -20,6 +20,9 @@ class Conversation extends Component {
   componentDidMount() {
     fetch(`/conversations/${this.props.match.params.id}`, {
       accept: 'application/json',
+      headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token')
+      },
     }).then(data => data.json())
       .then(dataJson => {
         console.log(dataJson)
