@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Interests from './components/Interests';
 import RecentChats from './RecentChats';
+import NewProfile from './NewProfile';
+import { Button } from 'semantic-ui-react'
 import {
   BrowserRouter as Router,
   Route,
@@ -14,7 +16,13 @@ class Dashboard extends Component {
       userData: [],
       conversations: [],
       loaded: false,
+      editing: false,
     };
+    this.toggleEdit = this.toggleEdit.bind(this);
+  }
+
+  toggleEdit(event) {
+    this.setState({editing: !this.state.editing});
   }
 
   componentDidMount() {
@@ -45,9 +53,8 @@ class Dashboard extends Component {
       });
   }
 
-
   render() {
-    if (this.state.loaded === true) {
+    if (this.state.loaded === true && this.state.editing === false) {
       return(
         <div className="profile-container ui centered container">
           <div className="max-width">
@@ -56,6 +63,10 @@ class Dashboard extends Component {
             <div className="profile-picture-container">
               <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
           </div>
+          <div>
+            <Button content='Edit' icon='edit' labelPosition='left' basic color='red'size='small' onClick={this.toggleEdit}/>
+          </div>
+
           <h2>A Little Bit About Me...</h2>
           <div className="bio-container ui centered container">
             <p>{this.state.userData.user.bio}</p>
@@ -66,6 +77,9 @@ class Dashboard extends Component {
          <RecentChats conversations={this.state.conversations}/>
         </div>
     );
+  }
+  else if (this.state.loaded === true && this.state.editing === true) {
+    return ( <NewProfile /> );
   }
   else {
     return ( <div>Internet gnomes are fetching your info...</div> );
