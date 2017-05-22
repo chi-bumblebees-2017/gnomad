@@ -45,7 +45,7 @@ class Dashboard extends Component {
             <p>{this.state.userData.user.bio}</p>
           </div>
           <div className="ui section divider"></div>
-          <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
+          <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions} />
          </div>
       </div>
     );
