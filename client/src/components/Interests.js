@@ -8,6 +8,7 @@ class Interests extends Component {
       return(
         <div className="interests-container ui center aligned container">
           <GnomadInterests travel_interests={this.props.travel_interests} />
+          <div className="ui section divider"></div>
           <LocalHostInterests host_interests={this.props.host_interests} suggestions={this.props.suggestions} />
         </div>
       );
