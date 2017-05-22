@@ -22,3 +22,19 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.left-pad-10 {
+  padding-left: 10px;
+}
+
+.top-pad-10 {
+  padding-top: 10px;
+}
+
+.top-margin-10 {
+  margin-top: 10px;
+}
+
+.margin-none {
+  margin: 0;
+}
