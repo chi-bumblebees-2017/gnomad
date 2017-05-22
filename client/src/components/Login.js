@@ -51,7 +51,11 @@ class Login extends Component {
     } else {
       return(
         <div>
-        <div className="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-use-continue-as="false" data-onlogin="checkLoginState()" >
+        <h1>GNOMAD</h1>
+        <div className="splash-picture">
+          <img height="200" src="http://media.istockphoto.com/photos/garden-gnome-picture-id157403714"/>
+        </div>
+        <div className="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-use-continue-as="false" data-onlogin="checkLoginState()" >
         </div>
         </div>
       )
