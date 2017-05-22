@@ -13,14 +13,18 @@ class Conversation < ApplicationRecord
     where(initiator_id: sender_id, receiver_id: receiver_id).or(where(initiator_id: receiver_id, receiver_id: sender_id)).limit(1)
   end
 
-  def last_message
-    personal_messages.last
+  def last_message(char_limit = false)
+    if char_limit
+      limit = char_limit - 1
+      personal_messages.last[0..limit]
+    else
+      personal_messages.last
+    end
   end
 
   def with(current_user)
     initiator == current_user ? receiver : initiator
   end
-
   # def participates?(user)
   #   initiator == user || receiver == user
   # end

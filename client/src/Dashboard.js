@@ -47,7 +47,8 @@ class Dashboard extends Component {
           <div className="ui section divider"></div>
           <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions} />
          </div>
-      </div>
+         // PLACEHOLDER FOR CHAT HISTORY BUTTON
+        </div>
     );
   }
   else {
