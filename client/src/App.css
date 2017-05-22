@@ -52,3 +52,13 @@
 .left-pad-0 {
   padding-left: 0;
 }
+
+.bio-max-width {
+  max-width: 400px;
+  margin: auto;
+}
+
+.register-max-width {
+  max-width: 90%;
+  margin: auto;
+}
