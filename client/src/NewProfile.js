@@ -116,9 +116,7 @@ class NewProfile extends Component {
       var newState = update(this.state, {
        submitted: {$set: true}
      });
-     console.log(this.state);
      this.setState(newState);
-     console.log(this.state);
     })
   }
 
@@ -134,7 +132,6 @@ class NewProfile extends Component {
     loaded: {$set: this.state.loaded},
   });
     this.setState(newState);
-    console.log(this.state);
   }
 
 // Updates form state for all non-checkbox values
@@ -168,9 +165,12 @@ class NewProfile extends Component {
   }
 
   render() {
-    // Redirects to user profile page if form successfully submits
+    // Redirects to user dashboard if form successfully submits
     if (this.state.submitted) {
-     return ( <Redirect to={`/users/${this.state.userData.user.first_name.toLowerCase()}/${this.state.userData.user.id}`} /> );
+      return ( <Redirect to={{
+        pathname: '/account',
+        state: {user_id: this.state.userData.user.id},
+      }} /> );
     }
     // Renders main form content IF current user data has loaded
     else if (this.state.loaded) {
