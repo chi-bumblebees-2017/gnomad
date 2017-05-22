@@ -38,7 +38,7 @@ class NewMessage extends Component {
 
   render() {
     return (
-      <form id="personal-message-form" onSubmit={this.handleSubmit}>
+      <form id="personal-message-form" onSubmit={this.sendMessageHandler}>
         <textarea id="new-message" name="personal_message" value={this.state.value} onChange={this.handleChange} />
         <input type="submit" value="Send" />
       </form>

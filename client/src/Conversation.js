@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import PersonalMessageContainer from './PersonalMessageContainer';
 import NewMessage from './NewMessage';
+import {ActionCable} from 'react-actioncable-provider';
 
 
 class Conversation extends Component {
@@ -22,14 +23,14 @@ class Conversation extends Component {
       messages: [
         ...this.state.messages,
         message
-      ]
+      ],
     })
   }
 
   sendMessage = () => {
     const message = this.refs.newMessage.value
     // Call perform or send
-    this.refs.roomChannel.perform('sendMessage', {message})
+    this.refs.chat.perform('sendMessage', {message})
   }
 
   componentDidMount() {
@@ -50,7 +51,6 @@ class Conversation extends Component {
   }
 
   checkAuthorClass(message) {
-    // TODO: write this method
     if (message.author_id === this.state.me.id) {
       return "my-message"
     } else {
@@ -58,7 +58,6 @@ class Conversation extends Component {
     }
   }
   checkAuthorName(message) {
-    // TODO: write this method
     if (message.author_id === this.state.me.id) {
       return this.state.me.first_name
     } else {
@@ -66,18 +65,18 @@ class Conversation extends Component {
     }
   }
 
-// receiver user stub (4 times)**********
   render() {
     if (this.state.loaded === true) {
       return (
         <div>
+          <ActionCable ref='chat' channel={ {channel: 'chat', user: '1'} } onReceived={this.onReceived} />
           <div className="profile-link-banner"><Link to={`/users/${this.state.other.first_name}/${this.state.other.id}`}>Visit {this.state.other.first_name}'s profile</Link></div>
           <div className="conversation-container">
             {this.state.messages.map((personalMessage) =>
               <PersonalMessageContainer className={this.checkAuthorClass(personalMessage)} key={personalMessage.id} author={this.checkAuthorName(personalMessage)} messageBody={personalMessage.body} />
             )}
           </div>
-          <NewMessage conversationId={this.props.match.params.id} receiverId={this.state.other.id} />
+          <NewMessage ref='newMessage' sendMessageHandler={this.sendMessage} conversationId={this.props.match.params.id} receiverId={this.state.other.id} />
         </div>
         );
     } else {
