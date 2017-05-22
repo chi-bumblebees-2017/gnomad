@@ -18,7 +18,6 @@ class Login extends Component {
 
   loggedIn() {
     let loggedInState = (localStorage.getItem('gnomad-auth-token') && localStorage.getItem('gnomad-auth-token').length >= 1)
-    console.log("Logged in state = " + loggedInState)
     return loggedInState
   }
 
@@ -46,8 +45,6 @@ class Login extends Component {
     data.append("uid", response.id)
     data.append("email", response.email)
 
-    console.log("Okay so this happened?")
-    console.log(response)
     window.FB.api('me/picture?width=150&height=150',
       function(response){
             data.append("image_url", response.data.url)
