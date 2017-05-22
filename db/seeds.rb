@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
-
 cities = ["Oklahoma City", "Tulsa", "Norman"]
 
 20.times do
@@ -63,3 +62,5 @@ convo.personal_messages.create!(body: Faker::ChuckNorris.fact, author_id: initia
   end
   convo.personal_messages.create!(body: Faker::ChuckNorris.fact, author_id: author_id)
 end
+
+

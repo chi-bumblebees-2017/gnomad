@@ -20,10 +20,27 @@ class UsersController < ApplicationController
   end
 
   def update
+    user = User.find(params[:id])
+    user.update_attributes(home_city: profile_params[:city], home_state: profile_params[:state], bio: profile_params[:user_bio])
+    if profile_params[:localhost_profile]
+      user.localhost_profile = LocalhostProfile.create(profile_params[:localhost_pref].merge(suggestions: profile_params[:suggestions], available: true))
+    end
+
+    if profile_params[:gnomad_profile]
+      user.gnomad_profile = GnomadProfile.create(profile_params[:gnomad_pref])
+    end
+    p user
+    p user.localhost_profile
+
   end
 
   def show
-    user = User.find(params[:id])
+    if params[:id] == "a"
+      user = current_user
+    else
+      user = User.find(params[:id])
+    end
+
     if user.localhost_profile
       suggestions = user.localhost_profile.suggestions
     else
@@ -35,5 +52,9 @@ class UsersController < ApplicationController
   private
   def user_params
     params.permit(:first_name, :last_name, :uid, :email, :image_url)
+  end
+
+  def profile_params
+    params.require(:profile_data).permit(:values, :city, :state, :user_bio, :gnomad_profile, :localhost_profile, :suggestions, gnomad_pref: [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping], localhost_pref: [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping])
   end
 end

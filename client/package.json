@@ -7,10 +7,14 @@
     "react": "^15.5.4",
     "react-actioncable-provider": "^0.1.0",
     "react-dom": "^15.5.4",
+    "react-dropdown": "^1.2.3",
     "react-router-dom": "^4.1.1",
+    "react-select": "^1.0.0-rc.4",
+    "react-update": "^0.4.4",
     "semantic-ui-react": "^0.68.3"
   },
   "devDependencies": {
+    "react-addons-update": "^15.5.2",
     "react-scripts": "1.0.1"
   },
   "scripts": {

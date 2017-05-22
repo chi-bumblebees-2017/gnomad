@@ -8,9 +8,16 @@ import {
 class UserListItemContainer extends Component {
   render() {
     return (
-      <li><div><Link to={this.props.linkto}>
-      <img src={this.props.user.image_url} className="profile-list-item" />{this.props.user.first_name}</Link></div>
-      <div>{this.props.snippet}</div></li>
+      <div className="comment ui left aligned container">
+        <div className="avatar">
+          <img src={this.props.user.image_url} className="profile-list-item" />
+        </div>
+        <Link className="author" to={this.props.linkto}>{this.props.user.first_name}</Link>
+        <div className="content">
+          <div className="text">{this.props.snippet}</div>
+        </div>
+      <div className="ui section divider"></div>
+      </div>
     );
   }
 }

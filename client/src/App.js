@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Conversation from './Conversation';
 import Conversations from './Conversations';
+import NewProfile from './NewProfile';
 import NavBar from './NavBar';
 import Login from './components/Login';
 import Profile from './components/Profile';

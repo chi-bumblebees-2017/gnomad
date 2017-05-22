@@ -34,13 +34,14 @@ class Conversations extends Component {
   render() {
     if (this.state.loaded === true) {
       return (
-        <div>
-          <div>Chat History</div>
-          <ul>
+        <div className="ui comments">
+          <h3>Chat History</h3>
+          <div className="ui section divider"></div>
+          <div>
             {this.state.conversations.map((conversation) =>
               <UserListItemContainer key={conversation.id} user={conversation.other} snippet={conversation.last_message.body} linkto={`/chats/${conversation.id}`} />
             )}
-          </ul>
+          </div>
         </div>
       );
     } else {

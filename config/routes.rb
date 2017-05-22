@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post "/conversations/:id/personal_messages" => "personal_messages#create"
   delete "/sessions" => "sessions#destroy"
 
+
   resources :users, only: [:create, :update, :show]
   resources :sessions, only: [:destroy]
 
