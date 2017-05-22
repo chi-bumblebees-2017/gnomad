@@ -3,11 +3,8 @@ class ConversationsController < ApplicationController
   # before_action :check_participating!, except: [:index]
 
   def index
-    p request.headers
     if request.headers.include?('Limit')
       @conversations = Conversation.participating(current_user).order('updated_at DESC').limit(request.headers['Limit'])
-      p request.headers['Limit']
-      p @conversations
     else
       @conversations = Conversation.participating(current_user).order('updated_at DESC')
     end

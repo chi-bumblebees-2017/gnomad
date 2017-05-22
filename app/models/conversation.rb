@@ -17,10 +17,6 @@ class Conversation < ApplicationRecord
     personal_messages.last
   end
 
-  def last_snippet(limit = 100)
-    personal_messages.last.body[0..limit]
-  end
-
   def with(current_user)
     initiator == current_user ? receiver : initiator
   end

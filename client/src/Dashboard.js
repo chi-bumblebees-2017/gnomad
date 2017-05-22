@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Interests from './components/Interests';
+import RecentChats from './RecentChats';
 import {
   BrowserRouter as Router,
   Route,
@@ -11,6 +12,7 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       userData: [],
+      conversations: [],
       loaded: false,
     };
   }
@@ -25,8 +27,22 @@ class Dashboard extends Component {
       .then(dataJson => {
         this.setState({
           userData: dataJson,
-          loaded: true,
     })});
+
+    fetch('/conversations', {
+      accept: 'application/json',
+      headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token'),
+        'Limit': '3',
+      },
+    })
+    .then(data => data.json())
+      .then(dataJson => {
+        this.setState({
+          conversations: dataJson,
+          loaded: true,
+        });
+      });
   }
 
 
@@ -47,7 +63,7 @@ class Dashboard extends Component {
           <div className="ui section divider"></div>
           <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions} />
          </div>
-         // PLACEHOLDER FOR CHAT HISTORY BUTTON
+         <RecentChats conversations={this.state.conversations}/>
         </div>
     );
   }

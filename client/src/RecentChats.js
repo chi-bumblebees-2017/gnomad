@@ -7,54 +7,19 @@ import {
 } from 'react-router-dom';
 
 class RecentChats extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      conversations: [],
-      loaded: false,
-    }
-  }
-
-  componentDidMount() {
-    fetch('/conversations', {
-      accept: 'application/json',
-      headers: {
-        'Authorization': localStorage.getItem('gnomad-auth-token'),
-        'Limit': '3',
-      },
-    })
-    .then(data => data.json())
-      .then(dataJson => {
-        this.setState({
-          conversations: dataJson,
-          loaded: true,
-        });
-      });
-    }
-
   render() {
-    if (this.state.loaded === true) {
-      return (
-        <div className="ui comments container">
-          <h5>Recent Chats</h5>
-          <div className="max-width">
-            <div className="ui section divider"></div>
-            {this.state.conversations.map((conversation) =>
-              <UserListItemContainer key={conversation.id} user={conversation.other} snippet={conversation.last_snippet} linkto={`/chats/${conversation.id}`} />
-            )}
-          </div>
+    return (
+      <div className="ui comments container">
+        <h5>Recent Chats</h5>
+        <div className="max-width">
+          <div className="ui section divider"></div>
+          {this.props.conversations.map((conversation) =>
+            <UserListItemContainer key={conversation.id} user={conversation.other} snippet={conversation.last_message.body.substr(0, 100)} linkto={`/chats/${conversation.id}`} />
+          )}
         </div>
-      );
-    } else {
-      return (
-        <div>
-          <h5>Recent Chats</h5>
-          <span>Internet gnomes are fetching your info...</span>
-        </div>
-      );
-    }
+      </div>
+    )
   }
 }
 
 export default RecentChats;
-}
