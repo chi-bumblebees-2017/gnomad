@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     if profile_params[:gnomad_profile]
       user.gnomad_profile = GnomadProfile.create(profile_params[:gnomad_pref])
     end
-    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions}
+    render json: {first_name: user.first_name.downcase, id: user.id}
   end
 
   def show

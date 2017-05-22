@@ -46,7 +46,7 @@ class Login extends Component {
         return (<Redirect push to={{ pathname: "/register" }} />)
       } else {
         console.log(this.state);
-        return (<div> :( </div>)
+        return (<div>Internet gnomes are fetching your info...</div>)
       }
     } else {
       return(

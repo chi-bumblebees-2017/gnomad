@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Redirect,
 } from 'react-router-dom';
 import Checkbox from './Checkbox';
 import Dropdown from 'react-dropdown';
@@ -12,6 +13,7 @@ class NewProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      submitted: false,
       loaded: false,
       userData: [],
       values: {
@@ -101,9 +103,8 @@ class NewProfile extends Component {
     return data
   }
 
-// ajax, makes the request
+// Updates user in controller, sets form submitted value to true to trigger re-render
   handleSubmit(event) {
-    console.log(this.state)
     event.preventDefault();
     fetch(`/users/${this.state.userData.user.id}`, {
       method: "PUT",
@@ -111,10 +112,17 @@ class NewProfile extends Component {
         'Authorization': localStorage.getItem('gnomad-auth-token')
       },
       body: this.createProfile(this.state.values)
-    }).then( () => { return (<Redirect push to={{ pathname: "/users/" + this.state.userData.user.first_name + "/" + this.state.userData.user.id}} />)});
+    }).then(() => {
+      var newState = update(this.state, {
+       submitted: {$set: true}
+     });
+     console.log(this.state);
+     this.setState(newState);
+     console.log(this.state);
+    })
   }
 
-// sends the data to create a profile
+// Updates interest states with checkbox values
   updateInterest(profile, category, value) {
     const newValue = value;
     const profileType = profile;
@@ -128,7 +136,8 @@ class NewProfile extends Component {
     this.setState(newState);
     console.log(this.state);
   }
-// stores what is immedidatly typed
+
+// Updates form state for all non-checkbox values
   handleChange(event) {
     const target = event.target;
     const name = target.name;
@@ -143,7 +152,7 @@ class NewProfile extends Component {
   }
 
 
-
+  // Retrieves current user information from controller/local storage and sets loaded to 'true'
   componentDidMount() {
     fetch('/users/a', {
       accept: 'application/json',
@@ -159,9 +168,14 @@ class NewProfile extends Component {
   }
 
   render() {
-    if (this.state.loaded) {
-
+    // Redirects to user profile page if form successfully submits
+    if (this.state.submitted) {
+     return ( <Redirect to={`/users/${this.state.userData.user.first_name.toLowerCase()}/${this.state.userData.user.id}`} /> );
+    }
+    // Renders main form content IF current user data has loaded
+    else if (this.state.loaded) {
       return (<div>
+        <p></p>
         <p>Create Profile</p>
           <div className="profile-picture-container">
               <img src={this.state.userData.user.image_url} alt="profile-picture"/>
@@ -281,7 +295,7 @@ class NewProfile extends Component {
         </div>)
   } else {
     return (
-      <div>loading...</div>
+      <div>Internet gnomes are fetching your info...</div>
     )
   }
   };
