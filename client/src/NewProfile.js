@@ -111,7 +111,7 @@ class NewProfile extends Component {
         'Authorization': localStorage.getItem('gnomad-auth-token')
       },
       body: this.createProfile(this.state.values)
-    })
+    }).then( return (<Redirect push to={{ pathname: "/account" }} />));
   }
 
 // sends the data to create a profile
