@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Interests from './Interests';
-import ChatButton from './ChatButton';
 import {
   BrowserRouter as Router,
   Route,
@@ -69,7 +68,7 @@ class Profile extends Component {
             </div>
 
           <div className="chat-button">
-            <button onClick={this.displayMessageForm}>Start Chat</button>
+            <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
           </div>
 
           <h2>A Little Bit About Me...</h2>
