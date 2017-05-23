@@ -20,11 +20,13 @@ class Checkbox extends Component {
 
   render() {
     return(
-      <div>
-      <p>
-        <label>{this.props.category}</label>
-        <input onClick={this.toggleCheckboxValue} type="checkbox" value={this.props.category} name={this.props.category} />
-      </p>
+      <div className="left aligned column">
+        <div className="ui checkbox">
+          <p>
+            <input onClick={this.toggleCheckboxValue} type="checkbox" value={this.props.category} name={this.props.category} />
+            <label>{this.props.category.replace(/_/g," ")}</label>
+          </p>
+        </div>
       </div>
     )
   }

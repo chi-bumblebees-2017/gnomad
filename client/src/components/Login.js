@@ -23,7 +23,6 @@ class Login extends Component {
   }
 
   onceLoggedIn() {
-    console.log(localStorage.getItem('gnomad-auth-token'))
     fetch('/users/a', {
       method: "GET",
       accept: 'application/json',
@@ -32,7 +31,6 @@ class Login extends Component {
       },
     }).then(data => data.json())
       .then(dataJson => {
-        console.log("This getting hit?")
         this.setState({
           userData: dataJson,
           loaded: true,
@@ -74,36 +72,27 @@ class Login extends Component {
 
   render() {
     if (this.loggedIn()) {
-
-        if (!(this.state.loaded)){
-          this.onceLoggedIn()
-        }
-
-      if (this.state.loaded === true && this.state.userData.user.home_city){
-          return (<Redirect push to={{
-            pathname: "/account",
-          }} />)
-        }
-
-      else if (this.state.loaded === true && !(this.state.userData.user.home_city)) {
-          return (<Redirect push to={{
-            pathname: "/register",
-          }} />)
-        }
-
-      else {
-          return (<div>Internet gnomes are fetching your info...</div>)
-        }
+      if (!(this.state.loaded)){
+        this.onceLoggedIn()
       }
-
-    else {
-        return(
-          <div>
+      if (this.state.loaded === true && this.state.userData.user.home_city){
+        return (<Redirect push to={{
+          pathname: "/account",
+        }} />)
+      } else if (this.state.loaded === true && !(this.state.userData.user.home_city) ) {
+        return (<Redirect push to={{
+          pathname: "/register",
+        }} />)
+      } else {
+        return (<div>Internet gnomes are fetching your info...</div>)
+      }
+    } else {
+      return(
+        <div>
+          <div className="max-width">
             <div className="ui section divider"></div>
-
             <h1>GNOMAD</h1>
             <div className="ui section divider"></div>
-
             <div className="splash-picture">
               <img height="200" src="https://media.istockphoto.com/photos/garden-gnome-picture-id157403714"/>
             </div>
@@ -117,7 +106,8 @@ class Login extends Component {
 
             <div className="ui section divider"></div>
           </div>
-        )
+        </div>
+      )
     }
   }
 }
