@@ -11,10 +11,12 @@ class LocalHostInterests extends Component {
             <div role="listitem" className="item" key={this.props.host_interests.indexOf(interest)}><i aria-hidden="true" className="tag icon"></i>{interest.replace(/_/g," ")}</div>
             )}
         </div>
+        <div className="ui section divider"></div>
         <div>
           <h3>my suggestions for visiting Gnomads...</h3>
           <div>{this.props.suggestions}</div>
         </div>
+        <div className="ui section divider"></div>
       </div>
     );
   }

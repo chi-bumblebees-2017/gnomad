@@ -41,12 +41,16 @@ class Login extends Component {
   render() {
     if (this.loggedIn()) {
       if (this.state.loaded === true && this.state.userData.user.home_city){
-        return (<Redirect push to={{ pathname: "/account" }} />)
+        return (<Redirect push to={{
+          pathname: "/account",
+        }} />)
       } else if (this.state.loaded === true && !(this.state.userData.user.home_city) ) {
-        return (<Redirect push to={{ pathname: "/register" }} />)
+        return (<Redirect push to={{
+          pathname: "/register",
+        }} />)
       } else {
         console.log(this.state);
-        return (<div> :( </div>)
+        return (<div>Internet gnomes are fetching your info...</div>)
       }
     } else {
       return(

@@ -43,45 +43,51 @@ class Profile extends Component {
       if (this.state.writeMessage) {
         return (
           <div className="profile-container ui centered container">
-          <h1>{this.state.userData.user.first_name}</h1>
+            <div className="max-width">
+            <h1>{this.state.userData.user.first_name}</h1>
 
-            <div className="profile-picture-container">
-              <img src={this.state.userData.user.image_url} alt="profile-picture"/>
+              <div className="profile-picture-container">
+                <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
+              </div>
+
+              <NewFirstMessage receiverId={this.state.userData.user.id} />
+
+              <h2>A Little Bit About Me...</h2>
+              <div className="bio-container ui centered container">
+                <p>{this.state.userData.user.bio}</p>
+              </div>
+              <div className="ui section divider"></div>
+              <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
             </div>
-
-            <NewFirstMessage receiverId={this.state.userData.user.id} />
-
-            <h2>A Little Bit About Me...</h2>
-            <div className="bio-container ui justified container">
-              <p>{this.state.userData.user.bio}</p>
-            </div>
-            <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
           </div>
         );
       } else {
         return (
           <div className="profile-container ui centered container">
-          <h1>{this.state.userData.user.first_name}</h1>
+            <div className="max-width">
+            <h1>{this.state.userData.user.first_name}</h1>
 
-            <div className="profile-picture-container">
-              <img src={this.state.userData.user.image_url} alt="profile-picture"/>
+              <div className="profile-picture-container">
+                <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
+              </div>
+
+            <div className="chat-button">
+              <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
             </div>
 
-          <div className="chat-button">
-            <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
+            <h2>A Little Bit About Me...</h2>
+            <div className="bio-container ui centered container">
+            <p>{this.state.userData.user.bio}</p>
+            </div>
+            <div className="ui section divider"></div>
+            <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
           </div>
-
-          <h2>A Little Bit About Me...</h2>
-          <div className="bio-container ui justified container">
-          <p>{this.state.userData.user.bio}</p>
-          </div>
-          <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
         </div>
         );
       }
     } else {
       return (
-        <div>Loading...</div>
+        <div>Internet gnomes are fetching your info...</div>
       );
     }
   }

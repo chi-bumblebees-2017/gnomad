@@ -43,7 +43,7 @@ class SearchContainer extends Component {
 
   render() {
     return (
-      <div className="search-container">
+      <div className="search-container top-margin-10">
         <SearchBar submitHandler={this.handleSubmit} changeHandler={this.handleChange} value={this.state.location} />
         <SearchResults results={this.state.localhosts} />
       </div>
