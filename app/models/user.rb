@@ -14,6 +14,13 @@ class User < ApplicationRecord
   # TODO: refactor this algorithm scoping
   scope :likes_any, ->(interests) { where("restaurants = :restaurants OR sports = :sports OR museums = :museums OR bars = :bars OR music = :music OR outdoors = :outdoors OR art = :art OR fitness = :fitness OR history = :history OR architecture = :architecture OR family_fun = :family_fun OR zoo = :zoo OR culture = :culture OR volunteer = :volunteer OR shopping = :shopping", interests_hash(interests)) }
 
+  scope :likes_all, ->(interests) { where(User.all_interests_query(interests)) }
+
+  def self.all_interests_query(interests)
+    queries = interests.map(&:to_s).map {|str| str + " = true" }
+    queries.reduce { |str, query| str + " AND #{query}" }
+  end
+
   # TODO: refactor this helper method along with the algorithm scoping
   def self.interests_hash(interests)
     results_hash = POSSIBLE_INTERESTS.map {|i| [i,nil] }.to_h

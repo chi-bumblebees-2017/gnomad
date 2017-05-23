@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
+import SearchFilters from './SearchFilters';
 
 class SearchContainer extends Component {
   constructor(props) {
@@ -13,9 +14,19 @@ class SearchContainer extends Component {
     this.state = {
       location: "",
       localhosts: [],
+      likesAll: false,
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.setCheckedValueLikesAll = this.setCheckedValueLikesAll.bind(this);
+    this.setInterestState = this.setInterestState.bind(this);
+    this.checkHandled = this.checkHandled.bind(this);
+  }
+
+  setInterestState(updatedInterests) {
+    this.setState({
+      interests: updatedInterests
+    })
   }
 
   handleSubmit(event) {
@@ -34,6 +45,9 @@ class SearchContainer extends Component {
       })});
   }
 
+  setCheckedValueLikesAll(){
+    this.setState({ likesAll: !this.state.likesAll });
+  }
 
   handleChange(event) {
     this.setState({
@@ -41,10 +55,19 @@ class SearchContainer extends Component {
     });
   }
 
+  checkHandled(value) {
+    console.log(value)
+    console.log("Save me Obi Juan who ever the fuck you are")
+  }
+
   render() {
     return (
       <div className="search-container top-margin-10">
         <SearchBar submitHandler={this.handleSubmit} changeHandler={this.handleChange} value={this.state.location} />
+        <br />
+        <div><h5 className="inline"> Localhosts must match all interests:</h5>
+        <div className="ui fitted toggle checkbox left-pad-10 inline"><input onClick={this.setCheckedValueLikesAll} type="checkbox" /><label></label></div></div>
+        <SearchFilters handleCheck={this.checkHandled} />
         <SearchResults results={this.state.localhosts} />
       </div>
     );
