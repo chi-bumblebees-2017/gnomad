@@ -65,8 +65,7 @@ class App extends Component {
           <Route exact path="/" render={() => <Login connectCable={this.connectCable} />} />
           <Route exact path="/chats" component={Conversations} />
           <Route path="/chats/:id" render={props => <Conversation cable={this.state.cable} {...props} />} />
-{/*       <Route path="/account" component={Dashboard} />       */}
-{/*       <Route path="/register" component={NewProfile} />     */}
+         <Route path="/register" component={NewProfile} />
           <Route path="/search" component={SearchContainer} />
           <Route path="/users/:name/:id" component={Profile} />
           <Route path="/logout" render={() => <Logout disconnectCable={this.disconnectCable} />} />

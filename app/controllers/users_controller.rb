@@ -33,18 +33,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    puts "TOP--------------------------------------------"
-    if params[:id] == "0"
-      puts "IN ID=a PARAMS --------------------------------------------"
+    if params[:id] == "a"
       user = current_user
-      puts "CURRENT USER IS #{current_user}--------------------------------------------"
-      p current_user
-      puts "USER IS #{user}--------------------------------------------"
-      p user
     else
       user = User.find(params[:id])
-
-      p user
     end
 
     if user.localhost_profile
@@ -52,8 +44,6 @@ class UsersController < ApplicationController
     else
       suggestions = nil
     end
-    puts "USER IS #{user}--------------------------------------------"
-    p user
     render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions, bio: user.bio}
   end
 

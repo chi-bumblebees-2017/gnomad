@@ -28,7 +28,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    fetch('/users/0', {
+    fetch('/users/a', {
       method: 'GET',
       accept: 'application/json',
       headers: {
@@ -88,7 +88,6 @@ class Dashboard extends Component {
     return ( <NewProfile toggleEdit={this.toggleEdit} userData={this.userData} /> );
   }
   else {
-    console.log(this.state);
     return ( <div>Internet gnomes are fetching your info...</div> );
   }
 }

@@ -18,7 +18,8 @@ class Login extends Component {
 
   loggedIn() {
     let loggedInState = (localStorage.getItem('gnomad-auth-token') && localStorage.getItem('gnomad-auth-token').length >= 1)
-    return loggedInState
+    return loggedInState;
+    // return false;
   }
 
   onceLoggedIn() {
@@ -34,6 +35,7 @@ class Login extends Component {
           userData: dataJson,
           loaded: true,
           })
+        console.log(this.state)
       });
   }
 
@@ -65,16 +67,22 @@ class Login extends Component {
 
   render() {
     if (this.loggedIn()) {
-      this.onceLoggedIn()
+      console.log("after logged in?")
+      console.log(this.state)
+
+      this.onceLoggedIn();
       if (this.state.loaded === true && this.state.userData.user.home_city){
+        console.log("1")
         return (<Redirect push to={{
           pathname: "/account",
         }} />)
       } else if (this.state.loaded === true && !(this.state.userData.user.home_city) ) {
+        console.log("2")
         return (<Redirect push to={{
           pathname: "/register",
         }} />)
       } else {
+        console.log("3")
         return (<div>Internet gnomes are fetching your info...</div>)
       }
     } else {
