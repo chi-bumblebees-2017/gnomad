@@ -8,6 +8,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-dropdown": "^1.2.3",
+    "react-facebook-login": "^3.6.0",
     "react-router-dom": "^4.1.1",
     "react-select": "^1.0.0-rc.4",
     "react-update": "^0.4.4",

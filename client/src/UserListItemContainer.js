@@ -12,7 +12,7 @@ class UserListItemContainer extends Component {
         <div className="avatar">
           <img src={this.props.user.image_url} className="profile-list-item" />
         </div>
-        <Link className="author" to={this.props.linkto}>{this.props.user.first_name}</Link>
+        <Link className="author left-pad-10" to={this.props.linkto}>{this.props.user.first_name}</Link>
         <div className="content">
           <div className="text">{this.props.snippet}</div>
         </div>

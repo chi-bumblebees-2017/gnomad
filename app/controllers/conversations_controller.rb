@@ -3,10 +3,14 @@ class ConversationsController < ApplicationController
   # before_action :check_participating!, except: [:index]
 
   def index
-    @conversations = Conversation.participating(current_user).order('updated_at DESC')
-    full_json = @conversations.map do |conversation|
-      conversation.as_json(methods: :last_message).merge({other: conversation.with(current_user)})
+    if request.headers.include?('Limit')
+      @conversations = Conversation.participating(current_user).order('updated_at DESC').limit(request.headers['Limit'])
+    else
+      @conversations = Conversation.participating(current_user).order('updated_at DESC')
     end
+      full_json = @conversations.map do |conversation|
+        conversation.as_json(methods: :last_message).merge({other: conversation.with(current_user)})
+      end
     render json: full_json
   end
 

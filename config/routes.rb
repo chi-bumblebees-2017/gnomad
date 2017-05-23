@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   resources :sessions, only: [:destroy]
 
   get '/auth/:provider/callback', to: 'sessions#create'
+  get '*path' => 'home#index'
 end

@@ -34,10 +34,10 @@ class Conversations extends Component {
   render() {
     if (this.state.loaded === true) {
       return (
-        <div className="ui comments">
+        <div className="ui comments container">
           <h3>Chat History</h3>
+          <div className="max-width">
           <div className="ui section divider"></div>
-          <div>
             {this.state.conversations.map((conversation) =>
               <UserListItemContainer key={conversation.id} user={conversation.other} snippet={conversation.last_message.body} linkto={`/chats/${conversation.id}`} />
             )}
