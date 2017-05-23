@@ -32,11 +32,11 @@ class Login extends Component {
       },
     }).then(data => data.json())
       .then(dataJson => {
+        console.log("This getting hit?")
         this.setState({
           userData: dataJson,
           loaded: true,
           })
-        console.log(this.state)
       });
   }
 
@@ -66,62 +66,61 @@ class Login extends Component {
     responseFacebooks(response) {
   }
 
-  // componentDidMount() {
-  //   console.log("Component did mount");
-  //   if (this.loggedIn()){
-  //     this.onceLoggedIn();
-  //   }
-
-  // }
+  componentDidMount() {
+    if (this.loggedIn()){
+      this.onceLoggedIn();
+    }
+  }
 
   render() {
     if (this.loggedIn()) {
+
+        if (!(this.state.loaded)){
+          this.onceLoggedIn()
+        }
+
       if (this.state.loaded === true && this.state.userData.user.home_city){
-      if (!(this.state.loaded)){
-        this.onceLoggedIn()
+          return (<Redirect push to={{
+            pathname: "/account",
+          }} />)
+        }
+
+      else if (this.state.loaded === true && !(this.state.userData.user.home_city)) {
+          return (<Redirect push to={{
+            pathname: "/register",
+          }} />)
+        }
+
+      else {
+          return (<div>Internet gnomes are fetching your info...</div>)
+        }
       }
-      if (this.state.loaded === true && this.state.userData.user.home_city){
-        return (<Redirect push to={{
-          pathname: "/account",
-        }} />)
-      } else if (this.state.loaded === true && !(this.state.userData.user.home_city) ) {
-        return (<Redirect push to={{
-          pathname: "/register",
-        }} />)
-      } else {
-        return (<div>Internet gnomes are fetching your info...</div>)
-      }
-    } else {
-      return(
-        <div>
-        <div className="ui section divider"></div>
 
+    else {
+        return(
+          <div>
+            <div className="ui section divider"></div>
 
-        <h1>GNOMAD</h1>
-        <div className="ui section divider"></div>
+            <h1>GNOMAD</h1>
+            <div className="ui section divider"></div>
 
-        <div className="splash-picture">
-          <img height="200" src="https://media.istockphoto.com/photos/garden-gnome-picture-id157403714"/>
-        </div>
+            <div className="splash-picture">
+              <img height="200" src="https://media.istockphoto.com/photos/garden-gnome-picture-id157403714"/>
+            </div>
 
-        <FacebookLogin
-          appId="1351086744971505"
-          autoLoad={false}
-          fields="first_name,last_name,email,id"
-          callback={this.responseFacebook}
-        />
+            <FacebookLogin appId="1351086744971505" autoLoad={false} fields="first_name,last_name,email,id" callback={this.responseFacebook} />
 
-        <div className="ui horizontal section divider">About</div>
+            <div className="ui horizontal section divider">About</div>
+            <div>
+              "Gnomad allows travellers (Gnomads) to connect to city residents (Localhosts) in order to have an authentic local experience of their travel destination. To get started, Log in with Facebook and tell us a little bit more about yourself. Happy Travelling!"
+            </div>
 
-        <div>Gnomad allows travellers (Gnomads) to connect to city residents (Localhosts) in order to have an authentic local experience of their travel destination. To get started, Log in with Facebook and tell us a little bit more about yourself. Happy Travelling!</div>
-
-        <div className="ui section divider"></div>
-
-        </div>
-      )
+            <div className="ui section divider"></div>
+          </div>
+        )
     }
   }
 }
-}
+
 
 export default Login;
