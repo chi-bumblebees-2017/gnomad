@@ -1,15 +1,6 @@
 class UsersController < ApplicationController
   # TODO: add line below back in once we add back this before action. commented out for now in development/test mode.
   skip_before_action :authorize_request, only: [:create]
-
-  def search
-    location = params[:location].split(", ")
-    city = location.first
-    state = location.last
-    @matches = User.localhosts.from_location(city, state).likes_any(current_user.interests_while_traveling)
-    render json: @matches
-  end
-
   def create
     user = User.from_oauth(user_params)
     session[:user_id] = user.id
@@ -54,5 +45,9 @@ class UsersController < ApplicationController
 
   def profile_params
     params.require(:profile_data).permit(:values, :city, :state, :user_bio, :gnomad_profile, :localhost_profile, :suggestions, gnomad_pref: [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping], localhost_pref: [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping])
+  end
+
+  def search_params
+    params.require(:likes_list).permit(:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :history, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping)
   end
 end

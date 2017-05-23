@@ -41,21 +41,26 @@ class SearchFilters extends Component {
 
   toggleCheckboxValue(event) {
     let interest = event.target.name
-    console.log(interest)
-    console.log(this.state[interest])
-    this.setState({ [interest]: !this.state[interest] });
 
+    this.setState((prevState) => { return {[interest]: !prevState[interest] } }, this.setStateCallback);
+    // this.props.handleCheck(this.state)
+
+  }
+
+  setStateCallback() {
+    this.props.handleCheck(this.state);
   }
 
   componentDidUpdate() {
-    console.log("This is what bothers me")
     // console.log(this.state)
-    this.props.handleCheck(this.state)
+    // console.log("Does this update with the parent?")
   }
   render() {
+    // console.log("Does this update with the parent?")
     return (
       <div>
-        <div className="ui equal width grid">
+      <div className="ui section divider"></div>
+        <div className="ui equal width grid left-margin-10">
           <div className="row">
             {this.setVariables()[0]}
             {this.setVariables()[1]}
