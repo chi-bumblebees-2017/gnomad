@@ -27,5 +27,7 @@ module Gnomad
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    # run standalone cable server? if so, use this:
+    # config.action_cable.mount_path = "/websocket"
   end
 end
