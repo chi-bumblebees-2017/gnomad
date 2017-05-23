@@ -5,7 +5,15 @@ import {
 
 class Logout extends Component {
   render() {
+    fetch("/sessions", {
+      method: 'DELETE',
+      accept: 'application/json',
+      headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token')
+      },
+    });
     localStorage.setItem('gnomad-auth-token', "");
+    this.props.disconnectCable();
     return( <Redirect to="/" /> )
   }
 }

@@ -16,29 +16,63 @@ import {
   Link
 } from 'react-router-dom';
 import Logout from './components/Logout';
+import ActionCable from 'action-cable-react-jwt';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cable: null,
+    };
+    this.connectCable = this.connectCable.bind(this);
+    this.disconnectCable = this.disconnectCable.bind(this);
+  }
+
+  componentWillMount() {
+    if (localStorage.getItem('gnomad-auth-token') && localStorage.getItem('gnomad-auth-token').length >= 1) {
+      this.connectCable();
+    }
+  }
+
+  componentWillUnmount() {
+    this.state.cable.subscriptions.subscriptions.forEach((sub) => {
+      this.state.cable.subscriptions.remove(sub)
+    })
+  }
+
+  connectCable() {
+    this.setState({
+      cable: ActionCable.createConsumer("ws://localhost:3001/cable", localStorage.getItem('gnomad-auth-token')),
+    })
+  }
+
+  disconnectCable() {
+    this.setState({
+      cable: null,
+    })
+  }
+
   render() {
-    return (<div>
+    return (
       <Router>
         <div className="App">
           <NavBar>
-            <NavLink className="item" to="/account">Dashboard</NavLink>
-            <NavLink className="item" to="/chats">Chats</NavLink>
-            <NavLink className="item" to="/search">Search</NavLink>
-            <NavLink className="item" to="/logout">Logout</NavLink>
+            <NavLink to="/account">Dashboard</NavLink>
+            <NavLink to="/chats">Chats</NavLink>
+            <NavLink to="/search">Search</NavLink>
+            <NavLink to="/logout">Logout</NavLink>
           </NavBar>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" render={() => <Login connectCable={this.connectCable} />} />
           <Route exact path="/chats" component={Conversations} />
-          <Route path="/chats/:id" component={Conversation} />
-          <Route path="/register" component={NewProfile} />
+          <Route path="/chats/:id" render={props => <Conversation cable={this.state.cable} {...props} />} />
+{/*       <Route path="/account" component={Dashboard} />       */}
+{/*       <Route path="/register" component={NewProfile} />     */}
           <Route path="/search" component={SearchContainer} />
-          <Route path="/logout" component={Logout} />
           <Route path="/users/:name/:id" component={Profile} />
+          <Route path="/logout" render={() => <Logout disconnectCable={this.disconnectCable} />} />
           <Route path="/account" component={Dashboard} />
         </div>
       </Router>
-      </div>
     );
   }
 }

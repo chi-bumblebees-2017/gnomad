@@ -13,8 +13,9 @@ class UsersController < ApplicationController
   def create
     user = User.from_oauth(user_params)
     session[:user_id] = user.id
+    request.cookie_jar.signed[:user_id] = user.id
     auth_token = JsonWebToken.encode(user_id: user.id)
-    p auth_token
+    # p auth_token
     json_response(auth_token: auth_token)
   end
 
