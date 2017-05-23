@@ -98,7 +98,7 @@ class Login extends Component {
       }
     } else {
       return(
-        <div>
+        <div className="max-width">
         <div className="ui section divider"></div>
 
 

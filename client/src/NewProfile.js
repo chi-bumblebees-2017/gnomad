@@ -6,8 +6,10 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Checkbox from './Checkbox';
-import Dropdown from 'react-dropdown';
+// import Dropdown from 'react-dropdown';
 import update from 'react-addons-update';
+import { Form, TextArea } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 
 class NewProfile extends Component {
   constructor(props) {
@@ -20,8 +22,8 @@ class NewProfile extends Component {
         city: "",
         state: "",
         user_bio: "",
-        gnomad_profile: false,
-        localhost_profile: false,
+        gnomad_profile: "",
+        localhost_profile: "",
         gnomad_pref: {
           restaurants: false,
           sports: false,
@@ -173,18 +175,25 @@ class NewProfile extends Component {
     }
     // Renders main form content IF current user data has loaded
     else if (this.state.loaded) {
-      return (<div>
-        <p>Create Profile</p>
+      return (<div className="register-max-width">
+        <h3 className="top-pad-10">Create Profile</h3>
           <div className="profile-picture-container">
-              <img src={this.state.userData.user.image_url} alt="profile-picture"/>
+              <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
           </div>
-          <div>{this.state.userData.user.first_name} {this.state.userData.user.last_name}</div>
-        <form onSubmit={this.handleSubmit} className="create-profile-form">
+          <h3 className="top-margin-10">{this.state.userData.user.first_name} {this.state.userData.user.last_name}</h3>
 
-          <p><label>City: <input name="city" required type="text" onChange={this.handleChange} /></label></p>
+        <form onSubmit={this.handleSubmit} className="create-profile-form ui form">
 
-          <label>State: </label>
-          <select type="select" name="state" onChange={this.handleChange} required value={this.state.values.state}>
+          <div className="ui labeled input padding-right">
+            <div className="ui basic label">City</div>
+            <input name="city" required type="text" onChange={this.handleChange} />
+          </div>
+
+          <br />
+          <br />
+          <div className="ui labeled input">
+          <div className="ui basic label">State: </div>
+          <select className="ui dropdown" type="select" name="state" onChange={this.handleChange} required value={this.state.values.state}>
             <option>--</option>
             <option value="AK">AK</option>
             <option value="AL">AL</option>
@@ -237,63 +246,103 @@ class NewProfile extends Component {
             <option value="WV">WV</option>
             <option value="WY">WY</option>
           </select>
+        </div>
 
-          <p><label>Bio: <textarea name="user_bio" onChange={this.handleChange}/></label></p>
+          <h5><label>Write a bio: <TextArea autoHeight className="bio-max-width" name="user_bio" onChange={this.handleChange}/></label></h5>
 
-          <label>I want to register as a Gnomad: </label>
-          <select type="select" name="gnomad_profile" onChange={this.handleChange} required value={this.state.values.gnomad_profile}>
-            <option >--</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
+          <div className="ui section divider"></div>
 
-          <p>As a Gnomad I like to :</p>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="restaurants"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="sports"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="museums"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="bars"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="music"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="outdoors"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="art"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="fitness"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="architecture"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="family_fun"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="zoo"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="culture"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="volunteer"/>
-          <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="shopping"/>
-          <label>I want to sign up as a local host:</label>
-          <select type="select" name="localhost_profile" onChange={this.handleChange} required value={this.state.values.localhost_profile}>
-            <option >--</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-          <p>As a Local Host:</p>
 
-          <p><label>Local Suggestions: <textarea value={this.state.suggestions} name="suggestions" onChange={this.handleChange} /></label></p>
+          <div><label><h5 className="inline">I want to register as a Gnomad: </h5></label>
+            <div className="ui input">
+              <select type="select" name="gnomad_profile" onChange={this.handleChange} required value={this.state.values.gnomad_profile}>
+                <option >--</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          </div>
 
-          <p>I like to show people:</p>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="restaurants"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="sports"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="museums"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="bars"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="music"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="outdoors"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="art"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="fitness"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="architecture"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="family_fun"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="zoo"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="culture"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="volunteer"/>
-          <Checkbox profileType="local_pref" handler={this.updateInterest} category="shopping"/>
+          <h5>As a Gnomad I like to:</h5>
+            <div className="ui equal width grid">
+              <div className="row">
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="restaurants"/>
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="sports"/>
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="museums"/>
+              </div>
+              <div className="row">
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="bars"/>
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="music"/>
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="outdoors"/>
+              </div>
+              <div className="row">
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="art"/>
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="fitness"/>
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="architecture"/>
+              </div>
+              <div className="row">
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="family_fun"/>
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="zoo"/>
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="culture"/>
+              </div>
+              <div className="row">
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="volunteer"/>
+                <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="shopping"/>
+                <div className="column"></div>
+              </div>
+            </div>
+          <div className="ui section divider"></div>
 
-          <input type="submit" value="Submit" />
+
+          <div><label><h5 className="inline">I want to register as a Localhost: </h5></label>
+            <div className="ui input">
+              <select type="select" name="localhost_profile" onChange={this.handleChange} required value={this.state.values.localhost_profile}>
+                <option >--</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          </div>
+
+          <h5>As a Local Host I like to show people:</h5>
+          <div className="ui equal width grid">
+              <div className="row">
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="restaurants"/>
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="sports"/>
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="museums"/>
+              </div>
+              <div className="row">
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="bars"/>
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="music"/>
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="outdoors"/>
+              </div>
+              <div className="row">
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="art"/>
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="fitness"/>
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="architecture"/>
+              </div>
+              <div className="row">
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="family_fun"/>
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="zoo"/>
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="culture"/>
+              </div>
+              <div className="row">
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="volunteer"/>
+                <Checkbox profileType="local_pref" handler={this.updateInterest} category="shopping"/>
+                <div className="column"></div>
+              </div>
+            </div>
+
+          <h5><label>Local Suggestions: <TextArea autoHeight className="bio-max-width" value={this.state.suggestions} name="suggestions" onChange={this.handleChange} /></label></h5>
+
+          <input className="ui blue button" type="submit" value="Submit" />
         </form>
+        <div className="ui section divider"></div>
+
         </div>)
   } else {
     return (
-      <div>Internet gnomes are fetching your info...</div>
+      <div className="top-margin-10">Internet gnomes are fetching your info...</div>
     )
   }
   };

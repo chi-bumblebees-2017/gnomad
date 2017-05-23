@@ -22,11 +22,11 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     user.update_attributes(home_city: profile_params[:city], home_state: profile_params[:state], bio: profile_params[:user_bio])
-    if profile_params[:localhost_profile]
+    if profile_params[:localhost_profile] == true
       user.localhost_profile = LocalhostProfile.create(profile_params[:localhost_pref].merge(suggestions: profile_params[:suggestions], available: true))
     end
 
-    if profile_params[:gnomad_profile]
+    if profile_params[:gnomad_profile] == true
       user.gnomad_profile = GnomadProfile.create(profile_params[:gnomad_pref])
     end
     render json: {first_name: user.first_name.downcase, id: user.id}
