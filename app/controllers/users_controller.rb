@@ -31,28 +31,19 @@ class UsersController < ApplicationController
     render json: {first_name: user.first_name.downcase, id: user.id}
   end
 
-  def edit
-    user = User.find(params[:id])
-    if user.localhost_profile
-      localhost_profile = user.localhost_profile.suggestions
-    else
-      localhost_profile = false
-    end
-
-    if user.gnomad_profile
-      gnomad_profile = user.gnomad_profile.suggestions
-    else
-      gnomad_profile = false
-    end
-
-    render json: {user: user, localhost_profile: localhost_profile, gnomad_profile: gnomad_profile}
-  end
-
   def show
-    if params[:id] == "a"
+    puts "TOP--------------------------------------------"
+    if params[:id] == "0"
+      puts "IN ID=a PARAMS --------------------------------------------"
       user = current_user
+      puts "CURRENT USER IS #{current_user}--------------------------------------------"
+      p current_user
+      puts "USER IS #{user}--------------------------------------------"
+      p user
     else
       user = User.find(params[:id])
+
+      p user
     end
 
     if user.localhost_profile
@@ -60,6 +51,8 @@ class UsersController < ApplicationController
     else
       suggestions = nil
     end
+    puts "USER IS #{user}--------------------------------------------"
+    p user
     render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions, bio: user.bio}
   end
 

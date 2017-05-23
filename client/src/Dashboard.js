@@ -15,18 +15,21 @@ class Dashboard extends Component {
     this.state = {
       userData: [],
       conversations: [],
-      loaded: false,
+      userLoaded: false,
+      chatsLoaded: false,
       editing: false,
     };
     this.toggleEdit = this.toggleEdit.bind(this);
   }
 
   toggleEdit(event) {
+    console.log(this.state.userData);
     this.setState({editing: !this.state.editing});
   }
 
   componentDidMount() {
-    fetch('/edit', {
+    fetch('/users/0', {
+      method: 'GET',
       accept: 'application/json',
       headers: {
         'Authorization': localStorage.getItem('gnomad-auth-token')
@@ -35,7 +38,9 @@ class Dashboard extends Component {
       .then(dataJson => {
         this.setState({
           userData: dataJson,
-    })});
+          userLoaded: true,
+        });
+      });
 
     fetch('/conversations', {
       accept: 'application/json',
@@ -48,13 +53,13 @@ class Dashboard extends Component {
       .then(dataJson => {
         this.setState({
           conversations: dataJson,
-          loaded: true,
+          chatsLoaded: true,
         });
       });
   }
 
   render() {
-    if (this.state.loaded === true && this.state.editing === false) {
+    if (this.state.userLoaded === true && this.state.chatsLoaded === true && this.state.editing === false) {
       return(
         <div className="profile-container ui centered container">
           <div className="max-width">
@@ -78,11 +83,12 @@ class Dashboard extends Component {
         </div>
     );
   }
-  else if (this.state.loaded === true && this.state.editing === true) {
-    console.log(this.state.userData.user)
-    return ( <NewProfile editingUser={this.state.userData.user}/> );
+  else if (this.state.userLoaded === true && this.state.chatsLoaded === true && this.state.editing === true) {
+    console.log(this.state.userData)
+    return ( <NewProfile toggleEdit={this.toggleEdit} userData={this.userData} /> );
   }
   else {
+    console.log(this.state);
     return ( <div>Internet gnomes are fetching your info...</div> );
   }
 }

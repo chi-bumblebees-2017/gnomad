@@ -39,6 +39,7 @@ class Login extends Component {
   }
 
   render() {
+
     if (this.loggedIn()) {
       if (this.state.loaded === true && this.state.userData.user.home_city){
         return (<Redirect push to={{

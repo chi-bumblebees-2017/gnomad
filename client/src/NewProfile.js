@@ -65,6 +65,12 @@ class NewProfile extends Component {
     this.isBeingEdited = this.isBeingEdited.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.userData !== this.props.userData) {
+      this.setState({ userData: nextProps.userData });
+    }
+  }
+
   createProfile(values) {
     var data = new FormData();
     data.append("profile_data[city]", values.city);
@@ -164,6 +170,7 @@ class NewProfile extends Component {
           loaded: true,
         })
     });
+      console.log(this.props);
   }
 
   isBeingEdited(user) {
