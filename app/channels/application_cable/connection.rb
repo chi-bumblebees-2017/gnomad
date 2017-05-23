@@ -4,16 +4,19 @@ module ApplicationCable
 
     def connect
       self.current_user = find_verified_user
-      p self.current_user
     end
 
     private
       def find_verified_user
-        p "Cookie jar is #{request.cookie_jar.signed[:user_id]}"
-        p "Cookies.signed[:user_id] is #{cookies.signed[:user_id]}"
-        if verified_user = User.find_by(id: cookies.signed[:user_id])
-          verified_user
-        else
+        begin
+          token = request.headers[:HTTP_SEC_WEBSOCKET_PROTOCOL].split(',').last
+          header = {'Authorization'=>token}
+          if (verified_user = (AuthorizeApiRequest.new(header).call)[:user])
+            verified_user
+          else
+            reject_unauthorized_connection
+          end
+        rescue
           reject_unauthorized_connection
         end
       end

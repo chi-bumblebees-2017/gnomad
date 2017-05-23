@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom';
 import PersonalMessageContainer from './PersonalMessageContainer';
 import NewMessage from './NewMessage';
-import {ActionCable} from 'react-actioncable-provider';
 
 
 class Conversation extends Component {
@@ -16,28 +15,20 @@ class Conversation extends Component {
       messages: [],
       loaded: false,
       newMsgText: "",
+      subscription: null,
     }
     this.handleChange = this.handleChange.bind(this);
-    this.onReceived = this.onReceived.bind(this);
-    this.sendMessage = this.sendMessage.bind(this);
+    this.sendNewMessage = this.sendNewMessage.bind(this);
     this.checkAuthorClass = this.checkAuthorClass.bind(this);
     this.checkAuthorName = this.checkAuthorName.bind(this);
   }
 
-  onReceived(message) {
-    this.setState({
-      messages: [
-        ...this.state.messages,
-        message
-      ],
-    })
-  }
-
-  sendMessage = () => {
-    this.refs.chat.perform('sendMessage', JSON.stringify({
+  sendNewMessage(event) {
+    event.preventDefault();
+    this.state.subscription.perform('add', {
       "message": this.state.newMsgText,
-      "conversationId": this.props.match.params.id,
-      "author_id": this.state.me.id}))
+      "conversation_id": parseInt(this.props.match.params.id, 10),
+      "author_id": this.state.me.id})
   }
 
   componentDidMount() {
@@ -80,16 +71,33 @@ class Conversation extends Component {
 
   render() {
     if (this.state.loaded === true) {
+      if (!this.state.subscription) {
+        let that = this;
+        this.state.subscription = this.props.cable.subscriptions.create({channel: 'ChatChannel', me_id: `${this.state.me.id}`, other_id: `${this.state.other.id}`}, {
+            connected() { this.perform("subscribed") },
+            disconnected() { this.perform("unsubscribed") },
+            received(data) {
+              console.log(data)
+              that.setState({
+                messages: [
+                  ...that.state.messages,
+                  data
+                ],
+                newMsgText: "",
+              })
+            }
+          }
+        );
+      }
       return (
         <div>
-          <ActionCable ref='chat' channel={ {channel: 'chat', user: `${this.state.other.id}`} } onReceived={this.onReceived} />
           <div className="profile-link-banner"><Link to={`/users/${this.state.other.first_name}/${this.state.other.id}`}>Visit {this.state.other.first_name}'s profile</Link></div>
           <div className="conversation-container">
             {this.state.messages.map((personalMessage) =>
               <PersonalMessageContainer className={this.checkAuthorClass(personalMessage)} key={personalMessage.id} author={this.checkAuthorName(personalMessage)} messageBody={personalMessage.body} />
             )}
           </div>
-          <NewMessage ref='newMessage' sendMessageHandler={this.sendMessage} changeHandler={this.handleChange} value={this.state.newMsgText} conversationId={this.props.match.params.id} receiverId={this.state.other.id} />
+          <NewMessage ref='newMessage' sendMessageHandler={this.sendNewMessage} changeHandler={this.handleChange} value={this.state.newMsgText} conversationId={this.props.match.params.id} receiverId={this.state.other.id} />
         </div>
         );
     } else {

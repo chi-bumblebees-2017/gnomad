@@ -4,8 +4,8 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "action-cable-react-jwt": "0.0.5",
     "react": "^15.5.4",
-    "react-actioncable-provider": "^0.1.0",
     "react-dom": "^15.5.4",
     "react-dropdown": "^1.2.3",
     "react-router-dom": "^4.1.1",

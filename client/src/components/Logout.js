@@ -13,6 +13,7 @@ class Logout extends Component {
       },
     });
     localStorage.setItem('gnomad-auth-token', "");
+    this.props.disconnectCable();
     return( <Redirect to="/" /> )
   }
 }

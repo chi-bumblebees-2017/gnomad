@@ -29,7 +29,14 @@ class Login extends Component {
         this.setState({
           userData: dataJson,
           loaded: true,
-    })});
+        });
+      });
+  }
+
+  componentWillMount() {
+    if (this.loggedIn()) {
+      this.props.connectCable();
+    }
   }
 
   componentDidMount() {
@@ -46,7 +53,7 @@ class Login extends Component {
         return (<Redirect push to={{ pathname: "/register" }} />)
       } else {
         console.log(this.state);
-        return (<div> :( </div>)
+        return (<div> </div>)
       }
     } else {
       return(
@@ -60,7 +67,7 @@ class Login extends Component {
           <img height="200" src="https://media.istockphoto.com/photos/garden-gnome-picture-id157403714"/>
         </div>
 
-        <div className="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-use-continue-as="false" data-onlogin="checkLoginState()" >
+        <div className="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-use-continue-as="false" data-onlogin="checkLoginState()">
         </div>
 
         <div className="ui horizontal section divider">About</div>
