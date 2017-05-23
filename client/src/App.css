@@ -141,8 +141,13 @@
 #personal-message-form {
   width: 90%;
   margin: 10px auto;
+  max-width: 425px;
 }
 
 #send-message-icon {
   top: 78px;
+}
+
+#navbar {
+
 }
