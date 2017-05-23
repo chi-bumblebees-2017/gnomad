@@ -22,6 +22,7 @@ class Login extends Component {
   }
 
   onceLoggedIn() {
+    console.log(localStorage.getItem('gnomad-auth-token'))
     fetch('/users/a', {
       method: "GET",
       accept: 'application/json',
@@ -63,18 +64,36 @@ class Login extends Component {
     responseFacebooks(response) {
   }
 
+  // componentDidMount() {
+  //   console.log("Component did mount");
+  //   if (this.loggedIn()){
+  //     this.onceLoggedIn();
+  //   }
+
+  // }
+
   render() {
     if (this.loggedIn()) {
-      this.onceLoggedIn()
+      console.log("0")
+      console.log(this.state)
+      if (!(this.state.loaded)){
+        this.onceLoggedIn()
+      }
       if (this.state.loaded === true && this.state.userData.user.home_city){
+          console.log("1")
+          console.log(this.state)
         return (<Redirect push to={{
           pathname: "/account",
         }} />)
       } else if (this.state.loaded === true && !(this.state.userData.user.home_city) ) {
+          console.log("2")
+          console.log(this.state)
         return (<Redirect push to={{
           pathname: "/register",
         }} />)
       } else {
+        console.log("3")
+        console.log(this.state)
         return (<div>Internet gnomes are fetching your info...</div>)
       }
     } else {
