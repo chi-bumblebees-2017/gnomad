@@ -43,7 +43,7 @@ class App extends Component {
   connectCable() {
     let cableURL = ""
     if (window.location.href.includes("gnomad")){
-      cableURL = "ws://gnomad.herokuapp.com/cable"
+      cableURL = "wss://gnomad.herokuapp.com/cable"
     } else{
       cableURL = "ws://localhost:3001/cable"
     }
