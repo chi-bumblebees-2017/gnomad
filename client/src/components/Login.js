@@ -64,7 +64,6 @@ class Login extends Component {
   }
 
   render() {
-
     if (this.loggedIn()) {
       this.onceLoggedIn()
       if (this.state.loaded === true && this.state.userData.user.home_city){
