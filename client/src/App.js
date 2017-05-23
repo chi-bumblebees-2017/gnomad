@@ -41,8 +41,14 @@ class App extends Component {
   }
 
   connectCable() {
+    let cableURL = ""
+    if (window.location.href.includes("gnomad")){
+      cableURL = "wss://gnomad.herokuapp.com/cable"
+    } else{
+      cableURL = "ws://localhost:3001/cable"
+    }
     this.setState({
-      cable: ActionCable.createConsumer("ws://localhost:3001/cable", localStorage.getItem('gnomad-auth-token')),
+      cable: ActionCable.createConsumer(cableURL, localStorage.getItem('gnomad-auth-token')),
     })
   }
 
