@@ -6,7 +6,11 @@ class StarsController < ApplicationController
   end
 
   def destroy
-
+    recipient = User.find(star_params[:recipient_id])
+    if current_user.starred?(recipient)
+      star = recipient.received_stars.where(sender: current_user).first
+      Star.destroy(star.id)
+    end
   end
 
   private

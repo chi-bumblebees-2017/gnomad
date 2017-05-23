@@ -31,9 +31,16 @@ class Star extends Component {
         body: this.userData(this.props.userID),
       })
     } else if (!this.props.starred) {
-
+      fetch(`/stars`, {
+        method: 'DELETE',
+        accept: 'application/json',
+        headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token'),
+        },
+        body: this.userData(this.props.userID),
+      })
     } else {
-      alert("Error: could not complete action");
+      alert("Error: could not complete action, please try again later");
     }
   }
 
