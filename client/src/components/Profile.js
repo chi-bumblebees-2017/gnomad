@@ -52,8 +52,10 @@ class Profile extends Component {
         return (
           <div className="profile-container ui centered container">
             <div className="max-width">
-            <h1 className='inline'>{this.state.userData.user.first_name}</h1><Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
-
+              <div className='max-width'>
+                <h1 className='inline'>{this.state.userData.user.first_name}</h1>
+                <Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
+              </div>
               <div attached className="profile-picture-container">
                 <img  src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>

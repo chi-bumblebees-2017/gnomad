@@ -46,7 +46,7 @@ class Star extends Component {
 
   render() {
     return(
-        <Button icon='empty star' circular color={this.color()} compact size='big' onClick={this.props.action} />
+        <Button className='left-margin-10' icon='star' circular color={this.color()} compact size='small' onClick={this.props.action} />
     );
   }
 }
