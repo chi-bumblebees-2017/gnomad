@@ -6,9 +6,10 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Checkbox from './Checkbox';
-import Dropdown from 'react-dropdown';
+// import Dropdown from 'react-dropdown';
 import update from 'react-addons-update';
 import { Form, TextArea } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 
 class NewProfile extends Component {
   constructor(props) {
@@ -183,14 +184,15 @@ class NewProfile extends Component {
 
         <form onSubmit={this.handleSubmit} className="create-profile-form ui form">
 
-          <div className="ui labeled input">
-            <div className="ui basic label label">City</div>
+          <div className="ui labeled input padding-right">
+            <div className="ui basic label">City</div>
             <input name="city" required type="text" onChange={this.handleChange} />
           </div>
 
           <br />
           <br />
           <div className="ui labeled input">
+          <div className="ui basic label">State: </div>
           <select className="ui dropdown" type="select" name="state" onChange={this.handleChange} required value={this.state.values.state}>
             <option>--</option>
             <option value="AK">AK</option>
@@ -246,21 +248,22 @@ class NewProfile extends Component {
           </select>
         </div>
 
-          <p><label>Bio: <TextArea autoHeight className="bio-max-width" name="user_bio" onChange={this.handleChange}/></label></p>
+          <h5><label>Write a bio: <TextArea autoHeight className="bio-max-width" name="user_bio" onChange={this.handleChange}/></label></h5>
 
           <div className="ui section divider"></div>
 
 
-          <label>I want to register as a Gnomad: </label>
-          <div className="ui input">
-          <select type="select" name="gnomad_profile" onChange={this.handleChange} required value={this.state.values.gnomad_profile}>
-            <option >--</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
+          <div><label><h5 className="inline">I want to register as a Gnomad: </h5></label>
+            <div className="ui input">
+              <select type="select" name="gnomad_profile" onChange={this.handleChange} required value={this.state.values.gnomad_profile}>
+                <option >--</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
           </div>
 
-          <p>As a Gnomad I like to :</p>
+          <h5>As a Gnomad I like to:</h5>
             <div className="ui equal width grid">
               <div className="row">
                 <Checkbox profileType="gnomad_pref" object={this.state.values.gnomad_pref} handler={this.updateInterest} category="restaurants"/>
@@ -291,17 +294,17 @@ class NewProfile extends Component {
           <div className="ui section divider"></div>
 
 
-          <div><label>I want to sign up as a local host: </label>
-          <div className="ui input">
-          <select type="select" name="localhost_profile" onChange={this.handleChange} required value={this.state.values.localhost_profile}>
-            <option >--</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-          </div>
+          <div><label><h5 className="inline">I want to register as a Localhost: </h5></label>
+            <div className="ui input">
+              <select type="select" name="localhost_profile" onChange={this.handleChange} required value={this.state.values.localhost_profile}>
+                <option >--</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
           </div>
 
-          <p>As a Local Host I like to show people:</p>
+          <h5>As a Local Host I like to show people:</h5>
           <div className="ui equal width grid">
               <div className="row">
                 <Checkbox profileType="local_pref" handler={this.updateInterest} category="restaurants"/>
@@ -330,7 +333,7 @@ class NewProfile extends Component {
               </div>
             </div>
 
-          <p><label>Local Suggestions: <TextArea autoHeight className="bio-max-width" value={this.state.suggestions} name="suggestions" onChange={this.handleChange} /></label></p>
+          <h5><label>Local Suggestions: <TextArea autoHeight className="bio-max-width" value={this.state.suggestions} name="suggestions" onChange={this.handleChange} /></label></h5>
 
           <input className="ui blue button" type="submit" value="Submit" />
         </form>

@@ -62,3 +62,15 @@
   max-width: 90%;
   margin: auto;
 }
+
+.test {
+  pointer-events: all;
+}
+
+.padding-right {
+  padding-right: 52px;
+}
+
+.inline {
+  display: inline;
+}
