@@ -36,6 +36,7 @@ class Profile extends Component {
         this.setState({
           userData: dataJson,
           loaded: true,
+          starred: dataJson.starred,
     })});
   }
 
@@ -51,13 +52,13 @@ class Profile extends Component {
         return (
           <div className="profile-container ui centered container">
             <div className="max-width">
-            <h1>{this.state.userData.user.first_name}</h1>
+            <h1 className='inline'>{this.state.userData.user.first_name}</h1><Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
 
               <div attached className="profile-picture-container">
                 <img  src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>
 
-              <NewFirstMessage receiverId={this.state.userData.user.id} /><Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
+              <NewFirstMessage receiverId={this.state.userData.user.id} />
               <h2>A Little Bit About Me...</h2>
               <div className="bio-container ui centered container">
                 <p>{this.state.userData.user.bio}</p>
@@ -71,13 +72,13 @@ class Profile extends Component {
         return (
           <div className="profile-container ui centered container">
             <div className="max-width">
-            <h1>{this.state.userData.user.first_name} </h1>
+            <h1 className='inline' >{this.state.userData.user.first_name} </h1><Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
               <div className="profile-picture-container">
                 <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>
 
             <div className="chat-button">
-              <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button><Star starred={this.state.starred} action={this.toggleStar} userID={this.state.userData.user.id}/>
+              <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
             </div>
 
             <h2>A Little Bit About Me...</h2>
