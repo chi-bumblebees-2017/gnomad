@@ -22,9 +22,8 @@ class Dashboard extends Component {
     this.toggleEdit = this.toggleEdit.bind(this);
   }
 
-  toggleEdit(event) {
-    console.log(this.state.userData);
-    this.setState({editing: !this.state.editing});
+  toggleEdit() {
+    this.setState({editing: true});
   }
 
   componentDidMount() {
@@ -54,6 +53,7 @@ class Dashboard extends Component {
         this.setState({
           conversations: dataJson,
           chatsLoaded: true,
+          editing: false,
         });
       });
   }
@@ -67,10 +67,10 @@ class Dashboard extends Component {
 
             <div className="profile-picture-container">
               <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
-          </div>
-          <div>
-            <Button content='Edit' icon='edit' labelPosition='left' basic color='red'size='small' onClick={this.toggleEdit}/>
-          </div>
+            </div>
+            <div>
+              <Button content='Edit' icon='edit' labelPosition='left' basic color='red'size='small' onClick={this.toggleEdit}/>
+            </div>
 
           <h2>A Little Bit About Me...</h2>
           <div className="bio-container ui centered container">
@@ -84,8 +84,7 @@ class Dashboard extends Component {
     );
   }
   else if (this.state.userLoaded === true && this.state.chatsLoaded === true && this.state.editing === true) {
-    console.log(this.state.userData)
-    return ( <NewProfile toggleEdit={this.toggleEdit} userData={this.userData} /> );
+    return ( <NewProfile userData={this.userData} /> );
   }
   else {
     return ( <div>Internet gnomes are fetching your info...</div> );

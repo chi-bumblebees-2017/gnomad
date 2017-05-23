@@ -8,6 +8,7 @@ import {
 import Checkbox from './Checkbox';
 import Dropdown from 'react-dropdown';
 import update from 'react-addons-update';
+import Dashboard from './Dashboard';
 
 class NewProfile extends Component {
   constructor(props) {
@@ -62,9 +63,8 @@ class NewProfile extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.createProfile = this.createProfile.bind(this);
     this.updateInterest = this.updateInterest.bind(this);
-    this.isBeingEdited = this.isBeingEdited.bind(this);
   }
-
+  // NOT WORKING: trying to populate user profile data when editing
   // componentDidUpdate(prevProps, prevState) {
   //   console.log("NEXT PROPS");
   //   console.log(nextProps);
@@ -73,6 +73,13 @@ class NewProfile extends Component {
   //   if (nextProps.userData !== this.props.userData) {
   //     this.setState({ userData: nextProps.userData });
   //   }
+  // }
+
+
+  // isBeingEdited(user) {
+  //   if (user.home_city) {
+  //     return true;
+  //   } else { return false; }
   // }
 
   createProfile(values) {
@@ -176,18 +183,10 @@ class NewProfile extends Component {
     });
   }
 
-  isBeingEdited(user) {
-    if (user.home_city) {
-      return true;
-    } else { return false; }
-  }
-
   render() {
     // Redirects to user dashboard if form successfully submits
     if (this.state.submitted) {
-      return ( <Redirect to={{
-        pathname: '/account',
-      }} /> );
+      return (<Dashboard />);
     }
     // Renders main form content IF current user data has loaded
     else if (this.state.loaded) {
