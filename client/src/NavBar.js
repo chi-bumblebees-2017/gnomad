@@ -5,6 +5,7 @@ import {
   NavLink,
   Link
 } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react';
 
 class NavBar extends Component {
   constructor(props) {
@@ -15,8 +16,10 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div className="navbar ui pointing secondary compact menu">
+      <div className="clear-navbar">
+      <Menu pointing secondary fixed="true" color="blue" inverted fluid widths={4} compact>
         {this.props.children}
+      </Menu>
       </div>
     );
   }

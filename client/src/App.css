@@ -74,3 +74,54 @@
 .inline {
   display: inline;
 }
+
+.vertical-align-bottom {
+  vertical-align: bottom;
+}
+
+.button-max-height {
+  max-height: 40px;
+}
+
+.bottom-display {
+  position: fixed;
+  bottom: 0;
+}
+
+.my-message {
+  position: relative;
+  max-width: 200px;
+  right: -190px;
+  margin-right: 10px;
+  text-align: right;
+}
+
+.their-message {
+  position: relative;
+  margin-left: 10px;
+  left: 10px;
+  text-align: left;
+  max-width: 200px;
+}
+
+.small-padding {
+  padding: .5em !important;
+  margin-top: 0 !important;
+}
+
+.main-nav {
+  background-color: white;
+  max-width: 480px;
+}
+
+.new-message-replace {
+  height: 2em;
+}
+
+.new-message {
+  height: 2em;
+}
+
+.clear-navbar {
+  height: 45px;
+}
