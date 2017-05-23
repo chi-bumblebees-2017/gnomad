@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import PersonalMessageContainer from './PersonalMessageContainer';
 import NewMessage from './NewMessage';
-import { Button, Comment, Form, Header, Message } from 'semantic-ui-react';
+import { Button, Comment, Form, Header, Message, Menu } from 'semantic-ui-react';
 import ReactDOM from 'react-dom';
 
 
@@ -90,7 +90,7 @@ class Conversation extends Component {
       if (!this.state.subscription) {
         let that = this;
         this.state.subscription = this.props.cable.subscriptions.create({channel: 'ChatChannel', me_id: `${this.state.me.id}`, other_id: `${this.state.other.id}`}, {
-            connected() { this.perform("subscribed") },
+            connected() { },
             disconnected() { this.perform("unsubscribed") },
             received(data) {
               console.log(data)
@@ -108,19 +108,20 @@ class Conversation extends Component {
       }
       return (
         <div className="bio-max-width">
-          <Message attached sticky className="profile-link-banner"><Link to={`/users/${this.state.other.first_name}/${this.state.other.id}`}>Visit {this.state.other.first_name}'s profile</Link></Message>
-
-        <Comment.Group>
-          <div className="conversation-container">
-            {this.state.messages.map((personalMessage) =>
-              <PersonalMessageContainer className={this.checkAuthorClass(personalMessage)} color={this.checkColor(personalMessage)} key={personalMessage.id} author={this.checkAuthorName(personalMessage)} messageBody={personalMessage.body} />
-            )}
+          <div className="clear-fixed">
+            <Menu fixed="top" widths="one" color="blue" id="profile-link-banner"><Link to={`/users/${this.state.other.first_name}/${this.state.other.id}`}>Visit {this.state.other.first_name}'s profile</Link></Menu>
           </div>
-          <div className="new-message-replace" ref={(div) => {this.messageLast = div}} ></div>
-          <NewMessage ref='newMessage' sendMessageHandler={this.sendNewMessage} changeHandler={this.handleChange} value={this.state.newMsgText} conversationId={this.props.match.params.id} receiverId={this.state.other.id} />
-          </Comment.Group>
-        </div>
-        );
+            <Comment.Group>
+              <div className="conversation-container">
+                {this.state.messages.map((personalMessage) =>
+                  <PersonalMessageContainer className={this.checkAuthorClass(personalMessage)} color={this.checkColor(personalMessage)} key={personalMessage.id} author={this.checkAuthorName(personalMessage)} messageBody={personalMessage.body} />
+                )}
+              </div>
+              <div id="new-message-replace" ref={(div) => {this.messageLast = div}} ></div>
+              <NewMessage ref='newMessage' sendMessageHandler={this.sendNewMessage} changeHandler={this.handleChange} value={this.state.newMsgText} conversationId={this.props.match.params.id} receiverId={this.state.other.id} />
+              </Comment.Group>
+          </div>
+      );
     } else {
       return (
         <div>

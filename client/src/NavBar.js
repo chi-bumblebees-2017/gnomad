@@ -16,10 +16,10 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div className="clear-navbar">
-      <Menu pointing secondary fixed="true" color="blue" inverted fluid widths={4} compact>
-        {this.props.children}
-      </Menu>
+      <div className="clear-fixed">
+        <Menu pointing secondary fixed="top" color="blue" inverted fluid widths={4} compact>
+          {this.props.children}
+        </Menu>
       </div>
     );
   }
