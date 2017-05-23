@@ -14,7 +14,21 @@ class Conversation extends Component {
     this.state = {
       messages: [],
       loaded: false,
+      newMsgText: "",
+      subscription: null,
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.sendNewMessage = this.sendNewMessage.bind(this);
+    this.checkAuthorClass = this.checkAuthorClass.bind(this);
+    this.checkAuthorName = this.checkAuthorName.bind(this);
+  }
+
+  sendNewMessage(event) {
+    event.preventDefault();
+    this.state.subscription.perform('add', {
+      "message": this.state.newMsgText,
+      "conversation_id": parseInt(this.props.match.params.id, 10),
+      "author_id": this.state.me.id})
   }
 
   componentDidMount() {
@@ -34,8 +48,13 @@ class Conversation extends Component {
     })});
   }
 
+  handleChange(event) {
+    this.setState({
+      newMsgText: event.target.value,
+    });
+  }
+
   checkAuthorClass(message) {
-    // TODO: write this method
     if (message.author_id === this.state.me.id) {
       return "my-message"
     } else {
@@ -43,7 +62,6 @@ class Conversation extends Component {
     }
   }
   checkAuthorName(message) {
-    // TODO: write this method
     if (message.author_id === this.state.me.id) {
       return this.state.me.first_name
     } else {
@@ -51,9 +69,26 @@ class Conversation extends Component {
     }
   }
 
-// receiver user stub (4 times)**********
   render() {
     if (this.state.loaded === true) {
+      if (!this.state.subscription) {
+        let that = this;
+        this.state.subscription = this.props.cable.subscriptions.create({channel: 'ChatChannel', me_id: `${this.state.me.id}`, other_id: `${this.state.other.id}`}, {
+            connected() { this.perform("subscribed") },
+            disconnected() { this.perform("unsubscribed") },
+            received(data) {
+              console.log(data)
+              that.setState({
+                messages: [
+                  ...that.state.messages,
+                  data
+                ],
+                newMsgText: "",
+              })
+            }
+          }
+        );
+      }
       return (
         <div>
           <div className="profile-link-banner"><Link to={`/users/${this.state.other.first_name}/${this.state.other.id}`}>Visit {this.state.other.first_name}'s profile</Link></div>
@@ -62,7 +97,7 @@ class Conversation extends Component {
               <PersonalMessageContainer className={this.checkAuthorClass(personalMessage)} key={personalMessage.id} author={this.checkAuthorName(personalMessage)} messageBody={personalMessage.body} />
             )}
           </div>
-          <NewMessage conversationId={this.props.match.params.id} receiverId={this.state.other.id} />
+          <NewMessage ref='newMessage' sendMessageHandler={this.sendNewMessage} changeHandler={this.handleChange} value={this.state.newMsgText} conversationId={this.props.match.params.id} receiverId={this.state.other.id} />
         </div>
         );
     } else {

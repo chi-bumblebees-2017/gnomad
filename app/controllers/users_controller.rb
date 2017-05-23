@@ -13,8 +13,9 @@ class UsersController < ApplicationController
   def create
     user = User.from_oauth(user_params)
     session[:user_id] = user.id
+    request.cookie_jar.signed[:user_id] = user.id
     auth_token = JsonWebToken.encode(user_id: user.id)
-    p auth_token
+    # p auth_token
     json_response(auth_token: auth_token)
   end
 
@@ -43,7 +44,7 @@ class UsersController < ApplicationController
     else
       suggestions = nil
     end
-    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions}
+    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions, bio: user.bio}
   end
 
   private

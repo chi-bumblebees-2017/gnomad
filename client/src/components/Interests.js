@@ -26,7 +26,7 @@ class Interests extends Component {
       );
     } else {
       return(
-        <div className="interests-container"></div>
+        <div className="interests-container">EMPTY CONTAINER</div>
       );
     }
   }

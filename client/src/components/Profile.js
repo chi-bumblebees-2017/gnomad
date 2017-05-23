@@ -87,7 +87,7 @@ class Profile extends Component {
       }
     } else {
       return (
-        <div>Loading...</div>
+        <div>Internet gnomes are fetching your info...</div>
       );
     }
   }

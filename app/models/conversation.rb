@@ -20,7 +20,6 @@ class Conversation < ApplicationRecord
   def with(current_user)
     initiator == current_user ? receiver : initiator
   end
-
   # def participates?(user)
   #   initiator == user || receiver == user
   # end
