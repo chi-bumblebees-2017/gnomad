@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react'
+import { Button, Icon, Segment } from 'semantic-ui-react';
 
 class Star extends Component {
   constructor(props) {
@@ -7,13 +7,16 @@ class Star extends Component {
     this.state = {
       selected: false
     }
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    this.setState({selected: !this.state.selected})
   }
 
   render() {
     return(
-      <div>
-        <Button icon='star' positive compact/>
-      </div>
+        <Button attached='top' icon='empty star' circular color='yellow' compact floated='right' size='big' toggle active={this.state.selected} onClick={this.handleClick} />
     );
   }
 }

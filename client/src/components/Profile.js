@@ -5,7 +5,8 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import NewFirstMessage from './NewFirstMessage'
+import NewFirstMessage from './NewFirstMessage';
+import Star from './Star';
 
 class Profile extends Component {
   constructor(props) {
@@ -46,12 +47,11 @@ class Profile extends Component {
             <div className="max-width">
             <h1>{this.state.userData.user.first_name}</h1>
 
-              <div className="profile-picture-container">
-                <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
+              <div attached className="profile-picture-container">
+                <img  src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>
 
               <NewFirstMessage receiverId={this.state.userData.user.id} />
-
               <h2>A Little Bit About Me...</h2>
               <div className="bio-container ui centered container">
                 <p>{this.state.userData.user.bio}</p>
@@ -68,6 +68,7 @@ class Profile extends Component {
             <h1>{this.state.userData.user.first_name}</h1>
 
               <div className="profile-picture-container">
+              <Star />
                 <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>
 

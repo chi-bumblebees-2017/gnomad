@@ -69,7 +69,7 @@ class Dashboard extends Component {
               <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
             </div>
             <div>
-              <Button content='Edit' icon='edit' labelPosition='left' basic color='red'size='small' onClick={this.toggleEdit}/>
+              <Button compact content='Edit' icon='edit' labelPosition='left' basic color='red'size='small' onClick={this.toggleEdit}/>
             </div>
 
           <h2>A Little Bit About Me...</h2>
