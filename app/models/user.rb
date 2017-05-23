@@ -60,4 +60,8 @@ class User < ApplicationRecord
     recipient.received_stars.create(sender: self)
     recipient.star_count += 1
   end
+
+  def starred?(recipient)
+    !(self.sent_stars.where(recipient_id: recipient.id).empty?)
+  end
 end

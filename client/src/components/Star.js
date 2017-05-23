@@ -3,20 +3,43 @@ import { Button, Icon, Segment } from 'semantic-ui-react';
 
 class Star extends Component {
   constructor(props) {
-    super(props)
-    this.state = {
-      selected: false
-    }
-    this.handleClick = this.handleClick.bind(this);
+    super(props);
+    this.color = this.color.bind(this);
+    this.userData = this.userData.bind(this);
   }
 
-  handleClick(event) {
-    this.setState({selected: !this.state.selected})
+  color() {
+    if (this.props.starred) {
+      return "yellow";
+    } else { return "grey"; }
+  }
+
+  userData(id) {
+    var data = new FormData();
+    data.append("star[recipient_id]", id);
+    return data;
+  }
+
+  componentDidUpdate() {
+    if (this.props.starred) {
+      fetch(`/stars`, {
+        method: 'POST',
+        accept: 'application/json',
+        headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token'),
+        },
+        body: this.userData(this.props.userID),
+      })
+    } else if (!this.props.starred) {
+
+    } else {
+      alert("Error: could not complete action");
+    }
   }
 
   render() {
     return(
-        <Button attached='top' icon='empty star' circular color='yellow' compact floated='right' size='big' toggle active={this.state.selected} onClick={this.handleClick} />
+        <Button icon='empty star' circular color={this.color()} compact size='big' onClick={this.props.action} />
     );
   }
 }
