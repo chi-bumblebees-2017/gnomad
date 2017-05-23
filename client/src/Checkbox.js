@@ -12,13 +12,9 @@ class Checkbox extends Component {
   };
 
   toggleCheckboxValue(event) {
-    console.log("1")
-    console.log(this.state)
     this.setState({
       checkedValue: !this.state.checkedValue
     });
-    console.log("2")
-    console.log(this.state)
     this.props.handler(this.profile, event.target.name, this.state.checkedValue);
   };
 

@@ -1,11 +1,17 @@
 class User < ApplicationRecord
   POSSIBLE_INTERESTS = [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :history, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping]
+
   has_many :initiated_conversations, class_name: 'Conversation', foreign_key: 'initiator_id'
   has_many :received_conversations, class_name: 'Conversation', foreign_key: 'received_id'
   has_many :personal_messages, dependent: :destroy
   # make models for and add associations to localhost or gnomad profiles
   has_one :gnomad_profile
   has_one :localhost_profile
+
+  has_many :sent_stars, class_name: 'Star', foreign_key: 'sender_id'
+  has_many :received_stars, class_name: 'Star', foreign_key: 'recipient_id'
+  scope :popular, -> {order("star_count DESC")}
+
   scope :from_location, ->(city, state) { where(home_city: city, home_state: state) }
   delegate :available, :suggestions, to: :localhost_profile, allow_nil: true
   scope :available, -> { joins(:localhost_profile).where(available: true) }
@@ -48,5 +54,15 @@ class User < ApplicationRecord
     POSSIBLE_INTERESTS.select do |interest|
       localhost_profile.try(interest)
     end
+  end
+
+  def send_star(recipient)
+    star = recipient.received_stars.create(sender: self)
+    recipient.star_count += 1
+    star
+  end
+
+  def starred?(recipient)
+    !(self.sent_stars.where(recipient_id: recipient.id).empty?)
   end
 end

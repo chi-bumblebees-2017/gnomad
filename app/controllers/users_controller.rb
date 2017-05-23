@@ -37,6 +37,7 @@ class UsersController < ApplicationController
       user = current_user
     else
       user = User.find(params[:id])
+      starred = current_user.starred?(user) ? true : false
     end
 
     if user.localhost_profile
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
     else
       suggestions = nil
     end
-    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions, bio: user.bio}
+    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions, bio: user.bio, starred: starred, star_count: user.star_count}
   end
 
   private

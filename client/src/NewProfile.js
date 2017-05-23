@@ -8,6 +8,7 @@ import {
 import Checkbox from './Checkbox';
 // import Dropdown from 'react-dropdown';
 import update from 'react-addons-update';
+import Dashboard from './Dashboard';
 import { Form, TextArea } from 'semantic-ui-react';
 import { Dropdown } from 'semantic-ui-react';
 
@@ -65,6 +66,23 @@ class NewProfile extends Component {
     this.createProfile = this.createProfile.bind(this);
     this.updateInterest = this.updateInterest.bind(this);
   }
+  // NOT WORKING: trying to populate user profile data when editing
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log("NEXT PROPS");
+  //   console.log(nextProps);
+  //   console.log("THESE PROPS");
+  //   console.log(this.props);
+  //   if (nextProps.userData !== this.props.userData) {
+  //     this.setState({ userData: nextProps.userData });
+  //   }
+  // }
+
+
+  // isBeingEdited(user) {
+  //   if (user.home_city) {
+  //     return true;
+  //   } else { return false; }
+  // }
 
   createProfile(values) {
     var data = new FormData();
@@ -163,15 +181,14 @@ class NewProfile extends Component {
         this.setState({
           userData: dataJson,
           loaded: true,
-    })});
+        })
+    });
   }
 
   render() {
     // Redirects to user dashboard if form successfully submits
     if (this.state.submitted) {
-      return ( <Redirect to={{
-        pathname: '/account',
-      }} /> );
+      return (<Dashboard />);
     }
     // Renders main form content IF current user data has loaded
     else if (this.state.loaded) {
