@@ -81,7 +81,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   config.web_socket_server_url = "wss://gnomad.herokuapp.com/cable"
-  config.action_cable.allowed_request_origins = ["http://gnomad.herokuapp.com", "http://gnomad.herokuapp.com"]
+  config.action_cable.allowed_request_origins = ["http://gnomad.herokuapp.com", "https://gnomad.herokuapp.com"]
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
