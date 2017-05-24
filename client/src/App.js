@@ -81,7 +81,7 @@ class App extends Component {
     if (this.state.loggedIn) {
       return (
         <Router>
-          <div className="App max-width">
+          <div className="App">
             <NavBar options={4}>
               <NavLink className="item" to="/account">Dashboard</NavLink>
               <NavLink className="item" to="/chats">Chats</NavLink>

@@ -105,7 +105,7 @@
 .my-message {
   position: relative;
   max-width: 200px;
-  right: -190px;
+  right: -165px;
   margin-right: 10px;
   text-align: right;
 }
@@ -161,3 +161,8 @@
 #navbar {
   background-color: white;
 }
+
+/*.conversation-container {
+  max-width: 400px;
+  margin: auto;
+}*/
