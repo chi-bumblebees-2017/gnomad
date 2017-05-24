@@ -69,18 +69,19 @@ class Dashboard extends Component {
               <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
             </div>
             <div>
+            <br/>
               <Button compact content='Edit' icon='edit' labelPosition='left' basic color='red'size='small' onClick={this.toggleEdit}/>
-            </div>
-
-          <h2>A Little Bit About Me...</h2>
-          <div className="bio-container ui centered container">
-            <p>{this.state.userData.user.bio}</p>
+            <br/>
+            <br/>
+              <div>
+              <Link to={`/users/${this.state.userData.user.first_name}/${this.state.userData.user.id}`}>
+                <Button compact content="View My Public Profile" icon='user outline' labelPosition='left' basic color='blue'size='small' className="top-margin-10"/>
+              </Link>
+              </div>
           </div>
-          <div className="ui section divider"></div>
-          <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions} />
-         </div>
-         <RecentChats conversations={this.state.conversations}/>
+          <RecentChats conversations={this.state.conversations}/>
         </div>
+      </div>
     );
   }
   else if (this.state.userLoaded === true && this.state.chatsLoaded === true && this.state.editing === true) {
