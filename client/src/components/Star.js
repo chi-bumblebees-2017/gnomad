@@ -46,7 +46,8 @@ class Star extends Component {
 
   render() {
     return(
-        <Button className='left-margin-10' icon='star' circular color={this.color()} compact size='small' onClick={this.props.action} />
+        <Button compact content='Star' size='mini' icon='star' color={this.color()} onClick={this.props.action}
+          label={{basic: true, color: this.color(), pointing: 'left', content: 'Star Count', size: 'mini'}} />
     );
   }
 }

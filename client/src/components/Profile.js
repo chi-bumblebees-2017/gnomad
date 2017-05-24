@@ -76,7 +76,10 @@ class Profile extends Component {
         return (
           <div className="profile-container ui centered container">
             <div className="max-width">
-              <h1 className='inline' >{this.state.userData.user.first_name} </h1><Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
+            <div>
+              <h1>{this.state.userData.user.first_name} </h1>
+              <Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
+            </div>
               <div className="profile-picture-container">
                 <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>
@@ -85,8 +88,7 @@ class Profile extends Component {
               <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
             </div>
             <div className='ui centered container'>
-              <h2 className='inline'>A Little Bit About Me...</h2>
-              <Label size='mini' as='a' color='yellow' tag>Stars</Label>
+              <h3 className='inline'>A Little Bit About Me...</h3>
             </div>
             <div className="bio-container ui centered container">
             <p>{this.state.userData.user.bio}</p>
