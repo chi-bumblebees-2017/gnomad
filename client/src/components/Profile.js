@@ -17,13 +17,16 @@ class Profile extends Component {
       loaded: false,
       writeMessage: false,
       starred: false,
+      count: 0,
     };
     this.displayMessageForm = this.displayMessageForm.bind(this);
     this.toggleStar = this.toggleStar.bind(this);
   }
 
   toggleStar() {
-    this.setState({ starred: !this.state.starred })
+    let newStatus = !this.state.starred;
+    this.setState({starred: !this.state.starred});
+    return newStatus;
   }
 
   componentDidMount() {
@@ -34,11 +37,11 @@ class Profile extends Component {
       },
     }).then(data => data.json())
       .then(dataJson => {
-        console.log(dataJson);
         this.setState({
           userData: dataJson,
           loaded: true,
           starred: dataJson.starred,
+          count: dataJson.star_count,
     })});
   }
 
@@ -56,14 +59,15 @@ class Profile extends Component {
             <div className="max-width">
 
               <div className='max-width '>
-                <h1 className='inline'>{this.state.userData.user.first_name}</h1>
-                <Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
+                <h1>{this.state.userData.user.first_name}</h1>
+                <Star action={this.toggleStar} starred={this.state.starred} changeDisplay={this.changeDisplay} userID={this.state.userData.user.id} count={this.state.count} />
               </div>
               <div attached className="profile-picture-container">
                 <img  src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>
 
               <NewFirstMessage receiverId={this.state.userData.user.id} />
+
               <h2>A Little Bit About Me...</h2>
               <div className="bio-container ui centered container">
                 <p>{this.state.userData.user.bio}</p>
@@ -78,7 +82,8 @@ class Profile extends Component {
           return (
             <div className="profile-container ui centered container">
               <div className="max-width">
-              <h1 className='inline' >{this.state.userData.user.first_name} </h1><Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
+              <h1>{this.state.userData.user.first_name} </h1>
+              <Star action={this.toggleStar} starred={this.state.starred} changeDisplay={this.changeDisplay} userID={this.state.userData.user.id} count={this.state.count} />
                 <div className="profile-picture-container">
                   <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
                 </div>
@@ -89,7 +94,6 @@ class Profile extends Component {
 
               <div className='ui centered container'>
                 <h2 className='inline'>A Little Bit About Me...</h2>
-                <Label size='mini' as='a' color='yellow' tag>Stars</Label>
               </div>
               <div className="bio-container ui centered container">
                 <p>{this.state.userData.user.bio}</p>
@@ -103,7 +107,8 @@ class Profile extends Component {
           return (
             <div className="profile-container ui centered container">
               <div className="max-width">
-              <h1 className='inline' >{this.state.userData.user.first_name} </h1><Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
+              <h1>{this.state.userData.user.first_name} </h1>
+              <Star action={this.toggleStar} starred={this.state.starred} changeDisplay={this.changeDisplay} userID={this.state.userData.user.id} count={this.state.count} />
 
                 <div className="profile-picture-container">
                   <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
@@ -115,7 +120,6 @@ class Profile extends Component {
 
               <div className='ui centered container'>
                 <h2 className='inline'>A Little Bit About Me...</h2>
-                <Label size='mini' as='a' color='yellow' tag>Stars</Label>
               </div>
               <div className="bio-container ui centered container">
                 <p>{this.state.userData.user.bio}</p>
