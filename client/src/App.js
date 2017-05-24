@@ -88,7 +88,7 @@ class App extends Component {
               <NavLink className="item" to="/search">Search</NavLink>
               <NavLink className="item" to="/logout">Logout</NavLink>
             </NavBar>
-            <Route exact path="/" render={() => <Login connectCable={this.connectCable} />} />
+            <Route exact path="/" render={() => <Login connectCable={this.connectCable} loginHandler={this.setLoggedIn} />} />
             <Route exact path="/chats" component={Conversations} />
             <Route path="/chats/:id" render={props => <Conversation cable={this.state.cable} {...props} />} />
             <Route path="/register" component={NewProfile} />
@@ -108,7 +108,7 @@ class App extends Component {
               <NavLink className="item" to="/chats">Chats</NavLink>
               <NavLink className="item" to="/search">Search</NavLink>
             </NavBar>
-            <Route exact path="/" render={() => <Login connectCable={this.connectCable} />} />
+            <Route exact path="/" render={() => <Login connectCable={this.connectCable} loginHandler={this.setLoggedIn} />} />
             <Route exact path="/chats" component={Conversations} />
             <Route path="/chats/:id" render={props => <Conversation cable={this.state.cable} {...props} />} />
             <Route path="/register" component={NewProfile} />
