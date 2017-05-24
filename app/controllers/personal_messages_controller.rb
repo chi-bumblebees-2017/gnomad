@@ -7,10 +7,12 @@ class PersonalMessagesController < ApplicationController
     @personal_message = PersonalMessage.create(body: personal_message_params[:body], author_id: current_user.id, conversation_id: personal_message_params[:conversation_id])
     @personal_message.save!
 
-    if @conversation.receiver_id > @conversation.initiator_id
-      channel = "chat_#{@conversation.initiator_id}_#{@conversation.receiver_id}"
+    initiator = @conversation.initiator_id.to_i
+    receiver = @conversation.receiver_id.to_i
+    if receiver > initiator
+      channel = "chat_#{initiator}_#{receiver}"
     else
-      channel = "chat_#{@conversation.receiver_id}_#{@conversation.initiator_id}"
+      channel = "chat_#{receiver}_#{initiator}"
     end
 
     ActionCable.server.broadcast(channel, @personal_message.as_json)

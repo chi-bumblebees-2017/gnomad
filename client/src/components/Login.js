@@ -31,6 +31,7 @@ class Login extends Component {
       },
     }).then(data => data.json())
       .then(dataJson => {
+        this.props.loginHandler();
         this.setState({
           userData: dataJson,
           loaded: true,

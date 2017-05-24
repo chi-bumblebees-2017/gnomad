@@ -1,14 +1,16 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
-    if params[:me_id] > params[:other_id]
-      stream_from "chat_#{params[:other_id]}_#{params[:me_id]}"
+    mine = params[:me_id].to_i
+    theirs = params[:other_id].to_i
+    if mine > theirs
+      stream_from "chat_#{theirs}_#{mine}"
     else
-      stream_from "chat_#{params[:me_id]}_#{params[:other_id]}"
+      stream_from "chat_#{mine}_#{theirs}"
     end
   end
 
   def add(message_data)
-    new_message = PersonalMessage.create(body: message_data["message"], author_id: message_data["author_id"], conversation_id: message_data["conversation_id"])
+    new_message = PersonalMessage.create(body: message_data["message"], author_id: message_data["author_id"].to_i, conversation_id: message_data["conversation_id"].to_i)
     conversation = new_message.conversation
 
     if conversation.receiver_id > conversation.initiator_id
