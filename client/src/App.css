@@ -1,3 +1,5 @@
+/* GNOMAD blue #2185D0 */
+
 .App {
   text-align: center;
 }
@@ -37,6 +39,10 @@
 
 .top-margin-10 {
   margin-top: 10px;
+}
+
+.top-pad-20 {
+  padding-top: 20px;
 }
 
 .margin-none {
@@ -153,5 +159,5 @@
 }
 
 #navbar {
-
+  background-color: white;
 }

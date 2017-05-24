@@ -9,8 +9,7 @@ import Checkbox from './Checkbox';
 // import Dropdown from 'react-dropdown';
 import update from 'react-addons-update';
 import Dashboard from './Dashboard';
-import { Form, TextArea } from 'semantic-ui-react';
-import { Dropdown } from 'semantic-ui-react';
+import { Form, TextArea, Dropdown, Loader } from 'semantic-ui-react';
 
 class NewProfile extends Component {
   constructor(props) {
@@ -360,7 +359,7 @@ class NewProfile extends Component {
         </div>)
   } else {
     return (
-      <div className="top-margin-10">Internet gnomes are fetching your info...</div>
+      <Loader />
     )
   }
   };
