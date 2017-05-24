@@ -12,6 +12,9 @@ class User < ApplicationRecord
   has_many :received_stars, class_name: 'Star', foreign_key: 'recipient_id'
   scope :popular, -> {order("star_count DESC")}
 
+  has_many :offended_users, class_name: 'Block', foreign_key: :offender_id
+  has_many :reported_users, class_name: 'Block', foreign_key: :reporter_id
+
   scope :from_location, ->(city, state) { where(home_city: city.downcase, home_state: state.upcase) }
   delegate :available, :suggestions, to: :localhost_profile, allow_nil: true
   scope :available, -> { joins(:localhost_profile).where(available: true) }
@@ -75,6 +78,14 @@ class User < ApplicationRecord
 
   def starred?(recipient)
     !(self.sent_stars.where(recipient_id: recipient.id).empty?)
+  end
+
+  def blocked?(reporter)
+    !(self.offended_users.where(reporter_id: reporter.id).empty?)
+  end
+
+  def block_user(offender)
+    offender.reported_users.create!(offender_id: self.id)
   end
 
   private

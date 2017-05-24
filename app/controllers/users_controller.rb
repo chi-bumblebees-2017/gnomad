@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     else
       user = User.find(params[:id])
       starred = current_user.starred?(user) ? true : false
+      blocked = current_user.blocked?(user) ? true : false
     end
 
     if user.localhost_profile
@@ -39,7 +40,7 @@ class UsersController < ApplicationController
     if user != current_user
       conversation = Conversation.between(user, current_user).first
     end
-    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions, bio: user.bio, starred: starred, star_count: user.star_count, conversation: conversation}
+    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions, bio: user.bio, starred: starred, star_count: user.star_count, conversation: conversation, blocked: blocked}
   end
 
   private
