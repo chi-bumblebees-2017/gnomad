@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import PersonalMessageContainer from './PersonalMessageContainer';
 import NewMessage from './NewMessage';
-import { Button, Comment, Form, Header, Message, Menu } from 'semantic-ui-react';
+import { Button, Comment, Form, Header, Message, Menu, Loader } from 'semantic-ui-react';
 import ReactDOM from 'react-dom';
 
 
@@ -126,7 +126,7 @@ class Conversation extends Component {
       return (
         <div>
           <div className="conversation-container">
-            loading...
+            <Loader />
           </div>
         </div>
       );
