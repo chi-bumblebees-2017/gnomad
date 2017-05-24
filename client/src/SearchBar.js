@@ -17,7 +17,7 @@ class SearchBar extends Component {
     return (
       <form className="ui icon input top-margin-10" id="search-bar" onSubmit={this.props.submitHandler}>
         <input type="text" placeholder="Example: Chicago, IL"value={this.props.value} onChange={this.props.changeHandler} />
-        <i aria-hidden="true" onClick={this.props.submitHandler} className="search circular inverted link icon"></i>
+        <i aria-hidden="true" onClick={this.props.submitHandler} className="blue search circular inverted link icon"></i>
       </form>
     );
   }
