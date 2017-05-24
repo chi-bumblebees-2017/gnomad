@@ -13,6 +13,7 @@ class Conversations extends Component {
       conversations: [],
       loaded: false,
     }
+    this.truncatedMessage = this.truncatedMessage.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +32,14 @@ class Conversations extends Component {
       });
   }
 
+  truncatedMessage(message){
+    if(message.length>100) {
+      return (message.substr(0, 100) + '...');
+    } else {
+      return message;
+    }
+  }
+
   render() {
     if (this.state.loaded === true) {
       return (
@@ -39,7 +48,7 @@ class Conversations extends Component {
           <div className="max-width">
           <div className="ui section divider"></div>
             {this.state.conversations.map((conversation) =>
-              <UserListItemContainer key={conversation.id} user={conversation.other} snippet={conversation.last_message.body} linkto={`/chats/${conversation.id}`} />
+              <UserListItemContainer key={conversation.id} user={conversation.other} snippet={this.truncatedMessage(conversation.last_message.body)} linkto={`/chats/${conversation.id}`} />
             )}
           </div>
         </div>
