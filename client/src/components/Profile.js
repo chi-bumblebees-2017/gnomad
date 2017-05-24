@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import NewFirstMessage from './NewFirstMessage';
 import Star from './Star';
-import { Label } from 'semantic-ui-react';
+import { Label, Dimmer, Loader } from 'semantic-ui-react';
 
 class Profile extends Component {
   constructor(props) {
@@ -133,7 +133,7 @@ class Profile extends Component {
     }
     } else {
       return (
-        <div>Internet gnomes are fetching your info...</div>
+        <Dimmer active inverted><Loader /></Dimmer>
       );
     }
   }

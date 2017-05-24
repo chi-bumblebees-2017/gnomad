@@ -103,10 +103,8 @@ class App extends Component {
       return (
         <Router>
           <div className="App">
-            <NavBar options={3}>
-              <NavLink className="item" to="/account">Dashboard</NavLink>
-              <NavLink className="item" to="/chats">Chats</NavLink>
-              <NavLink className="item" to="/search">Search</NavLink>
+            <NavBar options={1}>
+              <div></div>
             </NavBar>
             <Route exact path="/" render={() => <Login connectCable={this.connectCable} loginHandler={this.setLoggedIn} />} />
             <Route exact path="/chats" component={Conversations} />
