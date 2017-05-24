@@ -28,7 +28,7 @@ class App extends Component {
     this.disconnectCable = this.disconnectCable.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (localStorage.getItem('gnomad-auth-token') && localStorage.getItem('gnomad-auth-token').length >= 1) {
       this.connectCable();
     }
