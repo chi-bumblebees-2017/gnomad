@@ -98,8 +98,8 @@ class SearchContainer extends Component {
   }
 
   checkHandled(value) {
-    console.log(value)
-    console.log(this)
+    // console.log(value)
+    // console.log(this)
     this.setState({ likesList: value});
   }
 
