@@ -1,6 +1,6 @@
 class SearchesController < ApplicationController
   def search
-    location = params[:location].split(", ")
+    location = search_params[:location].split(", ")
     p search_params[:likes_list][:art]
     city = location.first
     state = location.last
@@ -19,11 +19,11 @@ class SearchesController < ApplicationController
     else
       @matches = localhosts.likes_any(likes)
     end
-    render json: @matches
+    render json: { matches: @matches, likes: likes.map {|i| [i,true] }.to_h }
   end
 
   private
   def search_params
-    params.require(:searching).permit(:likes_all, likes_list: [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping, :history])
+    params.require(:searching).permit(:likes_all, :location, likes_list: [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping, :history])
   end
 end
