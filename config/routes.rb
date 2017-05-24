@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   # root 'conversations#index'
-  get '/users' => "users#search"
+  post '/searches' => "searches#search"
   get "/conversations" => "conversations#index"
   post "/conversations" => "conversations#create"
   get "/conversations/:id" => "conversations#show"
