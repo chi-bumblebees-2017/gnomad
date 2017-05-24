@@ -2,7 +2,9 @@ class User < ApplicationRecord
   POSSIBLE_INTERESTS = [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :history, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping]
 
   has_many :initiated_conversations, class_name: 'Conversation', foreign_key: 'initiator_id'
-  has_many :received_conversations, class_name: 'Conversation', foreign_key: 'received_id'
+  # NOTE: type in received conversations foreign key? Was 'received_id', changed to 'receiver'
+  has_many :received_conversations, class_name: 'Conversation', foreign_key: 'receiver_id'
+
   has_many :personal_messages, dependent: :destroy
   # make models for and add associations to localhost or gnomad profiles
   has_one :gnomad_profile
@@ -80,8 +82,8 @@ class User < ApplicationRecord
     !(self.sent_stars.where(recipient_id: recipient.id).empty?)
   end
 
-  def blocked?(reporter)
-    !(self.offended_users.where(reporter_id: reporter.id).empty?)
+  def blocked?(offender)
+    !(self.reported_users.where(offender_id: offender.id).empty?)
   end
 
   def block_user(offender)

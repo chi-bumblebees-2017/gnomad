@@ -20,6 +20,10 @@ class Conversation < ApplicationRecord
   def with(current_user)
     initiator == current_user ? receiver : initiator
   end
+
+  def blocked_participants?(user)
+    self.initiator.blocked?(user) || self.receiver.blocked?(user)
+  end
   # def participates?(user)
   #   initiator == user || receiver == user
   # end

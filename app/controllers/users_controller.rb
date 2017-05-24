@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     else
       user = User.find(params[:id])
       starred = current_user.starred?(user) ? true : false
-      blocked = current_user.blocked?(user) ? true : false
+      blocked = user.blocked?(current_user) ? true : false
     end
 
     if user.localhost_profile
