@@ -1,15 +1,26 @@
 class SearchesController < ApplicationController
   def search
-    p "***********"
-    p search_params
-    p "++++++++++++"
-    p search_params[:likes_list]
-    p search_params[:likes_all]
     location = params[:location].split(", ")
+    p search_params[:likes_list][:art]
     city = location.first
     state = location.last
-    @matches = User.localhosts.from_location(city, state).likes_any(current_user.interests_while_traveling)
-    render json: @matches
+    localhosts =  User.localhosts.from_location(city, state)
+
+    likes = []
+    if (search_params[:likes_list][:art] == "undefined")
+      likes = current_user.interests_while_traveling
+    else
+      likes = search_params[:likes_list].select { |like, bool| bool == "true" }
+      likes = likes.keys.map(&:to_sym)
+    end
+
+    if search_params[:likes_all] == "true"
+      matches = localhosts.likes_all(likes)
+    else
+      matches = localhosts.likes_any(likes)
+    end
+
+    render json: matches
   end
 
   private
