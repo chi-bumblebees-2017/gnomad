@@ -81,7 +81,7 @@ class App extends Component {
     if (this.state.loggedIn) {
       return (
         <Router>
-          <div className="App">
+          <div className="App max-width">
             <NavBar options={4}>
               <NavLink className="item" to="/account">Dashboard</NavLink>
               <NavLink className="item" to="/chats">Chats</NavLink>
@@ -102,7 +102,7 @@ class App extends Component {
     } else {
       return (
         <Router>
-          <div className="App">
+          <div className="App max-width">
             <NavBar options={3}>
               <NavLink className="item" to="/account">Dashboard</NavLink>
               <NavLink className="item" to="/chats">Chats</NavLink>
