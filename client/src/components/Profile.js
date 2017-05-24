@@ -8,9 +8,9 @@ import {
 } from 'react-router-dom';
 import NewFirstMessage from './NewFirstMessage';
 import Star from './Star';
-import { Label, Dimmer, Loader } from 'semantic-ui-react';
+import { Label, Dimmer, Loader, Modal, Button, Header, Confirm} from 'semantic-ui-react';
 import Dashboard from '../Dashboard';
-
+import BlockForm from './BlockForm';
 
 class Profile extends Component {
   constructor(props) {
@@ -21,16 +21,29 @@ class Profile extends Component {
       writeMessage: false,
       starred: false,
       count: 0,
-      blocked: false
+      blocked: false,
     };
     this.displayMessageForm = this.displayMessageForm.bind(this);
     this.toggleStar = this.toggleStar.bind(this);
+    this.handleBlock = this.handleBlock.bind(this);
+    this.redirectHome = this.redirectHome.bind(this);
   }
 
   toggleStar() {
     let newStatus = !this.state.starred;
     this.setState({starred: !this.state.starred});
     return newStatus;
+  }
+
+  handleBlock(formData) {
+    fetch(`/blocks`, {
+      method: 'POST',
+      accept: 'application/json',
+      headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token')
+      },
+      body: formData,
+    })
   }
 
   componentDidMount() {
@@ -55,6 +68,12 @@ class Profile extends Component {
       writeMessage: true,
     })
   }
+
+  redirectHome() {
+    this.setState({ blocked: true })
+  }
+
+
 
   render() {
     if (this.state.loaded === true) {
@@ -132,6 +151,12 @@ class Profile extends Component {
               <div className="ui section divider"></div>
               <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
             </div>
+            <Modal trigger={<Button size='small' color="red">Report</Button>} closeIcon='close' onClose={this.redirectHome}>
+              <Modal.Header>Block {this.state.userData.user.first_name}?</Modal.Header>
+              <Modal.Content>
+                <BlockForm handleBlock={this.handleBlock} user={this.state.userData.user} redirect={this.redirectHome} />
+              </Modal.Content>
+            </Modal>
           </div>
         );
       }
