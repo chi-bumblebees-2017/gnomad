@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  url: redis://h:pf11f3566b69dabcc6b3db0a37ce298159c2aa9642dc51d690a5063294d9d952d@ec2-34-197-198-120.compute-1.amazonaws.com:22259
   channel_prefix: gnomad_production

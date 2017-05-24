@@ -18,11 +18,11 @@ class Login extends Component {
 
   loggedIn() {
     let loggedInState = (localStorage.getItem('gnomad-auth-token') && localStorage.getItem('gnomad-auth-token').length >= 1)
-    return loggedInState
+    return loggedInState;
+    // return false;
   }
 
   onceLoggedIn() {
-    console.log(localStorage.getItem('gnomad-auth-token'))
     fetch('/users/a', {
       method: "GET",
       accept: 'application/json',
@@ -64,68 +64,53 @@ class Login extends Component {
     responseFacebooks(response) {
   }
 
-  // componentDidMount() {
-  //   console.log("Component did mount");
-  //   if (this.loggedIn()){
-  //     this.onceLoggedIn();
-  //   }
-
-  // }
+  componentDidMount() {
+    if (this.loggedIn()){
+      this.onceLoggedIn();
+    }
+  }
 
   render() {
     if (this.loggedIn()) {
-      console.log("0")
-      console.log(this.state)
       if (!(this.state.loaded)){
         this.onceLoggedIn()
       }
       if (this.state.loaded === true && this.state.userData.user.home_city){
-          console.log("1")
-          console.log(this.state)
         return (<Redirect push to={{
           pathname: "/account",
         }} />)
       } else if (this.state.loaded === true && !(this.state.userData.user.home_city) ) {
-          console.log("2")
-          console.log(this.state)
         return (<Redirect push to={{
           pathname: "/register",
         }} />)
       } else {
-        console.log("3")
-        console.log(this.state)
         return (<div>Internet gnomes are fetching your info...</div>)
       }
     } else {
       return(
-        <div className="max-width">
-        <div className="ui section divider"></div>
+        <div>
+          <div className="max-width">
+            <div className="ui section divider"></div>
+            <h1>GNOMAD</h1>
+            <div className="ui section divider"></div>
+            <div className="splash-picture">
+              <img height="200" src="https://media.istockphoto.com/photos/garden-gnome-picture-id157403714"/>
+            </div>
 
+            <FacebookLogin appId="1351086744971505" autoLoad={false} fields="first_name,last_name,email,id" callback={this.responseFacebook} />
 
-        <h1>GNOMAD</h1>
-        <div className="ui section divider"></div>
+            <div className="ui horizontal section divider">About</div>
+            <div>
+              "Gnomad allows travellers (Gnomads) to connect to city residents (Localhosts) in order to have an authentic local experience of their travel destination. To get started, Log in with Facebook and tell us a little bit more about yourself. Happy Travelling!"
+            </div>
 
-        <div className="splash-picture">
-          <img height="200" src="https://media.istockphoto.com/photos/garden-gnome-picture-id157403714"/>
-        </div>
-
-        <FacebookLogin
-          appId="1351086744971505"
-          autoLoad={false}
-          fields="first_name,last_name,email,id"
-          callback={this.responseFacebook}
-        />
-
-        <div className="ui horizontal section divider">About</div>
-
-        <div>Gnomad allows travellers (Gnomads) to connect to city residents (Localhosts) in order to have an authentic local experience of their travel destination. To get started, Log in with Facebook and tell us a little bit more about yourself. Happy Travelling!</div>
-
-        <div className="ui section divider"></div>
-
+            <div className="ui section divider"></div>
+          </div>
         </div>
       )
     }
   }
 }
+
 
 export default Login;

@@ -4,9 +4,9 @@ class ConversationsController < ApplicationController
 
   def index
     if request.headers.include?('Limit')
-      @conversations = Conversation.participating(current_user).order('updated_at DESC').limit(request.headers['Limit'])
+      @conversations = Conversation.participating(current_user).order('updated_at ASC').limit(request.headers['Limit'])
     else
-      @conversations = Conversation.participating(current_user).order('updated_at DESC')
+      @conversations = Conversation.participating(current_user).order('updated_at ASC')
     end
       full_json = @conversations.map do |conversation|
         conversation.as_json(methods: :last_message).merge({other: conversation.with(current_user)})

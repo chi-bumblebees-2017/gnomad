@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Interests from './components/Interests';
 import RecentChats from './RecentChats';
+import NewProfile from './NewProfile';
+import { Button } from 'semantic-ui-react'
 import {
   BrowserRouter as Router,
   Route,
@@ -13,12 +15,20 @@ class Dashboard extends Component {
     this.state = {
       userData: [],
       conversations: [],
-      loaded: false,
+      userLoaded: false,
+      chatsLoaded: false,
+      editing: false,
     };
+    this.toggleEdit = this.toggleEdit.bind(this);
+  }
+
+  toggleEdit() {
+    this.setState({editing: true});
   }
 
   componentDidMount() {
     fetch('/users/a', {
+      method: 'GET',
       accept: 'application/json',
       headers: {
         'Authorization': localStorage.getItem('gnomad-auth-token')
@@ -27,7 +37,9 @@ class Dashboard extends Component {
       .then(dataJson => {
         this.setState({
           userData: dataJson,
-    })});
+          userLoaded: true,
+        });
+      });
 
     fetch('/conversations', {
       accept: 'application/json',
@@ -40,14 +52,14 @@ class Dashboard extends Component {
       .then(dataJson => {
         this.setState({
           conversations: dataJson,
-          loaded: true,
+          chatsLoaded: true,
+          editing: false,
         });
       });
   }
 
-
   render() {
-    if (this.state.loaded === true) {
+    if (this.state.userLoaded === true && this.state.chatsLoaded === true && this.state.editing === false) {
       return(
         <div className="profile-container ui centered container">
           <div className="max-width">
@@ -55,7 +67,11 @@ class Dashboard extends Component {
 
             <div className="profile-picture-container">
               <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
-          </div>
+            </div>
+            <div>
+              <Button compact content='Edit' icon='edit' labelPosition='left' basic color='red'size='small' onClick={this.toggleEdit}/>
+            </div>
+
           <h2>A Little Bit About Me...</h2>
           <div className="bio-container ui centered container">
             <p>{this.state.userData.user.bio}</p>
@@ -66,6 +82,9 @@ class Dashboard extends Component {
          <RecentChats conversations={this.state.conversations}/>
         </div>
     );
+  }
+  else if (this.state.userLoaded === true && this.state.chatsLoaded === true && this.state.editing === true) {
+    return ( <NewProfile userData={this.userData} /> );
   }
   else {
     return ( <div>Internet gnomes are fetching your info...</div> );
