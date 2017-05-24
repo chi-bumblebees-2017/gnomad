@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 
 class Logout extends Component {
-  render() {
+  componentDidMount() {
     fetch("/sessions", {
       method: 'DELETE',
       accept: 'application/json',
@@ -14,6 +14,9 @@ class Logout extends Component {
     });
     localStorage.setItem('gnomad-auth-token', "");
     this.props.disconnectCable();
+    this.props.logoutHandler();
+  }
+  render() {
     return( <Redirect to="/" /> )
   }
 }

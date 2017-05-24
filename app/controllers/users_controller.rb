@@ -1,15 +1,6 @@
 class UsersController < ApplicationController
   # TODO: add line below back in once we add back this before action. commented out for now in development/test mode.
   skip_before_action :authorize_request, only: [:create]
-
-  def search
-    location = params[:location].split(", ")
-    city = location.first
-    state = location.last
-    @matches = User.localhosts.from_location(city, state).likes_any(current_user.interests_while_traveling)
-    render json: @matches
-  end
-
   def create
     user = User.from_oauth(user_params)
     session[:user_id] = user.id
@@ -20,25 +11,20 @@ class UsersController < ApplicationController
   end
 
   def update
-    p "TOP OF UPDATE"
     user = User.find(params[:id])
     user.update_attributes(home_city: profile_params[:city], home_state: profile_params[:state], bio: profile_params[:user_bio])
     if profile_params[:localhost_profile] == "true"
-      p "LOCAL PROFILE TRUE"
       user.localhost_profile = LocalhostProfile.create(profile_params[:localhost_pref].merge(suggestions: profile_params[:suggestions], available: true))
     end
 
-    if profile_params[:gnomad_profile] == "false"
-        p "GNOMAD PROFILE TRUE"
+    if profile_params[:gnomad_profile] == "true"
       user.gnomad_profile = GnomadProfile.create(profile_params[:gnomad_pref])
     end
     render json: {first_name: user.first_name.downcase, id: user.id}
   end
 
   def show
-    p "TOP OF SHOW"
     if params[:id] == "a"
-      p "ID IS A"
       user = current_user
     else
       user = User.find(params[:id])
@@ -46,7 +32,6 @@ class UsersController < ApplicationController
     end
 
     if user.localhost_profile
-      p "USER IS LOCAL"
       suggestions = user.localhost_profile.suggestions
     else
       suggestions = nil
