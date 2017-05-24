@@ -6,6 +6,11 @@ class Star extends Component {
     super(props);
     this.color = this.color.bind(this);
     this.userData = this.userData.bind(this);
+    this.state = {
+      count: props.count,
+    }
+    this.changeCount = this.changeCount.bind(this);
+    this.toggleStar = this.props.action;
   }
 
   color() {
@@ -20,6 +25,16 @@ class Star extends Component {
     return data;
   }
 
+  changeCount(){
+   let newStatus = this.toggleStar();
+     if (newStatus === true) {
+      this.setState({count: (this.state.count + 1)})
+    }
+    else if (newStatus === false) {
+      this.setState({count: (this.state.count - 1)})
+    } else { alert("SOMETHING IS FUCKY HERE")}
+  }
+
   componentDidUpdate() {
     if (this.props.starred) {
       fetch(`/stars`, {
@@ -29,7 +44,7 @@ class Star extends Component {
         'Authorization': localStorage.getItem('gnomad-auth-token'),
         },
         body: this.userData(this.props.userID),
-      })
+      });
     } else if (!this.props.starred) {
       fetch(`/stars`, {
         method: 'DELETE',
@@ -38,7 +53,7 @@ class Star extends Component {
         'Authorization': localStorage.getItem('gnomad-auth-token'),
         },
         body: this.userData(this.props.userID),
-      })
+      });
     } else {
       alert("Error: could not complete action, please try again later");
     }
@@ -46,7 +61,8 @@ class Star extends Component {
 
   render() {
     return(
-        <Button className='left-margin-10' icon='star' circular color={this.color()} compact size='small' onClick={this.props.action} />
+        <Button compact content='Stars' size='mini' icon='star' color={this.color()} onClick={this.changeCount}
+          label={{basic: true, color: this.color(), content: this.state.count, pointing: 'left', size: 'mini'}} />
     );
   }
 }

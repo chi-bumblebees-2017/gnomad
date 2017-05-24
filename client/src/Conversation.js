@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom';
 import PersonalMessageContainer from './PersonalMessageContainer';
 import NewMessage from './NewMessage';
-import { Button, Comment, Form, Header, Message, Menu } from 'semantic-ui-react';
+import { Button, Comment, Form, Header, Message, Menu, Loader } from 'semantic-ui-react';
 import ReactDOM from 'react-dom';
-
+import AfterLastMessage from './AfterLastMessage'
 
 class Conversation extends Component {
   constructor(props) {
@@ -43,13 +43,27 @@ class Conversation extends Component {
       },
     }).then(data => data.json())
       .then(dataJson => {
-        console.log(dataJson)
         this.setState({
           messages: dataJson.personal_messages,
           loaded: true,
           me: dataJson.me,
           other: dataJson.other,
-    })}).then(() => this.scrollToBottom());
+    })}).then(() => {
+          if (!this.state.subscription) {
+            let that = this;
+            this.state.subscription = this.props.cable.subscriptions.create({channel: 'ChatChannel', me_id: `${this.state.me.id}`, other_id: `${this.state.other.id}`}, {
+                connected() { },
+                disconnected() { this.perform("unsubscribed") },
+                received(data) {
+                  that.setState({
+                    messages: [
+                      ...that.state.messages,
+                      data
+                    ],
+                    newMsgText: "",
+                  })
+                }});
+          }});
   }
 
   handleChange(event) {
@@ -87,25 +101,6 @@ class Conversation extends Component {
 
   render() {
     if (this.state.loaded === true) {
-      if (!this.state.subscription) {
-        let that = this;
-        this.state.subscription = this.props.cable.subscriptions.create({channel: 'ChatChannel', me_id: `${this.state.me.id}`, other_id: `${this.state.other.id}`}, {
-            connected() { },
-            disconnected() { this.perform("unsubscribed") },
-            received(data) {
-              console.log(data)
-              that.setState({
-                messages: [
-                  ...that.state.messages,
-                  data
-                ],
-                newMsgText: "",
-              })
-              that.scrollToBottom();
-            }
-          }
-        );
-      }
       return (
         <div className="bio-max-width">
           <div className="clear-fixed">
@@ -117,7 +112,7 @@ class Conversation extends Component {
                   <PersonalMessageContainer className={this.checkAuthorClass(personalMessage)} color={this.checkColor(personalMessage)} key={personalMessage.id} author={this.checkAuthorName(personalMessage)} messageBody={personalMessage.body} />
                 )}
               </div>
-              <div id="new-message-replace" ref={(div) => {this.messageLast = div}} ></div>
+              <AfterLastMessage divRef={el => this.messageLast = el} mountedCallback={this.scrollToBottom} />
               <NewMessage ref='newMessage' sendMessageHandler={this.sendNewMessage} changeHandler={this.handleChange} value={this.state.newMsgText} conversationId={this.props.match.params.id} receiverId={this.state.other.id} />
               </Comment.Group>
           </div>
@@ -126,7 +121,7 @@ class Conversation extends Component {
       return (
         <div>
           <div className="conversation-container">
-            loading...
+            <Loader />
           </div>
         </div>
       );
