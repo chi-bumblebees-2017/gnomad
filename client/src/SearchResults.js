@@ -11,8 +11,8 @@ class SearchResults extends Component {
     if (this.props.results.length === 0) {
       return (
         <div className="search-results ui comments container">
-          <p className="margin-none">No localhosts found in that city</p>
-          <p className="margin-none">that share your interests...</p>
+          <p className="margin-none">No localhosts found that</p>
+          <p className="margin-none">share your interests...</p>
         </div>
       );
     } else {
