@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import FacebookLogin from 'react-facebook-login';
+import { Loader } from 'semantic-ui-react';
 
 class Login extends Component {
    constructor(props) {
@@ -32,6 +33,7 @@ class Login extends Component {
     }).then(data => data.json())
       .then(dataJson => {
         this.props.loginHandler();
+        this.props.connectCable();
         this.setState({
           userData: dataJson,
           loaded: true,
@@ -62,8 +64,6 @@ class Login extends Component {
             })
         });
   }
-    responseFacebooks(response) {
-  }
 
   componentDidMount() {
     if (this.loggedIn()){
@@ -71,11 +71,14 @@ class Login extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (!(this.state.loaded) && this.loggedIn()) {
+      this.onceLoggedIn()
+    }
+  }
+
   render() {
     if (this.loggedIn()) {
-      if (!(this.state.loaded)){
-        this.onceLoggedIn()
-      }
       if (this.state.loaded === true && this.state.userData.user.home_city){
         return (<Redirect push to={{
           pathname: "/account",
@@ -85,7 +88,7 @@ class Login extends Component {
           pathname: "/register",
         }} />)
       } else {
-        return (<div>Internet gnomes are fetching your info...</div>)
+        return (<Loader />)
       }
     } else {
       return(

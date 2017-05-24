@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Interests from './components/Interests';
 import RecentChats from './RecentChats';
 import NewProfile from './NewProfile';
-import { Button } from 'semantic-ui-react'
+import { Button, Loader } from 'semantic-ui-react'
 import {
   BrowserRouter as Router,
   Route,
@@ -87,7 +87,7 @@ class Dashboard extends Component {
     return ( <NewProfile userData={this.userData} /> );
   }
   else {
-    return ( <div>Internet gnomes are fetching your info...</div> );
+    return ( <Loader /> );
   }
 }
 }
