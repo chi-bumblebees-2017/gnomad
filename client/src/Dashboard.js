@@ -14,6 +14,7 @@ class Dashboard extends Component {
       userData: [],
       conversations: [],
       loaded: false,
+      doubleLoaded: false,
     };
   }
 
@@ -27,6 +28,7 @@ class Dashboard extends Component {
       .then(dataJson => {
         this.setState({
           userData: dataJson,
+          doubleLoaded: true,
     })});
 
     fetch('/conversations', {
@@ -47,7 +49,7 @@ class Dashboard extends Component {
 
 
   render() {
-    if (this.state.loaded === true) {
+    if (this.state.loaded === true && this.state.doubleLoaded) {
       return(
         <div className="profile-container ui centered container">
           <div className="max-width">

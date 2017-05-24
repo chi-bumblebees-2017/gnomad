@@ -46,8 +46,4 @@ class UsersController < ApplicationController
   def profile_params
     params.require(:profile_data).permit(:values, :city, :state, :user_bio, :gnomad_profile, :localhost_profile, :suggestions, gnomad_pref: [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping], localhost_pref: [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping])
   end
-
-  def search_params
-    params.require(:likes_list).permit(:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :history, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping)
-  end
 end

@@ -44,29 +44,29 @@ class SearchContainer extends Component {
 
   createSearchRequest() {
     var data = new FormData();
-    data.append("likes_list[restaurants]", this.state.likesList.restaurants)
-    data.append("likes_list[sports]", this.state.likesList.sports)
-    data.append("likes_list[museums]", this.state.likesList.museums)
-    data.append("likes_list[bars]", this.state.likesList.bars)
-    data.append("likes_list[music]", this.state.likesList.music)
-    data.append("likes_list[outdoors]", this.state.likesList.outdoors)
-    data.append("likes_list[art]", this.state.likesList.art)
-    data.append("likes_list[fitness]", this.state.likesList.fitness)
-    data.append("likes_list[history]", this.state.likesList.history)
-    data.append("likes_list[architecture]", this.state.likesList.architecture)
-    data.append("likes_list[family_fun]", this.state.likesList.family_fun)
-    data.append("likes_list[zoo]", this.state.likesList.zoo)
-    data.append("likes_list[culture]", this.state.likesList.culture)
-    data.append("likes_list[volunteer]", this.state.likesList.volunteer)
-    data.append("likes_list[shopping]", this.state.likesList.shopping)
-    data.append("likes_all", this.state.likesAll)
+    data.append("searching[likes_list][restaurants]", this.state.likesList.restaurants)
+    data.append("searching[likes_list][sports]", this.state.likesList.sports)
+    data.append("searching[likes_list][museums]", this.state.likesList.museums)
+    data.append("searching[likes_list][bars]", this.state.likesList.bars)
+    data.append("searching[likes_list][music]", this.state.likesList.music)
+    data.append("searching[likes_list][outdoors]", this.state.likesList.outdoors)
+    data.append("searching[likes_list][art]", this.state.likesList.art)
+    data.append("searching[likes_list][fitness]", this.state.likesList.fitness)
+    data.append("searching[likes_list][history]", this.state.likesList.history)
+    data.append("searching[likes_list][architecture]", this.state.likesList.architecture)
+    data.append("searching[likes_list][family_fun]", this.state.likesList.family_fun)
+    data.append("searching[likes_list][zoo]", this.state.likesList.zoo)
+    data.append("searching[likes_list][culture]", this.state.likesList.culture)
+    data.append("searching[likes_list][volunteer]", this.state.likesList.volunteer)
+    data.append("searching[likes_list][shopping]", this.state.likesList.shopping)
+    data.append("searching[likes_all]", this.state.likesAll)
     return data
   }
 
   goSearch() {
     let that = this;
     if (that.state.hasSearched) {
-      fetch(`/users?location=${that.state.location}`, {
+      fetch(`/searches?location=${that.state.location}`, {
         accept: 'application/json',
         method: 'POST',
         headers: {
