@@ -91,8 +91,8 @@ class Login extends Component {
       return(
         <div>
           <div className="max-width">
-            <div className="ui section divider"></div>
-            <h1>GNOMAD</h1>
+
+            <h1 className="top-pad-10">GNOMAD</h1>
             <div className="ui section divider"></div>
             <div className="splash-picture">
               <img height="200" src="https://media.istockphoto.com/photos/garden-gnome-picture-id157403714"/>

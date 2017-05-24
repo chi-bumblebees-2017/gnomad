@@ -39,6 +39,10 @@
   margin-top: 10px;
 }
 
+.top-margin-20 {
+  margin-top: 20px;
+}
+
 .margin-none {
   margin: 0;
 }
@@ -153,5 +157,5 @@
 }
 
 #navbar {
-
+  background-color: white;
 }
