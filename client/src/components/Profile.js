@@ -62,13 +62,15 @@ class Profile extends Component {
                 <h1>{this.state.userData.user.first_name}</h1>
                 <Star action={this.toggleStar} starred={this.state.starred} changeDisplay={this.changeDisplay} userID={this.state.userData.user.id} count={this.state.count} />
               </div>
-              <div attached className="profile-picture-container">
+              <div attached className="profile-picture-container top-margin-10">
                 <img  src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>
 
               <NewFirstMessage receiverId={this.state.userData.user.id} />
 
-              <h2>A Little Bit About Me...</h2>
+              <div className='ui centered container top-margin-10'>
+                <h2 className='inline'>A Little Bit About Me...</h2>
+              </div>
               <div className="bio-container ui centered container">
                 <p>{this.state.userData.user.bio}</p>
               </div>
@@ -84,7 +86,7 @@ class Profile extends Component {
               <div className="max-width">
               <h1>{this.state.userData.user.first_name} </h1>
               <Star action={this.toggleStar} starred={this.state.starred} changeDisplay={this.changeDisplay} userID={this.state.userData.user.id} count={this.state.count} />
-                <div className="profile-picture-container">
+                <div className="profile-picture-container top-margin-10">
                   <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
                 </div>
 
@@ -92,7 +94,7 @@ class Profile extends Component {
                 <Link to={`/chats/${this.state.userData.conversation.id}`}><button className="ui blue button">Continue chatting</button></Link>
               </div>
 
-              <div className='ui centered container'>
+              <div className='ui centered container top-margin-10'>
                 <h2 className='inline'>A Little Bit About Me...</h2>
               </div>
               <div className="bio-container ui centered container">
@@ -110,7 +112,7 @@ class Profile extends Component {
               <h1>{this.state.userData.user.first_name} </h1>
               <Star action={this.toggleStar} starred={this.state.starred} changeDisplay={this.changeDisplay} userID={this.state.userData.user.id} count={this.state.count} />
 
-                <div className="profile-picture-container">
+                <div className="profile-picture-container top-margin-10">
                   <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
                 </div>
 
@@ -118,7 +120,7 @@ class Profile extends Component {
                 <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
               </div>
 
-              <div className='ui centered container'>
+              <div className='ui centered container top-margin-10'>
                 <h2 className='inline'>A Little Bit About Me...</h2>
               </div>
               <div className="bio-container ui centered container">
