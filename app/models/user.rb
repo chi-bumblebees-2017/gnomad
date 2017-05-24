@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :received_stars, class_name: 'Star', foreign_key: 'recipient_id'
   scope :popular, -> {order("star_count DESC")}
 
-  scope :from_location, ->(city, state) { where(home_city: city, home_state: state) }
+  scope :from_location, ->(city, state) { where(home_city: city.downcase, home_state: state.upcase) }
   delegate :available, :suggestions, to: :localhost_profile, allow_nil: true
   scope :available, -> { joins(:localhost_profile).where(available: true) }
   scope :localhosts, -> { joins(:localhost_profile) }
@@ -21,6 +21,8 @@ class User < ApplicationRecord
   scope :likes_any, ->(interests) { where("restaurants = :restaurants OR sports = :sports OR museums = :museums OR bars = :bars OR music = :music OR outdoors = :outdoors OR art = :art OR fitness = :fitness OR history = :history OR architecture = :architecture OR family_fun = :family_fun OR zoo = :zoo OR culture = :culture OR volunteer = :volunteer OR shopping = :shopping", interests_hash(interests)) }
 
   scope :likes_all, ->(interests) { where(User.all_interests_query(interests)) }
+
+  before_save :normalize_city
 
   def self.all_interests_query(interests)
     queries = interests.map(&:to_s).map {|str| str + " = true" }
@@ -71,5 +73,12 @@ class User < ApplicationRecord
 
   def starred?(recipient)
     !(self.sent_stars.where(recipient_id: recipient.id).empty?)
+  end
+
+  private
+  def normalize_city
+    if home_city
+      self.home_city = home_city.downcase
+    end
   end
 end

@@ -15,12 +15,11 @@ class SearchesController < ApplicationController
     end
 
     if search_params[:likes_all] == "true"
-      matches = localhosts.likes_all(likes)
+      @matches = localhosts.likes_all(likes)
     else
-      matches = localhosts.likes_any(likes)
+      @matches = localhosts.likes_any(likes)
     end
-
-    render json: matches
+    render json: @matches
   end
 
   private
