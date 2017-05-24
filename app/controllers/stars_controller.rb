@@ -3,6 +3,8 @@ class StarsController < ApplicationController
   def create
     recipient = User.find(star_params[:recipient_id])
     current_user.send_star(recipient)
+    p recipient.received_stars
+    p recipient.star_count
   end
 
   def destroy
