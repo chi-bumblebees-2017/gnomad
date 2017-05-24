@@ -145,6 +145,7 @@ class NewProfile extends Component {
     const newValue = value;
     const profileType = profile;
     const interest = category;
+
     var newState = update(this.state, {
       values: {[profileType]: {[interest]: {$set: newValue}}
     },

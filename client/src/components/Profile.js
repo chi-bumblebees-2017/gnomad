@@ -34,6 +34,7 @@ class Profile extends Component {
       },
     }).then(data => data.json())
       .then(dataJson => {
+        console.log(dataJson);
         this.setState({
           userData: dataJson,
           loaded: true,
@@ -73,30 +74,59 @@ class Profile extends Component {
           </div>
         );
       } else {
-        return (
-          <div className="profile-container ui centered container">
-            <div className="max-width">
+        if (this.state.userData.conversation) {
+          return (
+            <div className="profile-container ui centered container">
+              <div className="max-width">
               <h1 className='inline' >{this.state.userData.user.first_name} </h1><Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
-              <div className="profile-picture-container">
-                <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
+                <div className="profile-picture-container">
+                  <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
+                </div>
+
+              <div className="chat-button">
+                <Link to={`/chats/${this.state.userData.conversation.id}`}><button className="ui blue button">Continue chatting</button></Link>
               </div>
 
-            <div className="chat-button">
-              <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
+              <div className='ui centered container'>
+                <h2 className='inline'>A Little Bit About Me...</h2>
+                <Label size='mini' as='a' color='yellow' tag>Stars</Label>
+              </div>
+              <div className="bio-container ui centered container">
+                <p>{this.state.userData.user.bio}</p>
+              </div>
+              <div className="ui section divider"></div>
+                <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
+              </div>
             </div>
-            <div className='ui centered container'>
-              <h2 className='inline'>A Little Bit About Me...</h2>
-              <Label as='a' color='yellow' tag>Stars</Label>
+          );
+        } else {
+          return (
+            <div className="profile-container ui centered container">
+              <div className="max-width">
+              <h1 className='inline' >{this.state.userData.user.first_name} </h1><Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
+
+                <div className="profile-picture-container">
+                  <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
+                </div>
+
+              <div className="chat-button">
+                <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
+              </div>
+
+              <div className='ui centered container'>
+                <h2 className='inline'>A Little Bit About Me...</h2>
+                <Label size='mini' as='a' color='yellow' tag>Stars</Label>
+              </div>
+              <div className="bio-container ui centered container">
+                <p>{this.state.userData.user.bio}</p>
+              </div>
+              <div className="ui section divider"></div>
+              <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
             </div>
-            <div className="bio-container ui centered container">
-            <p>{this.state.userData.user.bio}</p>
-            </div>
-            <div className="ui section divider"></div>
-            <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
           </div>
-        </div>
         );
       }
+    }
     } else {
       return (
         <div>Internet gnomes are fetching your info...</div>
