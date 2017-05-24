@@ -56,9 +56,12 @@ class User < ApplicationRecord
     end
   end
 
+  def update_star_count
+    self.update(star_count: self.received_stars.count)
+  end
+
   def send_star(recipient)
     Star.create(sender: self, recipient: recipient)
-    recipient.star_count += 1
   end
 
   def starred?(recipient)
