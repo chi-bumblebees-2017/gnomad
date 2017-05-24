@@ -3,13 +3,16 @@ import Interests from './Interests';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Redirect,
 } from 'react-router-dom';
 import NewFirstMessage from './NewFirstMessage';
 import Star from './Star';
 import { Label, Dimmer, Loader } from 'semantic-ui-react';
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
+import Dashboard from '../Dashboard';
+
 
 class Profile extends Component {
   constructor(props) {
@@ -57,6 +60,9 @@ class Profile extends Component {
 
   render() {
     if (this.state.loaded === true) {
+      if (this.state.blocked) {
+        return (<Redirect push to={{ pathname: "/account"}} />);
+      }
       if (this.state.writeMessage) {
         return (
           <div className="profile-container ui centered container">
@@ -69,9 +75,7 @@ class Profile extends Component {
               <div attached className="profile-picture-container">
                 <img  src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>
-              <BlockUi tag='div' blocking={this.state.blocked} renderChildren={false}>
                 <NewFirstMessage receiverId={this.state.userData.user.id} />
-              </BlockUi>
 
               <h2>A Little Bit About Me...</h2>
               <div className="bio-container ui centered container">
@@ -92,11 +96,9 @@ class Profile extends Component {
                 <div className="profile-picture-container">
                   <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
                 </div>
-              <BlockUi tag='div' blocking={this.state.blocked} renderChildren={false}>
                 <div className="chat-button">
                   <Link to={`/chats/${this.state.userData.conversation.id}`}><button className="ui blue button">Continue chatting</button></Link>
                 </div>
-              </BlockUi>
 
               <div className='ui centered container'>
                 <h2 className='inline'>A Little Bit About Me...</h2>
@@ -119,11 +121,9 @@ class Profile extends Component {
                 <div className="profile-picture-container">
                   <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
                 </div>
-                <BlockUi tag='div' blocking={this.state.blocked} renderChildren={false}>
                   <div className="chat-button">
                     <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
                   </div>
-                </BlockUi>
 
               <div className='ui centered container'>
                 <h2 className='inline'>A Little Bit About Me...</h2>
