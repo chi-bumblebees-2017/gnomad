@@ -86,7 +86,7 @@ class Profile extends Component {
             </div>
             <div className='ui centered container'>
               <h2 className='inline'>A Little Bit About Me...</h2>
-              <Label as='a' color='yellow' tag>Stars</Label>
+              <Label size='mini' as='a' color='yellow' tag>Stars</Label>
             </div>
             <div className="bio-container ui centered container">
             <p>{this.state.userData.user.bio}</p>
