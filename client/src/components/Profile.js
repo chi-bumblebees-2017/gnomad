@@ -9,8 +9,6 @@ import {
 import NewFirstMessage from './NewFirstMessage';
 import Star from './Star';
 import { Label, Dimmer, Loader } from 'semantic-ui-react';
-import BlockUi from 'react-block-ui';
-import 'react-block-ui/style.css';
 import Dashboard from '../Dashboard';
 
 
