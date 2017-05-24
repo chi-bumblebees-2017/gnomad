@@ -17,27 +17,31 @@ class ConversationsController < ApplicationController
 
   def show
     # @personal_message = PersonalMessage.new
+
     @conversation = Conversation.find_by(id: params[:id]) || Conversation.new
-    full_json = @conversation.as_json(include: :personal_messages).merge({other: @conversation.with(current_user), me: current_user})
+    full_json = @conversation.as_json(include: :personal_messages).merge({other: @conversation.with(current_user), me: current_user, blocked: @conversation.blocked_participants?(current_user)})
     render json: full_json
   end
 
   def create
-    @conversation = Conversation.find_or_create_by(receiver_id: conversation_params[:receiver_id], initiator_id: current_user.id)
-    @personal_message = PersonalMessage.create(body: conversation_params[:body], author_id: current_user.id, conversation_id: @conversation.id)
-    @personal_message.save!
+    user = User.find(conversation_params[:receiver_id])
+    unless user.blocked?(current_user)
+      @conversation = Conversation.find_or_create_by(receiver_id: conversation_params[:receiver_id], initiator_id: current_user.id)
+      @personal_message = PersonalMessage.create(body: conversation_params[:body], author_id: current_user.id, conversation_id: @conversation.id)
+      @personal_message.save!
 
 
-    receiver_id = conversation_params[:receiver_id].to_i
-    if receiver_id > current_user.id
-      channel = "chat_#{current_user.id}_#{receiver_id}"
-    else
-      channel = "chat_#{receiver_id}_#{current_user.id}"
+      receiver_id = conversation_params[:receiver_id].to_i
+      if receiver_id > current_user.id
+        channel = "chat_#{current_user.id}_#{receiver_id}"
+      else
+        channel = "chat_#{receiver_id}_#{current_user.id}"
+      end
+      ActionCable.server.broadcast(channel, @personal_message.as_json)
+
+
+      render json: @conversation.as_json(include: [:personal_messages, :receiver, :initiator])
     end
-    ActionCable.server.broadcast(channel, @personal_message.as_json)
-
-
-    render json: @conversation.as_json(include: [:personal_messages, :receiver, :initiator])
   end
 
   private
