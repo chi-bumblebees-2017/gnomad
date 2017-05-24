@@ -17,6 +17,8 @@ class SearchContainer extends Component {
       likesList: {},
       likesAll: false,
       hasSearched: false,
+      advancedSearchOptions: false,
+      userLikes: {},
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,6 +27,7 @@ class SearchContainer extends Component {
     this.checkHandled = this.checkHandled.bind(this);
     this.goSearch = this.goSearch.bind(this);
     this.createSearchRequest = this.createSearchRequest.bind(this);
+    this.toggleAdvancedSearch = this.toggleAdvancedSearch.bind(this);
   }
 
   setInterestState(updatedInterests) {
@@ -36,9 +39,10 @@ class SearchContainer extends Component {
   handleSubmit(event) {
     event.preventDefault();
     // TODO: Change history so that back button works. How do I persist the results from the last search too?
-    this.props.history.push(`/search/${this.state.location}`, this.state);
+    //this.props.history.push(`/search/${this.state.location}`, this.state);
     this.setState({
       hasSearched: true,
+      advancedSearchOptions: false,
     }, this.goSearch)
   }
 
@@ -60,6 +64,7 @@ class SearchContainer extends Component {
     data.append("searching[likes_list][volunteer]", this.state.likesList.volunteer)
     data.append("searching[likes_list][shopping]", this.state.likesList.shopping)
     data.append("searching[likes_all]", this.state.likesAll)
+    data.append("searching[location]", this.state.location)
     return data
   }
 
@@ -76,7 +81,8 @@ class SearchContainer extends Component {
       }).then(data => data.json())
         .then(dataJson => {
           that.setState({
-            localhosts: dataJson,
+            localhosts: dataJson["matches"],
+            userLikes: dataJson["likes"],
         })});
       }
   }
@@ -97,6 +103,9 @@ class SearchContainer extends Component {
     this.setState({ likesList: value});
   }
 
+  toggleAdvancedSearch() {
+    this.setState({ advancedSearchOptions: true });
+  }
 
 
   componentDidUpdate() {
@@ -106,18 +115,42 @@ class SearchContainer extends Component {
   }
 
   render() {
-    return (
-      <div className="search-container register-max-width">
-        <SearchBar submitHandler={this.handleSubmit} changeHandler={this.handleChange} value={this.state.location} />
-        <div className="ui section divider"></div>
-        <div>
-          <h4 className="inline">Localhosts must match all interests:</h4>
-          <div className="ui fitted toggle checkbox left-pad-10 inline"><input onClick={this.setCheckedValueLikesAll} type="checkbox" /><label></label></div>
+    if (!this.state.hasSearched) {
+      return (
+        <div className="search-container register-max-width">
+          <SearchBar submitHandler={this.handleSubmit} changeHandler={this.handleChange} value={this.state.location} />
+          <h5>Enter a city to search for Localhosts that share your interests!</h5>
+          <div className="ui section divider"></div>
         </div>
-        <SearchFilters handleCheck={this.checkHandled} />
-        <SearchResults results={this.state.localhosts} />
-      </div>
-    );
+      )
+    }
+    else if (this.state.advancedSearchOptions) {
+      return (
+        <div className="search-container register-max-width">
+          <SearchBar submitHandler={this.handleSubmit} changeHandler={this.handleChange} value={this.state.location} />
+          <div className="ui section divider"></div>
+          <div className="max-width">
+            <h4 className="inline">Localhosts must match all interests:</h4>
+            <div className="ui fitted toggle checkbox inline left-pad-10"><input onClick={this.setCheckedValueLikesAll} type="checkbox" checked={this.state.likesAll} /><label></label></div>
+          </div>
+          <SearchFilters likes={this.state.likesList} handleCheck={this.checkHandled} userLikes={this.state.userLikes}/>
+          <SearchResults results={this.state.localhosts} />
+        </div>
+      );
+    }
+    else {
+      return (
+        <div className="search-container register-max-width">
+          <SearchBar submitHandler={this.handleSubmit} changeHandler={this.handleChange} value={this.state.location} />
+          <div className="ui section divider"></div>
+          <button className="ui blue button" onClick={this.toggleAdvancedSearch}>
+            <span>Advanced Search Options</span>
+            <i aria-hidden="true" className="search icon left-pad-10"></i>
+          </button>
+          <SearchResults results={this.state.localhosts} />
+        </div>
+      )
+    }
   }
 }
 
