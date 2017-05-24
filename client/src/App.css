@@ -78,3 +78,80 @@
 .inline {
   display: inline;
 }
+
+.vertical-align-bottom {
+  vertical-align: bottom;
+}
+
+.button-max-height {
+  max-height: 40px;
+}
+
+.bottom-display {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #cecece;
+}
+
+.my-message {
+  position: relative;
+  max-width: 200px;
+  right: -190px;
+  margin-right: 10px;
+  text-align: right;
+}
+
+.their-message {
+  position: relative;
+  margin-left: 10px;
+  left: 10px;
+  text-align: left;
+  max-width: 200px;
+}
+
+.small-padding {
+  padding: .5em !important;
+  margin-top: 0 !important;
+}
+
+.main-nav {
+  background-color: white;
+  max-width: 480px;
+}
+
+#new-message-replace {
+  height: 140px;
+}
+
+#new-message {
+  height: 100px;
+  vertical-align: top;
+}
+
+.clear-fixed {
+  height: 45px;
+  background-color: white;
+}
+
+#profile-link-banner {
+  top: 40px;
+  z-index: 101;
+  padding: 10px;
+}
+
+#personal-message-form {
+  width: 90%;
+  margin: 10px auto;
+  max-width: 425px;
+}
+
+#send-message-icon {
+  top: 78px;
+}
+
+#navbar {
+
+}

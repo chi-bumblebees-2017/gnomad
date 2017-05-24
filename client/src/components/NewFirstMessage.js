@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Form, TextArea } from 'semantic-ui-react';
+import { Form, TextArea, Message } from 'semantic-ui-react';
 
 class NewFirstMessage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: "",
+      messageSent: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,16 +34,23 @@ class NewFirstMessage extends Component {
         'Authorization': localStorage.getItem('gnomad-auth-token')
       },
       // mode: 'no-cors',
-    })
+    }).then(this.setState({
+      messageSent: true,
+    }))
+
   }
 
   render() {
-    return (
-      <form className="ui form ui icon input" id="personal-message-form" onSubmit={this.handleSubmit}>
-        <input type="text" id="new-message" name="personal_message" placeholder="Start chatting" value={this.state.value} onChange={this.handleChange}></input>
-        <i aria-hidden="true" onClick={this.handleSubmit} className="talk outline link icon blue large"></i>
-      </form>
-    );
+    if (this.state.messageSent) {
+      return( <Message success header="Message sent!" /> );
+    } else {
+      return (
+        <Form success className="icon input" fixed="bottom" id="personal-message-form" onSubmit={this.handleSubmit}>
+          <textarea action="Send" id="new-message" placeholder="Start chatting..." name="personal_message" value={this.state.value} onChange={this.handleChange} />
+          <i onClick={this.handleSubmit} id="send-message-icon" className="send circular inverted blue link icon"></i>
+        </Form>
+      );
+    }
   }
 }
 

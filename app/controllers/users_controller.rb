@@ -51,7 +51,10 @@ class UsersController < ApplicationController
     else
       suggestions = nil
     end
-    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions, bio: user.bio, starred: starred, star_count: user.star_count}
+    if user != current_user
+      conversation = Conversation.between(user, current_user).first
+    end
+    render json: { user: user, travel_interests: user.interests_while_traveling, host_interests: user.interests_while_hosting, suggestions: suggestions, bio: user.bio, starred: starred, star_count: user.star_count, conversation: conversation}
   end
 
   private
