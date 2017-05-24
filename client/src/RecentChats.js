@@ -13,7 +13,7 @@ class RecentChats extends Component {
         <h5>Recent Chats</h5>
         <div className="max-width">
           {this.props.conversations.map((conversation) =>
-            <UserListItemContainer key={conversation.id} user={conversation.other} snippet={conversation.last_message.body.substr(0, 80)} linkto={`/chats/${conversation.id}`} />
+            <UserListItemContainer key={conversation.id} user={conversation.other} snippet={conversation.last_message.body.substr(0, 100) + '...'} linkto={`/chats/${conversation.id}`} />
           )}
         </div>
       </div>

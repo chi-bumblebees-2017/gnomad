@@ -5,7 +5,9 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import NewFirstMessage from './NewFirstMessage'
+import NewFirstMessage from './NewFirstMessage';
+import Star from './Star';
+import { Label } from 'semantic-ui-react';
 
 class Profile extends Component {
   constructor(props) {
@@ -14,8 +16,14 @@ class Profile extends Component {
       userData: [],
       loaded: false,
       writeMessage: false,
+      starred: false,
     };
     this.displayMessageForm = this.displayMessageForm.bind(this);
+    this.toggleStar = this.toggleStar.bind(this);
+  }
+
+  toggleStar() {
+    this.setState({ starred: !this.state.starred })
   }
 
   componentDidMount() {
@@ -29,6 +37,7 @@ class Profile extends Component {
         this.setState({
           userData: dataJson,
           loaded: true,
+          starred: dataJson.starred,
     })});
   }
 
@@ -44,14 +53,16 @@ class Profile extends Component {
         return (
           <div className="profile-container ui centered container">
             <div className="max-width">
-            <h1>{this.state.userData.user.first_name}</h1>
 
-              <div className="profile-picture-container">
-                <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
+              <div className='max-width '>
+                <h1 className='inline'>{this.state.userData.user.first_name}</h1>
+                <Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
+              </div>
+              <div attached className="profile-picture-container">
+                <img  src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>
 
               <NewFirstMessage receiverId={this.state.userData.user.id} />
-
               <h2>A Little Bit About Me...</h2>
               <div className="bio-container ui centered container">
                 <p>{this.state.userData.user.bio}</p>
@@ -65,8 +76,7 @@ class Profile extends Component {
         return (
           <div className="profile-container ui centered container">
             <div className="max-width">
-            <h1>{this.state.userData.user.first_name}</h1>
-
+              <h1 className='inline' >{this.state.userData.user.first_name} </h1><Star action={this.toggleStar} starred={this.state.starred} userID={this.state.userData.user.id}/>
               <div className="profile-picture-container">
                 <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>
@@ -74,8 +84,10 @@ class Profile extends Component {
             <div className="chat-button">
               <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
             </div>
-
-            <h2>A Little Bit About Me...</h2>
+            <div className='ui centered container'>
+              <h2 className='inline'>A Little Bit About Me...</h2>
+              <Label size='mini' as='a' color='yellow' tag>Stars</Label>
+            </div>
             <div className="bio-container ui centered container">
             <p>{this.state.userData.user.bio}</p>
             </div>
