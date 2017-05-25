@@ -5,6 +5,7 @@ import {
 import ReactDOM from 'react-dom';
 import FacebookLogin from 'react-facebook-login';
 import { Loader } from 'semantic-ui-react';
+import gnomad_logo from '../gnomad_logo.jpg';
 import GnomadLogo from '../logoslogan.png';
 
 class Login extends Component {
@@ -100,7 +101,7 @@ class Login extends Component {
 
             <div className="ui section divider"></div>
             <div className="splash-picture">
-              <img height="200" src="https://media.istockphoto.com/photos/garden-gnome-picture-id157403714"/>
+              <img height="300" src={gnomad_logo}/>
             </div>
 
 
