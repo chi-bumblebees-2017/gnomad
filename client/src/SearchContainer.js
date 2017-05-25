@@ -147,6 +147,8 @@ class SearchContainer extends Component {
             <span>Advanced Search Options</span>
             <i aria-hidden="true" className="search icon left-pad-10"></i>
           </button>
+          <div className="ui section divider" id="bottom-margin-15"></div>
+          <h5 className="top-margin-0 bottom-padding-10">Localhosts that match your interests...</h5>
           <SearchResults results={this.state.localhosts} />
         </div>
       )
