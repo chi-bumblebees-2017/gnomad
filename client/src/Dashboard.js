@@ -3,11 +3,7 @@ import Interests from './components/Interests';
 import RecentChats from './RecentChats';
 import NewProfile from './NewProfile';
 import { Button, Loader } from 'semantic-ui-react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -59,6 +55,9 @@ class Dashboard extends Component {
   }
 
   render() {
+    if (!this.props.loggedIn) {
+      return (<Redirect to="/" />);
+    }
     if (this.state.userLoaded === true && this.state.chatsLoaded === true && this.state.editing === false) {
       return(
         <div className="profile-container ui centered container">

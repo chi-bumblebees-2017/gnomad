@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import UserListItemContainer from './UserListItemContainer'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
 
 class RecentChats extends Component {
   constructor(props) {
