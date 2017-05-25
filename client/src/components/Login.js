@@ -5,6 +5,7 @@ import {
 import ReactDOM from 'react-dom';
 import FacebookLogin from 'react-facebook-login';
 import { Loader } from 'semantic-ui-react';
+// import Logo from './Logo';
 import GnomadLogo from '../logoslogan.png';
 
 class Login extends Component {
