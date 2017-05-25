@@ -12,8 +12,6 @@ import {
   BrowserRouter as Router,
   Route,
   NavLink,
-  Redirect,
-  Link
 } from 'react-router-dom';
 import Logout from './components/Logout';
 import ActionCable from 'action-cable-react-jwt';
@@ -89,14 +87,14 @@ class App extends Component {
               <NavLink className="item" to="/search">Search</NavLink>
               <NavLink className="item" to="/logout">Logout</NavLink>
             </NavBar>
-            <Route exact path="/" render={() => <Login connectCable={this.connectCable} loginHandler={this.setLoggedIn} />} />
-            <Route exact path="/chats" component={Conversations} />
-            <Route path="/chats/:id" render={props => <Conversation cable={this.state.cable} {...props} />} />
-            <Route path="/register" component={NewProfile} />
-            <Route path="/search" component={SearchContainer} />
-            <Route path="/users/:name/:id" component={Profile} />
-            <Route path="/logout" render={() => <Logout disconnectCable={this.disconnectCable} logoutHandler={this.setLoggedOut} />} />
-            <Route path="/account" component={Dashboard} />
+            <Route exact path="/" render={props => <Login connectCable={this.connectCable} loginHandler={this.setLoggedIn} />} />
+            <Route exact path="/chats" render={props => <Conversations loggedIn={this.state.loggedIn} {...props} />} />
+            <Route path="/chats/:id" render={props => <Conversation cable={this.state.cable} loggedIn={this.state.loggedIn} {...props} />} />
+            <Route path="/register" render={props => <NewProfile loggedIn={this.state.loggedIn} {...props} />} />
+            <Route path="/search" render={props => <SearchContainer loggedIn={this.state.loggedIn} {...props} />} />
+            <Route path="/users/:name/:id" render={props => <Profile loggedIn={this.state.loggedIn} {...props} />} />
+            <Route path="/logout" render={props => <Logout disconnectCable={this.disconnectCable} logoutHandler={this.setLoggedOut} {...props} />} />
+            <Route path="/account" render={props => <Dashboard loggedIn={this.state.loggedIn} {...props} />} />
           </div>
         </Router>
       );
@@ -107,14 +105,14 @@ class App extends Component {
             <NavBar options={1}>
               <div></div>
             </NavBar>
-            <Route exact path="/" render={() => <Login connectCable={this.connectCable} loginHandler={this.setLoggedIn} />} />
-            <Route exact path="/chats" component={Conversations} />
-            <Route path="/chats/:id" render={props => <Conversation cable={this.state.cable} {...props} />} />
-            <Route path="/register" component={NewProfile} />
-            <Route path="/search" component={SearchContainer} />
-            <Route path="/users/:name/:id" component={Profile} />
-            <Route path="/logout" render={() => <Logout disconnectCable={this.disconnectCable} />} />
-            <Route path="/account" component={Dashboard} />
+            <Route exact path="/" render={props => <Login connectCable={this.connectCable} loginHandler={this.setLoggedIn} />} />
+            <Route exact path="/chats" render={props => <Conversations loggedIn={this.state.loggedIn} {...props} />} />
+            <Route path="/chats/:id" render={props => <Conversation cable={this.state.cable} loggedIn={this.state.loggedIn} {...props} />} />
+            <Route path="/register" render={props => <NewProfile loggedIn={this.state.loggedIn} {...props} />} />
+            <Route path="/search" render={props => <SearchContainer loggedIn={this.state.loggedIn} {...props} />} />
+            <Route path="/users/:name/:id" render={props => <Profile loggedIn={this.state.loggedIn} {...props} />} />
+            <Route path="/logout" render={props => <Logout disconnectCable={this.disconnectCable} logoutHandler={this.setLoggedOut} {...props} />} />
+            <Route path="/account" render={props => <Dashboard loggedIn={this.state.loggedIn} {...props} />} />
           </div>
         </Router>
       );

@@ -52,11 +52,9 @@ class SearchFilters extends Component {
   }
 
   componentDidUpdate() {
-    // console.log(this.state)
-    // console.log("Does this update with the parent?")
   }
+
   render() {
-    // console.log("Does this update with the parent?")
     return (
       <div>
       <div className="ui section divider"></div>

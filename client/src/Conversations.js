@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link
+  Redirect
 } from 'react-router-dom';
 import UserListItemContainer from './UserListItemContainer'
+import { Loader } from 'semantic-ui-react';
 
 class Conversations extends Component {
   constructor(props) {
@@ -16,6 +15,7 @@ class Conversations extends Component {
     this.truncatedMessage = this.truncatedMessage.bind(this);
   }
 
+
   componentDidMount() {
     fetch('/conversations', {
       accept: 'application/json',
@@ -24,7 +24,6 @@ class Conversations extends Component {
       },
     }).then(data => data.json())
       .then(dataJson => {
-        console.log(dataJson);
         this.setState({
           conversations: dataJson,
           loaded: true,
@@ -41,6 +40,9 @@ class Conversations extends Component {
   }
 
   render() {
+    if (!this.props.loggedIn) {
+      return (<Redirect to="/" />);
+    }
     if (this.state.loaded === true) {
       return (
         <div className="ui comments container">
@@ -56,8 +58,7 @@ class Conversations extends Component {
     } else {
       return (
         <div>
-          <div>Chat History</div>
-          Loading...
+          <Loader />
         </div>
       );
     }
