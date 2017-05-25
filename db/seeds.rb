@@ -5,8 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'faker'
-
 user = User.create(provider: 'facebook', uid: Faker::Number.hexadecimal(5), first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, image_url: "https://thumbs.dreamstime.com/x/garden-gnome-elf-22324178.jpg", email: Faker::Internet.email, home_city: "St. Louis", home_state: "MO", bio: "I'm a foodie so I know where the best local restaurants are and I want to find where they are in your city too!")
 user.localhost_profile = LocalhostProfile.create!(restaurants: true,
                                sports: false,
