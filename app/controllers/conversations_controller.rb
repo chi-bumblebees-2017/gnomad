@@ -19,7 +19,10 @@ class ConversationsController < ApplicationController
     # @personal_message = PersonalMessage.new
 
     @conversation = Conversation.find_by(id: params[:id]) || Conversation.new
-    full_json = @conversation.as_json(include: :personal_messages).merge({other: @conversation.with(current_user), me: current_user, blocked: @conversation.blocked_participants?(current_user)})
+
+    authorization = @conversation.participates?(current_user)
+
+    full_json = @conversation.as_json(include: :personal_messages).merge({other: @conversation.with(current_user), me: current_user, blocked: @conversation.blocked_participants?(current_user), authorization: authorization})
     render json: full_json
   end
 
