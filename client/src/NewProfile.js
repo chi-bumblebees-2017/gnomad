@@ -177,9 +177,9 @@ class NewProfile extends Component {
   }
 
   render() {
-    if (!this.props.loggedIn) {
-      return (<Redirect to="/" />);
-    }
+    // if (!this.props.loggedIn) {
+    //   return (<Redirect to="/" />);
+    // }
     // Redirects to user dashboard if form successfully submits
     if (this.state.submitted) {
       return (<Dashboard />);

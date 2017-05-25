@@ -109,9 +109,9 @@ class Conversation extends Component {
   }
 
   render() {
-    if (!this.props.loggedIn) {
-      return (<Redirect to="/" />);
-    }
+    // if (!this.props.loggedIn) {
+    //   return (<Redirect to="/" />);
+    // }
     if (this.state.loaded === true) {
       if ((this.state.blocked === true) || (!this.state.authorization)) {
         return (<Redirect push to={{ pathname: "/account"}} />);
