@@ -103,6 +103,13 @@ class Profile extends Component {
               </div>
               <div className="ui section divider"></div>
               <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
+              <Modal trigger={<Button size='small' color="red">Report</Button>} closeIcon='close' onClose={this.redirectHome}>
+                <Modal.Header>Block {this.state.userData.user.first_name}?</Modal.Header>
+                <Modal.Content>
+                  <BlockForm handleBlock={this.handleBlock} user={this.state.userData.user} redirect={this.redirectHome} />
+                </Modal.Content>
+              </Modal>
+              <div className="ui section divider"></div>
             </div>
           </div>
         );
@@ -129,6 +136,13 @@ class Profile extends Component {
               <div className="ui section divider"></div>
                 <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
               </div>
+                <Modal trigger={<Button size='small' color="red">Report</Button>} closeIcon='close' onClose={this.redirectHome}>
+                <Modal.Header>Block {this.state.userData.user.first_name}?</Modal.Header>
+                <Modal.Content>
+                  <BlockForm handleBlock={this.handleBlock} user={this.state.userData.user} redirect={this.redirectHome} />
+                </Modal.Content>
+              </Modal>
+              <div className="ui section divider"></div>
             </div>
           );
         } else {
@@ -160,6 +174,7 @@ class Profile extends Component {
                 <BlockForm handleBlock={this.handleBlock} user={this.state.userData.user} redirect={this.redirectHome} />
               </Modal.Content>
             </Modal>
+            <div className="ui section divider"></div>
           </div>
         );
       }

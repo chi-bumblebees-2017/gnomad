@@ -16,6 +16,7 @@ import {
 import Logout from './components/Logout';
 import ActionCable from 'action-cable-react-jwt';
 
+
 class App extends Component {
   constructor(props) {
     super(props);
