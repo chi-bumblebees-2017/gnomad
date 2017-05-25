@@ -70,12 +70,12 @@ class Dashboard extends Component {
             </div>
             <div>
             <br/>
-              <Button compact content='Edit' icon='edit' labelPosition='left' basic color='red'size='small' onClick={this.toggleEdit}/>
+              <Button compact content='Edit' icon='edit' labelPosition='left' basic color='red' size='small' onClick={this.toggleEdit}/>
             <br/>
             <br/>
               <div>
               <Link to={`/users/${this.state.userData.user.first_name}/${this.state.userData.user.id}`}>
-                <Button compact content="View My Public Profile" icon='user outline' labelPosition='left' basic color='blue'size='small' className="top-margin-10"/>
+                <Button compact content="View My Public Profile" icon='user outline' labelPosition='left' basic color='blue' size='small' className="top-margin-10"/>
               </Link>
               </div>
           </div>
