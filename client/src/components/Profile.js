@@ -3,11 +3,14 @@ import Interests from './Interests';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Redirect,
 } from 'react-router-dom';
 import NewFirstMessage from './NewFirstMessage';
 import Star from './Star';
-import { Label, Dimmer, Loader } from 'semantic-ui-react';
+import { Label, Dimmer, Loader, Modal, Button, Header, Confirm} from 'semantic-ui-react';
+import Dashboard from '../Dashboard';
+import BlockForm from './BlockForm';
 
 class Profile extends Component {
   constructor(props) {
@@ -18,15 +21,29 @@ class Profile extends Component {
       writeMessage: false,
       starred: false,
       count: 0,
+      blocked: false,
     };
     this.displayMessageForm = this.displayMessageForm.bind(this);
     this.toggleStar = this.toggleStar.bind(this);
+    this.handleBlock = this.handleBlock.bind(this);
+    this.redirectHome = this.redirectHome.bind(this);
   }
 
   toggleStar() {
     let newStatus = !this.state.starred;
     this.setState({starred: !this.state.starred});
     return newStatus;
+  }
+
+  handleBlock(formData) {
+    fetch(`/blocks`, {
+      method: 'POST',
+      accept: 'application/json',
+      headers: {
+        'Authorization': localStorage.getItem('gnomad-auth-token')
+      },
+      body: formData,
+    })
   }
 
   componentDidMount() {
@@ -42,6 +59,7 @@ class Profile extends Component {
           loaded: true,
           starred: dataJson.starred,
           count: dataJson.star_count,
+          blocked: dataJson.blocked,
     })});
   }
 
@@ -51,8 +69,17 @@ class Profile extends Component {
     })
   }
 
+  redirectHome() {
+    this.setState({ blocked: true })
+  }
+
+
+
   render() {
     if (this.state.loaded === true) {
+      if (this.state.blocked) {
+        return (<Redirect push to={{ pathname: "/account"}} />);
+      }
       if (this.state.writeMessage) {
         return (
           <div className="profile-container ui centered container">
@@ -65,8 +92,7 @@ class Profile extends Component {
               <div attached className="profile-picture-container top-margin-10">
                 <img  src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
               </div>
-
-              <NewFirstMessage receiverId={this.state.userData.user.id} />
+                <NewFirstMessage receiverId={this.state.userData.user.id} />
 
               <div className='ui centered container top-margin-10'>
                 <h2 className='inline'>A Little Bit About Me...</h2>
@@ -89,10 +115,9 @@ class Profile extends Component {
                 <div className="profile-picture-container top-margin-10">
                   <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
                 </div>
-
-              <div className="chat-button">
-                <Link to={`/chats/${this.state.userData.conversation.id}`}><button className="ui blue button">Continue chatting</button></Link>
-              </div>
+                <div className="chat-button">
+                  <Link to={`/chats/${this.state.userData.conversation.id}`}><button className="ui blue button">Continue chatting</button></Link>
+                </div>
 
               <div className='ui centered container top-margin-10'>
                 <h2 className='inline'>A Little Bit About Me...</h2>
@@ -115,10 +140,9 @@ class Profile extends Component {
                 <div className="profile-picture-container top-margin-10">
                   <img src={this.state.userData.user.image_url} alt="profile-picture" className="border-radius-10"/>
                 </div>
-
-              <div className="chat-button">
-                <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
-              </div>
+                  <div className="chat-button">
+                    <button className="ui blue button" onClick={this.displayMessageForm}>Start Chat</button>
+                  </div>
 
               <div className='ui centered container top-margin-10'>
                 <h2 className='inline'>A Little Bit About Me...</h2>
@@ -129,6 +153,12 @@ class Profile extends Component {
               <div className="ui section divider"></div>
               <Interests travel_interests={this.state.userData.travel_interests} host_interests={this.state.userData.host_interests} suggestions={this.state.userData.suggestions}/>
             </div>
+            <Modal trigger={<Button size='small' color="red">Report</Button>} closeIcon='close' onClose={this.redirectHome}>
+              <Modal.Header>Block {this.state.userData.user.first_name}?</Modal.Header>
+              <Modal.Content>
+                <BlockForm handleBlock={this.handleBlock} user={this.state.userData.user} redirect={this.redirectHome} />
+              </Modal.Content>
+            </Modal>
           </div>
         );
       }

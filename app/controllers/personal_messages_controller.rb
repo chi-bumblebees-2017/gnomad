@@ -2,22 +2,25 @@ class PersonalMessagesController < ApplicationController
   before_action :find_conversation!
 
   def create
-    @conversation ||= Conversation.create(conversation_id: personal_message_params[:conversation_id], author_id: current_user.id, receiver_id: @receiver.id)
+    user = User.find(personal_message_params[:receiver_id])
+    unless user.blocked?(current_user)
+      @conversation ||= Conversation.create(conversation_id: personal_message_params[:conversation_id], author_id: current_user.id, receiver_id: @receiver.id)
 
-    @personal_message = PersonalMessage.create(body: personal_message_params[:body], author_id: current_user.id, conversation_id: personal_message_params[:conversation_id])
-    @personal_message.save!
+      @personal_message = PersonalMessage.create(body: personal_message_params[:body], author_id: current_user.id, conversation_id: personal_message_params[:conversation_id])
+      @personal_message.save!
 
-    initiator = @conversation.initiator_id.to_i
-    receiver = @conversation.receiver_id.to_i
-    if receiver > initiator
-      channel = "chat_#{initiator}_#{receiver}"
-    else
-      channel = "chat_#{receiver}_#{initiator}"
+      initiator = @conversation.initiator_id.to_i
+      receiver = @conversation.receiver_id.to_i
+      if receiver > initiator
+        channel = "chat_#{initiator}_#{receiver}"
+      else
+        channel = "chat_#{receiver}_#{initiator}"
+      end
+
+      ActionCable.server.broadcast(channel, @personal_message.as_json)
+
+      render json: @personal_message
     end
-
-    ActionCable.server.broadcast(channel, @personal_message.as_json)
-
-    render json: @personal_message
   end
 
   # def new

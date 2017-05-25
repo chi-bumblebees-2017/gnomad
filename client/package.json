@@ -6,6 +6,7 @@
   "dependencies": {
     "action-cable-react-jwt": "0.0.5",
     "react": "^15.5.4",
+    "react-block-ui": "^0.2.6",
     "react-dom": "^15.5.4",
     "react-dropdown": "^1.2.3",
     "react-facebook-login": "^3.6.0",

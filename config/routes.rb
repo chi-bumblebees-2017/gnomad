@@ -14,8 +14,11 @@ Rails.application.routes.draw do
 
   resources :stars, only: [:create]
   delete '/stars' => 'stars#destroy'
+
   resources :users, only: [:create, :update, :show]
   resources :sessions, only: [:destroy]
+
+  post '/blocks' => "blocks#create"
 
   get '/auth/:provider/callback', to: 'sessions#create'
   get '*path' => 'home#index'
