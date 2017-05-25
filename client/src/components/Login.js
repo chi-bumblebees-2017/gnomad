@@ -5,6 +5,7 @@ import {
 import ReactDOM from 'react-dom';
 import FacebookLogin from 'react-facebook-login';
 import { Loader } from 'semantic-ui-react';
+import gnomad_logo from '../gnomad_logo.jpg'
 
 class Login extends Component {
    constructor(props) {
@@ -98,7 +99,7 @@ class Login extends Component {
             <h1 className="top-pad-20">GNOMAD</h1>
             <div className="ui section divider"></div>
             <div className="splash-picture">
-              <img height="200" src="https://media.istockphoto.com/photos/garden-gnome-picture-id157403714"/>
+              <img height="400" src={gnomad_logo}/>
             </div>
 
             <FacebookLogin appId="1351086744971505" autoLoad={false} fields="first_name,last_name,email,id" callback={this.responseFacebook} />
