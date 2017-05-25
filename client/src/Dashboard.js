@@ -55,9 +55,9 @@ class Dashboard extends Component {
   }
 
   render() {
-    if (!this.props.loggedIn) {
-      return (<Redirect to="/" />);
-    }
+    // if (!this.props.loggedIn) {
+    //   return (<Redirect to="/" />);
+    // }
     if (this.state.userLoaded === true && this.state.chatsLoaded === true && this.state.editing === false) {
       return(
         <div className="profile-container ui centered container">

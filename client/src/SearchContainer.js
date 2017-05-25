@@ -106,9 +106,9 @@ class SearchContainer extends Component {
   }
 
   render() {
-    if (!this.props.loggedIn) {
-      return (<Redirect to="/" />);
-    }
+    // if (!this.props.loggedIn) {
+    //   return (<Redirect to="/" />);
+    // }
     if (!this.state.hasSearched) {
       return (
         <div className="search-container register-max-width">
