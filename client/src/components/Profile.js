@@ -159,6 +159,7 @@ class Profile extends Component {
                 <BlockForm handleBlock={this.handleBlock} user={this.state.userData.user} redirect={this.redirectHome} />
               </Modal.Content>
             </Modal>
+            <div className="ui section divider"></div>
           </div>
         );
       }

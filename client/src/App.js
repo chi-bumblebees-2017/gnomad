@@ -17,7 +17,6 @@ import {
 } from 'react-router-dom';
 import Logout from './components/Logout';
 import ActionCable from 'action-cable-react-jwt';
-import Logo from './logo.png';
 
 
 class App extends Component {
@@ -84,7 +83,6 @@ class App extends Component {
       return (
         <Router>
           <div className="App">
-          <img src={Logo} />
             <NavBar options={4}>
               <NavLink className="item" to="/account">Dashboard</NavLink>
               <NavLink className="item" to="/chats">Chats</NavLink>
