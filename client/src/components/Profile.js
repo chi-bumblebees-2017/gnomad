@@ -74,9 +74,9 @@ class Profile extends Component {
 
 
   render() {
-    if (!this.props.loggedIn) {
-      return (<Redirect to="/" />);
-    }
+    // if (!this.props.loggedIn) {
+    //   return (<Redirect to="/" />);
+    // }
     if (this.state.loaded === true) {
       if (this.state.blocked) {
         return (<Redirect push to={{ pathname: "/account"}} />);

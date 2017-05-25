@@ -40,9 +40,9 @@ class Conversations extends Component {
   }
 
   render() {
-    if (!this.props.loggedIn) {
-      return (<Redirect to="/" />);
-    }
+    // if (!this.props.loggedIn) {
+    //   return (<Redirect to="/" />);
+    // }
     if (this.state.loaded === true) {
       return (
         <div className="ui comments container">
