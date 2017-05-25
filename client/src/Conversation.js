@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Redirect,
 } from 'react-router-dom';
 import PersonalMessageContainer from './PersonalMessageContainer';
 import NewMessage from './NewMessage';
@@ -18,6 +19,7 @@ class Conversation extends Component {
       loaded: false,
       newMsgText: "",
       subscription: null,
+      blocked: false,
     }
     this.handleChange = this.handleChange.bind(this);
     this.sendNewMessage = this.sendNewMessage.bind(this);
@@ -48,6 +50,7 @@ class Conversation extends Component {
           loaded: true,
           me: dataJson.me,
           other: dataJson.other,
+          blocked: dataJson.blocked,
     })}).then(() => {
           if (!this.state.subscription) {
             let that = this;
@@ -101,6 +104,9 @@ class Conversation extends Component {
 
   render() {
     if (this.state.loaded === true) {
+      if (this.state.blocked === true) {
+        return (<Redirect push to={{ pathname: "/account"}} />);
+      }
       return (
         <div className="bio-max-width">
           <div className="clear-fixed">

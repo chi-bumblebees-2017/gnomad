@@ -26,7 +26,7 @@ class RecentChats extends Component {
         <div className="max-width">
           <div className="ui horizontal section divider"><h3>Recent Chats</h3></div>
           {this.props.conversations.map((conversation) =>
-            <UserListItemContainer key={conversation.id} user={conversation.other} snippet={this.truncatedMessage(conversation.last_message.body)} linkto={`/chats/${conversation.id}`} />
+            <UserListItemContainer key={conversation.id} user={conversation.other} snippet={this.truncatedMessage(conversation.last_message.body)} linkto={`/chats/${conversation.id}`} blocked={conversation.blocked}/>
           )}
         </div>
       </div>
