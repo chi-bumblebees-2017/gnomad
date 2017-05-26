@@ -189,3 +189,8 @@
 .profile-header {
   text-align: left;
 }
+
+.profile-picture-container img {
+  height: 160px;
+  width: 160px;
+}
