@@ -33,6 +33,7 @@ RSpec.describe 'User API', type: :request do
       before { put "/users/#{sample_user.id}", params: params, headers: sample_user_header}
 
       it "Sends back a JSON with user data" do
+        p json
         expect(json).not_to be_empty
         expect(json["first_name"]).to eq (sample_user.first_name.downcase)
       end
@@ -61,6 +62,7 @@ RSpec.describe 'User API', type: :request do
       before { put "/users/#{sample_user.id}", params: params, headers: header}
 
       it "Sends back a JSON with user data" do
+        p json
         expect(json).not_to be_empty
         expect(json["message"]).to eq ('Invalid credentials')
       end
@@ -70,6 +72,7 @@ RSpec.describe 'User API', type: :request do
       before { put "/users/#{sample_user.id}"}
 
       it "Sends back a JSON" do
+        p json
         expect(json).not_to be_empty
         expect(json["message"]).to eq("Missing token")
       end

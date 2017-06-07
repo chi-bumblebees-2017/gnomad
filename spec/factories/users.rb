@@ -9,13 +9,6 @@ FactoryGirl.define do
     home_city  'New York'
     home_state  'NY'
   end
-
-  factory :user_with_conversations do 
-    after(:create) do |user|
-        create_list(:conversation, user: user, 2)
-    end
-  end
-
 end
 
 

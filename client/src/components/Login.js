@@ -53,7 +53,6 @@ class Login extends Component {
 
     window.FB.api('me/picture?width=150&height=150',
       function(response){
-            console.log(response.data.url)
             data.append("image_url", response.data.url)
             fetch("/users", {
               method: "POST",
