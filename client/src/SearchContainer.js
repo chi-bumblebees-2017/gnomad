@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import SearchFilters from './SearchFilters';
+import { Redirect } from 'react-router-dom';
 
 class SearchContainer extends Component {
   constructor(props) {
@@ -98,8 +94,6 @@ class SearchContainer extends Component {
   }
 
   checkHandled(value) {
-    // console.log(value)
-    // console.log(this)
     this.setState({ likesList: value});
   }
 
@@ -109,12 +103,12 @@ class SearchContainer extends Component {
 
 
   componentDidUpdate() {
-    // console.log("+++++++")
-    // console.log(this.state)
-    // console.log("+++++++")
   }
 
   render() {
+    // if (!this.props.loggedIn) {
+    //   return (<Redirect to="/" />);
+    // }
     if (!this.state.hasSearched) {
       return (
         <div className="search-container register-max-width">
@@ -147,6 +141,8 @@ class SearchContainer extends Component {
             <span>Advanced Search Options</span>
             <i aria-hidden="true" className="search icon left-pad-10"></i>
           </button>
+          <div className="ui section divider" id="bottom-margin-15"></div>
+          <h5 className="top-margin-0 bottom-padding-10">Localhosts that match your interests...</h5>
           <SearchResults results={this.state.localhosts} />
         </div>
       )

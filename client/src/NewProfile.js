@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Checkbox from './Checkbox';
 // import Dropdown from 'react-dropdown';
 import update from 'react-addons-update';
@@ -67,10 +62,6 @@ class NewProfile extends Component {
   }
   // NOT WORKING: trying to populate user profile data when editing
   // componentDidUpdate(prevProps, prevState) {
-  //   console.log("NEXT PROPS");
-  //   console.log(nextProps);
-  //   console.log("THESE PROPS");
-  //   console.log(this.props);
   //   if (nextProps.userData !== this.props.userData) {
   //     this.setState({ userData: nextProps.userData });
   //   }
@@ -186,6 +177,9 @@ class NewProfile extends Component {
   }
 
   render() {
+    // if (!this.props.loggedIn) {
+    //   return (<Redirect to="/" />);
+    // }
     // Redirects to user dashboard if form successfully submits
     if (this.state.submitted) {
       return (<Dashboard />);

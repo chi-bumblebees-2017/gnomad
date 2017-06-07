@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link
+  Link,
+  Redirect,
 } from 'react-router-dom';
 import PersonalMessageContainer from './PersonalMessageContainer';
 import NewMessage from './NewMessage';
@@ -18,6 +17,8 @@ class Conversation extends Component {
       loaded: false,
       newMsgText: "",
       subscription: null,
+      blocked: false,
+      authorization: false,
     }
     this.handleChange = this.handleChange.bind(this);
     this.sendNewMessage = this.sendNewMessage.bind(this);
@@ -36,6 +37,7 @@ class Conversation extends Component {
   }
 
   componentDidMount() {
+    let authorization;
     fetch(`/conversations/${this.props.match.params.id}`, {
       accept: 'application/json',
       headers: {
@@ -43,13 +45,20 @@ class Conversation extends Component {
       },
     }).then(data => data.json())
       .then(dataJson => {
-        this.setState({
-          messages: dataJson.personal_messages,
-          loaded: true,
-          me: dataJson.me,
-          other: dataJson.other,
-    })}).then(() => {
-          if (!this.state.subscription) {
+        console.log(dataJson);
+        authorization = dataJson.authorization;
+        if (authorization) {
+          this.setState({
+            messages: dataJson.personal_messages,
+            loaded: true,
+            me: dataJson.me,
+            other: dataJson.other,
+            blocked: dataJson.blocked,
+            authorization: authorization,
+          });
+        }
+      }).then(dataJson => {
+          if (authorization && (!this.state.subscription)) {
             let that = this;
             this.state.subscription = this.props.cable.subscriptions.create({channel: 'ChatChannel', me_id: `${this.state.me.id}`, other_id: `${this.state.other.id}`}, {
                 connected() { },
@@ -100,7 +109,13 @@ class Conversation extends Component {
   }
 
   render() {
+    // if (!this.props.loggedIn) {
+    //   return (<Redirect to="/" />);
+    // }
     if (this.state.loaded === true) {
+      if ((this.state.blocked === true) || (!this.state.authorization)) {
+        return (<Redirect push to={{ pathname: "/account"}} />);
+      }
       return (
         <div className="bio-max-width">
           <div className="clear-fixed">

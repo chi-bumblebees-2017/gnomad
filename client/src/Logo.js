@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Link
+} from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 
-class NavBar extends Component {
+class Logo extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -11,7 +17,7 @@ class NavBar extends Component {
   render() {
     return (
       <div className="clear-fixed">
-        <Menu ui compact fluid pointing secondary color="blue" fixed="top" widths={this.props.options} id="navbar">
+        <Menu ui compact fluid pointing secondary color="blue" fixed="top" widths={this.props.options} id="logo">
           {this.props.children}
         </Menu>
       </div>
@@ -19,4 +25,4 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default Logo;

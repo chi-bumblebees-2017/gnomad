@@ -2,7 +2,9 @@ class User < ApplicationRecord
   POSSIBLE_INTERESTS = [:restaurants, :sports, :museums, :bars, :music, :outdoors, :art, :fitness, :history, :architecture, :family_fun, :zoo, :culture, :volunteer, :shopping]
 
   has_many :initiated_conversations, class_name: 'Conversation', foreign_key: 'initiator_id'
-  has_many :received_conversations, class_name: 'Conversation', foreign_key: 'received_id'
+  # NOTE: type in received conversations foreign key? Was 'received_id', changed to 'receiver'
+  has_many :received_conversations, class_name: 'Conversation', foreign_key: 'receiver_id'
+
   has_many :personal_messages, dependent: :destroy
   # make models for and add associations to localhost or gnomad profiles
   has_one :gnomad_profile
@@ -11,6 +13,9 @@ class User < ApplicationRecord
   has_many :sent_stars, class_name: 'Star', foreign_key: 'sender_id'
   has_many :received_stars, class_name: 'Star', foreign_key: 'recipient_id'
   scope :popular, -> {order("star_count DESC")}
+
+  has_many :offended_users, class_name: 'Block', foreign_key: :offender_id
+  has_many :reported_users, class_name: 'Block', foreign_key: :reporter_id
 
   scope :from_location, ->(city, state) { where(home_city: city.downcase, home_state: state.upcase) }
   delegate :available, :suggestions, to: :localhost_profile, allow_nil: true
@@ -75,6 +80,14 @@ class User < ApplicationRecord
 
   def starred?(recipient)
     !(self.sent_stars.where(recipient_id: recipient.id).empty?)
+  end
+
+  def blocked?(offender)
+    !(self.reported_users.where(offender_id: offender.id).empty?)
+  end
+
+  def block_user(offender)
+    offender.reported_users.create!(offender_id: self.id)
   end
 
   private
